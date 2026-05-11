@@ -2647,7 +2647,7 @@ Functional guilds from root samples were assigned using FUNGuild based on the cu
 
 ## Section 8: Phylogenetic community structure
 
-Phylogenetic community structure was quantified using Net Relatedness Index (NRI; based on MPD) and Nearest Taxon Index (NTI; based on MNTD), calculated under a taxa-label null model with 999 randomizations using both abundance-weighted (aw) and presence–absence (pa) versions. Habitat-level summaries are reported as median (IQR) (Table S19). Habitat and site effects on abundance-weighted metrics were evaluated with linear models (habitat + site; Table S20).
+Phylogenetic community structure was quantified using Net Relatedness Index (NRI; based on MPD) and Nearest Taxon Index (NTI; based on MNTD), calculated under a taxa-label null model with 999 randomizations using both abundance-weighted (aw) and presence–absence (pa) versions. Habitat-level summaries are reported as median (IQR) (Table S19). Habitat and site effects on abundance-weighted metrics were evaluated with linear models (habitat + site; Table S20). Model diagnostics for the NTI_aw model are available in Fig. S8.
 
 ```{r}
 #| echo: false
@@ -2666,6 +2666,10 @@ tab_s21 <- read.csv("tables/Table_S21_NRI_NTI_ANOVA.csv")
 kable(tab_s21, digits = 4,
       caption = "Table S20. ANOVA summaries for linear models of abundance-weighted NTI and NRI (habitat + site).")
 ```
+
+![](figures/Fig_S9_NTI_aw_diagnostics.png)
+
+**Figure S8**: Diagnostic plots for the NTI_aw linear model.
 
 ```{r}
 #| eval: false
@@ -2828,8 +2832,8 @@ ggsave(
 
 To provide environmental context for the elevational gradients sampled in this study, we quantified bulk soil physicochemical properties from one composite topsoil sample (0–15 cm) collected at each sampling location (n = 12; one per location). Because soil chemistry was measured once per location, these data are interpreted descriptively and were not used for formal statistical inference among habitats or sites.
 
-The full soil dataset, including all measured variables is archived in the repository as "Data_S3_soil.csv".
+The full soil dataset, including all measured variables, is provided as Table S21 and is archived in the repository as "Data_S3_soil.csv".
 
 ![](figures/Fig_S10_soil.png)\
 \
-**Figure S8**: Correlation heatmap of bulk soil physicochemical variables measured at each sampling location (n = 12). Colors indicate Pearson correlation among soil variables and elevation.
+**Figure S9**: Correlation heatmap of bulk soil physicochemical variables measured at each sampling location (n = 12). Colors indicate Pearson correlation among soil variables and elevation.
