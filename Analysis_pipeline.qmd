@@ -33,12 +33,14 @@ header-includes:
   - '\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}'
 editor: visual
 ---
+
 ```{r}
 #| include: false
 if (knitr::is_html_output()) {
   knitr::opts_chunk$set(echo = TRUE)
 }
 ```
+
 ## Overview and reproducibility
 
 This document compiles methodological details, supplementary analyses, and reproducibility outputs supporting the main manuscript. Computationally intensive steps (e.g. phylogenetic tree inference, GLLVM fitting, iNEXT3D diversity estimation) were executed on a remote Ubuntu-based computing environment. Their outputs (figures, tables, and selected model objects) are integrated here as static results.
@@ -50,6 +52,10 @@ All figures (PNG) and result tables (CSV) are stored within the project reposito
 Repository: [Root_fungi_DADA2](https://github.com/Ssangulo/Root_fungi_DADA2)\
 Sequence data: ENA accession number PRJEB107725\
 Metadata: `Data_S1_metadata.csv, Data_S3_soil.csv`
+
+If viewing the PDF version of this Appendix material, note that the HTML version has all code to reproduce these results accessible through drop-downs. 
+
+Please visit the project webpage for this: https://ssangulo.github.io/Paramo_SkyIslands_RootFungi/appendix.html
 
 ------------------------------------------------------------------------
 
@@ -927,7 +933,156 @@ tree_data_rg2.N <- merge_phyloseq(alldat.N[[2]], fit$tree)
 saveRDS(tree_data_rg2.N, file.path(out_obj_dir, "tree_ps.rds"))
 ```
 
-### 5.1 Per-sample Hill diversity: parallelism models (Tables S11–S12)
+### 5.1 Abundance-based beta-diversity partitioning (Table S11)
+
+Bray–Curtis dissimilarities were partitioned into balanced variation and abundance gradients across taxonomic levels using the `betapart` package. Metrics were calculated from rarefied abundance data.
+
+```{r}
+#| echo: false
+library(knitr)
+
+tab_s11 <- read.csv("tables/Table_S11_Bray_partitioning.csv")
+
+kable(
+  tab_s11,
+  digits = 4,
+  caption = "Table S11. Bray–Curtis beta-diversity partitioning across taxonomic levels and sites."
+)
+```
+
+### 5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S12–S13)
+
+We quantified habitat-associated patterns in taxonomic diversity (TD) and phylogenetic diversity (PD) using iNEXT3D and Hill numbers (q = 0, 1, 2). Diversity estimates were computed from incidence (presence/absence) matrices at the habitat level and evaluated under rarefaction/extrapolation with bootstrap confidence intervals (nboot = 500). Phylogenetic diversity was estimated as meanPD using a pruned phylogeny matched to the observed taxa. The combined curve visualization is presented in main-text Figure 3A; asymptotic summaries are provided in Tables S12–S13, and the per-sample parallelism ANOVA results in Tables S14–S15.
+
+```{r}
+#| echo: false
+library(knitr)
+
+tab_s16 <- read.csv("tables/Table_S16_iNEXT3D_TD.csv")
+
+kable(
+  tab_s16,
+  digits = 3,
+  caption = "Table S12. Taxonomic diversity (TD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500). Observed and asymptotic estimates are reported with standard errors, 95% confidence intervals, and sample coverage at observed effort and at double effort."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+tab_s17 <- read.csv("tables/Table_S17_iNEXT3D_PD.csv")
+
+kable(
+  tab_s17,
+  digits = 3,
+  caption = "Table S13. Phylogenetic diversity (PD; meanPD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500), including coverage and effective lineage estimates under rarefaction/extrapolation."
+)
+```
+
+```{r}
+#| eval: false
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
+#| code-summary: "iNEXT3D diversity analyses (executed on remote server)"
+
+library(phyloseq)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(iNEXT.3D)
+library(ape)
+library(knitr)
+library(phangorn)
+
+# NOTE: The phylogenetic tree is loaded from tree_ps (objects/tree_ps.rds).
+# The GTR inference block below is REDUNDANT — tree_ps already contains the fitted tree.
+# REMOVE the AlignSeqs/optim.pml block if re-running; use phy_tree(tree_ps) directly.
+
+set.seed(1)
+
+labs_map  <- c(forest = "Forest", subparamo = "Subpáramo", paramo = "Páramo")
+lvl_order <- c("Forest", "Subpáramo", "Páramo")
+
+relabel_inext <- function(x) {
+  f <- function(df){
+    if (!("Assemblage" %in% names(df))) return(df)
+    df$Assemblage <- as.character(df$Assemblage)
+    df$Assemblage <- labs_map[df$Assemblage]
+    df$Assemblage <- factor(df$Assemblage, levels = lvl_order)
+    df
+  }
+  x$TDInfo   <- f(as.data.frame(x$TDInfo))
+  x$TDAsyEst <- f(as.data.frame(x$TDAsyEst))
+  if (!is.null(x$TDiNextEst)) {
+    for (nm in names(x$TDiNextEst)) x$TDiNextEst[[nm]] <- f(as.data.frame(x$TDiNextEst[[nm]]))
+  }
+  x
+}
+
+ps_td <- tree_ps
+
+sd <- as.data.frame(sample_data(ps_td))
+
+OTU <- as(otu_table(ps_td), "matrix")
+if (!taxa_are_rows(ps_td)) OTU <- t(OTU)
+
+inc_by_hab_td <- lapply(split(rownames(sd), sd$habitat), function(samps){
+  M <- OTU[, colnames(OTU) %in% samps, drop = FALSE]
+  M[M > 0] <- 1
+  storage.mode(M) <- "numeric"
+  M
+})
+
+inc_by_hab_td <- inc_by_hab_td[names(inc_by_hab_td) %in% names(labs_map)]
+inc_by_hab_td <- inc_by_hab_td[vapply(inc_by_hab_td, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
+
+out_TD <- iNEXT3D(data = inc_by_hab_td, diversity = "TD", q = c(0,1,2),
+                  datatype = "incidence_raw", nboot = 500)
+out_TD <- relabel_inext(out_TD)
+
+tab_s16 <- as.data.frame(out_TD$TDAsyEst) %>%
+  mutate(Diversity_order = case_when(
+    qTD == 0 ~ "Species richness", qTD == 1 ~ "Shannon diversity",
+    qTD == 2 ~ "Simpson diversity", TRUE ~ as.character(qTD)
+  )) %>%
+  rename(Habitat = Assemblage)
+
+write.csv(tab_s16, file.path(out_tab_dir, "Table_S16_iNEXT3D_TD.csv"), row.names = FALSE)
+
+ps_pd <- tree_ps
+sd2 <- as.data.frame(sample_data(ps_pd))
+
+X <- as(otu_table(ps_pd), "matrix")
+if (!taxa_are_rows(ps_pd)) X <- t(X)
+
+inc_by_hab_pd <- lapply(split(rownames(sd2), sd2$habitat), function(samps){
+  M <- X[, colnames(X) %in% samps, drop = FALSE]
+  M[M > 0] <- 1; storage.mode(M) <- "numeric"; M
+})
+inc_by_hab_pd <- inc_by_hab_pd[names(inc_by_hab_pd) %in% names(labs_map)]
+inc_by_hab_pd <- inc_by_hab_pd[vapply(inc_by_hab_pd, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
+
+tr <- phy_tree(ps_pd)
+keep_tips <- intersect(tr$tip.label, unique(unlist(lapply(inc_by_hab_pd, rownames))))
+tr2 <- ape::keep.tip(tr, keep_tips)
+tr2$node.label <- NULL
+if (!ape::is.rooted(tr2)) tr2 <- phangorn::midpoint(tr2)
+
+tipset <- tr2$tip.label
+inc_by_hab_pd <- lapply(inc_by_hab_pd, function(M) M[rownames(M) %in% tipset, , drop = FALSE])
+inc_by_hab_pd <- inc_by_hab_pd[vapply(inc_by_hab_pd, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
+
+out_PD <- iNEXT3D(data = inc_by_hab_pd, diversity = "PD", q = c(0,1,2),
+                  datatype = "incidence_raw", nboot = 500, PDtree = tr2, PDtype = "meanPD")
+
+tab_s17 <- as.data.frame(out_PD$PDAsyEst) %>% rename(Habitat = Assemblage)
+tab_s17$Habitat <- factor(labs_map[as.character(tab_s17$Habitat)], levels = lvl_order)
+
+write.csv(tab_s17, file.path(out_tab_dir, "Table_S17_iNEXT3D_PD.csv"), row.names = FALSE)
+```
+
+### 5.3 Per-sample Hill diversity: parallelism models (Tables S14–S15)
 
 To evaluate whether diversity trajectories are parallel across geographically isolated sites, we model diversity as a function of habitat (ordered along elevation), site, and their interaction. The key term is habitat × site: a weak/non-significant interaction with a strong habitat main effect supports broadly parallel trajectories with site-specific baselines.
 
@@ -944,7 +1099,7 @@ tab_s18 <- read.csv("tables/Table_S18_TD_parallelism_anova.csv")
 kable(
   tab_s18,
   digits = 3,
-  caption = "Table S11. ANOVA table for the log-linear model of per-sample taxonomic diversity (TD; Hill q=1) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.52, p=0.21 supports parallel diversity trajectories across sites."
+  caption = "Table S14. ANOVA table for the log-linear model of per-sample taxonomic diversity (TD; Hill q=1) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.52, p=0.21 supports parallel diversity trajectories across sites."
 )
 ```
 
@@ -957,7 +1112,7 @@ tab_s19 <- read.csv("tables/Table_S19_PD_parallelism_anova.csv")
 kable(
   tab_s19,
   digits = 3,
-  caption = "Table S12. ANOVA table for the log-linear model of per-sample phylogenetic diversity (PD; Hill q=1, meanPD) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.22, p=0.31 supports parallel diversity trajectories across sites."
+  caption = "Table S15. ANOVA table for the log-linear model of per-sample phylogenetic diversity (PD; Hill q=1, meanPD) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.22, p=0.31 supports parallel diversity trajectories across sites."
 )
 ```
 
@@ -1305,155 +1460,6 @@ ggsave(
   bg = "white"
 )
 
-```
-
-### 5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S13–S14)
-
-We quantified habitat-associated patterns in taxonomic diversity (TD) and phylogenetic diversity (PD) using iNEXT3D and Hill numbers (q = 0, 1, 2). Diversity estimates were computed from incidence (presence/absence) matrices at the habitat level and evaluated under rarefaction/extrapolation with bootstrap confidence intervals (nboot = 500). Phylogenetic diversity was estimated as meanPD using a pruned phylogeny matched to the observed taxa. The combined curve visualization is presented in main-text Figure 3A; asymptotic summaries are provided in Tables S13–S14, and the per-sample parallelism ANOVA results in Tables S11–S12.
-
-```{r}
-#| echo: false
-library(knitr)
-
-tab_s16 <- read.csv("tables/Table_S16_iNEXT3D_TD.csv")
-
-kable(
-  tab_s16,
-  digits = 3,
-  caption = "Table S13. Taxonomic diversity (TD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500). Observed and asymptotic estimates are reported with standard errors, 95% confidence intervals, and sample coverage at observed effort and at double effort."
-)
-```
-
-```{r}
-#| echo: false
-library(knitr)
-
-tab_s17 <- read.csv("tables/Table_S17_iNEXT3D_PD.csv")
-
-kable(
-  tab_s17,
-  digits = 3,
-  caption = "Table S14. Phylogenetic diversity (PD; meanPD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500), including coverage and effective lineage estimates under rarefaction/extrapolation."
-)
-```
-
-```{r}
-#| eval: false
-#| echo: !expr knitr::is_html_output()
-#| code-fold: true
-#| code-summary: "iNEXT3D diversity analyses (executed on remote server)"
-
-library(phyloseq)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(iNEXT.3D)
-library(ape)
-library(knitr)
-library(phangorn)
-
-# NOTE: The phylogenetic tree is loaded from tree_ps (objects/tree_ps.rds).
-# The GTR inference block below is REDUNDANT — tree_ps already contains the fitted tree.
-# REMOVE the AlignSeqs/optim.pml block if re-running; use phy_tree(tree_ps) directly.
-
-set.seed(1)
-
-labs_map  <- c(forest = "Forest", subparamo = "Subpáramo", paramo = "Páramo")
-lvl_order <- c("Forest", "Subpáramo", "Páramo")
-
-relabel_inext <- function(x) {
-  f <- function(df){
-    if (!("Assemblage" %in% names(df))) return(df)
-    df$Assemblage <- as.character(df$Assemblage)
-    df$Assemblage <- labs_map[df$Assemblage]
-    df$Assemblage <- factor(df$Assemblage, levels = lvl_order)
-    df
-  }
-  x$TDInfo   <- f(as.data.frame(x$TDInfo))
-  x$TDAsyEst <- f(as.data.frame(x$TDAsyEst))
-  if (!is.null(x$TDiNextEst)) {
-    for (nm in names(x$TDiNextEst)) x$TDiNextEst[[nm]] <- f(as.data.frame(x$TDiNextEst[[nm]]))
-  }
-  x
-}
-
-ps_td <- tree_ps
-
-sd <- as.data.frame(sample_data(ps_td))
-
-OTU <- as(otu_table(ps_td), "matrix")
-if (!taxa_are_rows(ps_td)) OTU <- t(OTU)
-
-inc_by_hab_td <- lapply(split(rownames(sd), sd$habitat), function(samps){
-  M <- OTU[, colnames(OTU) %in% samps, drop = FALSE]
-  M[M > 0] <- 1
-  storage.mode(M) <- "numeric"
-  M
-})
-
-inc_by_hab_td <- inc_by_hab_td[names(inc_by_hab_td) %in% names(labs_map)]
-inc_by_hab_td <- inc_by_hab_td[vapply(inc_by_hab_td, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
-
-out_TD <- iNEXT3D(data = inc_by_hab_td, diversity = "TD", q = c(0,1,2),
-                  datatype = "incidence_raw", nboot = 500)
-out_TD <- relabel_inext(out_TD)
-
-tab_s16 <- as.data.frame(out_TD$TDAsyEst) %>%
-  mutate(Diversity_order = case_when(
-    qTD == 0 ~ "Species richness", qTD == 1 ~ "Shannon diversity",
-    qTD == 2 ~ "Simpson diversity", TRUE ~ as.character(qTD)
-  )) %>%
-  rename(Habitat = Assemblage)
-
-write.csv(tab_s16, file.path(out_tab_dir, "Table_S16_iNEXT3D_TD.csv"), row.names = FALSE)
-
-ps_pd <- tree_ps
-sd2 <- as.data.frame(sample_data(ps_pd))
-
-X <- as(otu_table(ps_pd), "matrix")
-if (!taxa_are_rows(ps_pd)) X <- t(X)
-
-inc_by_hab_pd <- lapply(split(rownames(sd2), sd2$habitat), function(samps){
-  M <- X[, colnames(X) %in% samps, drop = FALSE]
-  M[M > 0] <- 1; storage.mode(M) <- "numeric"; M
-})
-inc_by_hab_pd <- inc_by_hab_pd[names(inc_by_hab_pd) %in% names(labs_map)]
-inc_by_hab_pd <- inc_by_hab_pd[vapply(inc_by_hab_pd, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
-
-tr <- phy_tree(ps_pd)
-keep_tips <- intersect(tr$tip.label, unique(unlist(lapply(inc_by_hab_pd, rownames))))
-tr2 <- ape::keep.tip(tr, keep_tips)
-tr2$node.label <- NULL
-if (!ape::is.rooted(tr2)) tr2 <- phangorn::midpoint(tr2)
-
-tipset <- tr2$tip.label
-inc_by_hab_pd <- lapply(inc_by_hab_pd, function(M) M[rownames(M) %in% tipset, , drop = FALSE])
-inc_by_hab_pd <- inc_by_hab_pd[vapply(inc_by_hab_pd, function(M) nrow(M) > 0 && ncol(M) > 0, TRUE)]
-
-out_PD <- iNEXT3D(data = inc_by_hab_pd, diversity = "PD", q = c(0,1,2),
-                  datatype = "incidence_raw", nboot = 500, PDtree = tr2, PDtype = "meanPD")
-
-tab_s17 <- as.data.frame(out_PD$PDAsyEst) %>% rename(Habitat = Assemblage)
-tab_s17$Habitat <- factor(labs_map[as.character(tab_s17$Habitat)], levels = lvl_order)
-
-write.csv(tab_s17, file.path(out_tab_dir, "Table_S17_iNEXT3D_PD.csv"), row.names = FALSE)
-```
-
-### 5.3 Abundance-based beta-diversity partitioning (Table S15)
-
-Bray–Curtis dissimilarities were partitioned into balanced variation and abundance gradients across taxonomic levels using the `betapart` package. Metrics were calculated from rarefied abundance data.
-
-```{r}
-#| echo: false
-library(knitr)
-
-tab_s11 <- read.csv("tables/Table_S11_Bray_partitioning.csv")
-
-kable(
-  tab_s11,
-  digits = 4,
-  caption = "Table S15. Bray–Curtis beta-diversity partitioning across taxonomic levels and sites."
-)
 ```
 
 ------------------------------------------------------------------------

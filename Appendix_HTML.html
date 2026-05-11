@@ -2367,9 +2367,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#section-5-diversity-trajectories" id="toc-section-5-diversity-trajectories" class="nav-link" data-scroll-target="#section-5-diversity-trajectories">Section 5: Diversity trajectories</a>
   <ul class="collapse">
-  <li><a href="#per-sample-hill-diversity-parallelism-models-tables-s11s12" id="toc-per-sample-hill-diversity-parallelism-models-tables-s11s12" class="nav-link" data-scroll-target="#per-sample-hill-diversity-parallelism-models-tables-s11s12">5.1 Per-sample Hill diversity: parallelism models (Tables S11–S12)</a></li>
-  <li><a href="#inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s13s14" id="toc-inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s13s14" class="nav-link" data-scroll-target="#inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s13s14">5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S13–S14)</a></li>
-  <li><a href="#abundance-based-beta-diversity-partitioning-table-s15" id="toc-abundance-based-beta-diversity-partitioning-table-s15" class="nav-link" data-scroll-target="#abundance-based-beta-diversity-partitioning-table-s15">5.3 Abundance-based beta-diversity partitioning (Table S15)</a></li>
+  <li><a href="#abundance-based-beta-diversity-partitioning-table-s11" id="toc-abundance-based-beta-diversity-partitioning-table-s11" class="nav-link" data-scroll-target="#abundance-based-beta-diversity-partitioning-table-s11">5.1 Abundance-based beta-diversity partitioning (Table S11)</a></li>
+  <li><a href="#inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s12s13" id="toc-inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s12s13" class="nav-link" data-scroll-target="#inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s12s13">5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S12–S13)</a></li>
+  <li><a href="#per-sample-hill-diversity-parallelism-models-tables-s14s15" id="toc-per-sample-hill-diversity-parallelism-models-tables-s14s15" class="nav-link" data-scroll-target="#per-sample-hill-diversity-parallelism-models-tables-s14s15">5.3 Per-sample Hill diversity: parallelism models (Tables S14–S15)</a></li>
   <li><a href="#figure-3-diversity-trajectories" id="toc-figure-3-diversity-trajectories" class="nav-link" data-scroll-target="#figure-3-diversity-trajectories">5.4 Figure 3: Diversity trajectories</a></li>
   </ul></li>
   <li><a href="#section-6-lineage-specific-responses" id="toc-section-6-lineage-specific-responses" class="nav-link" data-scroll-target="#section-6-lineage-specific-responses">Section 6: Lineage-specific responses</a>
@@ -2416,6 +2416,8 @@ window.Quarto = {
 <p>Repository: <a href="https://github.com/Ssangulo/Root_fungi_DADA2">Root_fungi_DADA2</a><br>
 Sequence data: ENA accession number PRJEB107725<br>
 Metadata: <code>Data_S1_metadata.csv, Data_S3_soil.csv</code></p>
+<p>If viewing the PDF version of this Appendix material, note that the HTML version has all code to reproduce these results accessible through drop-downs.</p>
+<p>Please visit the project webpage for this: https://ssangulo.github.io/Paramo_SkyIslands_RootFungi/appendix.html</p>
 <hr>
 </section>
 <section id="section-0-setup" class="level2 unnumbered">
@@ -3695,808 +3697,13 @@ Metadata: <code>Data_S1_metadata.csv, Data_S3_soil.csv</code></p>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tree_data_rg2.N, <span class="fu">file.path</span>(out_obj_dir, <span class="st">&quot;tree_ps.rds&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="per-sample-hill-diversity-parallelism-models-tables-s11s12" class="level3">
-<h3 class="anchored" data-anchor-id="per-sample-hill-diversity-parallelism-models-tables-s11s12">5.1 Per-sample Hill diversity: parallelism models (Tables S11–S12)</h3>
-<p>To evaluate whether diversity trajectories are parallel across geographically isolated sites, we model diversity as a function of habitat (ordered along elevation), site, and their interaction. The key term is habitat × site: a weak/non-significant interaction with a strong habitat main effect supports broadly parallel trajectories with site-specific baselines.</p>
-<p>For this section, diversity is computed independently for each sample using Hill numbers: taxonomic diversity (TD) and phylogenetic diversity (PD) at q = 1 (effective Shannon) as the primary metric. This preserves interpretability, keeps consistency with Hill-number logic, and allows direct sample-level inference on trajectory parallelism.</p>
-<p>We use a two-model strategy: (i) a primary habitat-factor model for ecological interpretation, and (ii) a secondary numeric-trend model (ordered habitat steps) to summarize site-specific slopes. Model family is screened first (Gaussian, log-Gaussian, Gamma-log) before final inference.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Table S11. ANOVA table for the log-linear model of per-sample taxonomic diversity (TD; Hill q=1) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.52, p=0.21 supports parallel diversity trajectories across sites.</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Term</th>
-<th style="text-align: right;">Df</th>
-<th style="text-align: right;">Sum.Sq</th>
-<th style="text-align: right;">Mean.Sq</th>
-<th style="text-align: right;">F.value</th>
-<th style="text-align: right;">Pr..F.</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">habitat</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2.748</td>
-<td style="text-align: right;">1.374</td>
-<td style="text-align: right;">4.395</td>
-<td style="text-align: right;">0.017</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">site</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0.633</td>
-<td style="text-align: right;">0.211</td>
-<td style="text-align: right;">0.675</td>
-<td style="text-align: right;">0.571</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">habitat:site</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">1.899</td>
-<td style="text-align: right;">0.475</td>
-<td style="text-align: right;">1.518</td>
-<td style="text-align: right;">0.211</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">15.633</td>
-<td style="text-align: right;">0.313</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Table S12. ANOVA table for the log-linear model of per-sample phylogenetic diversity (PD; Hill q=1, meanPD) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.22, p=0.31 supports parallel diversity trajectories across sites.</caption>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Term</th>
-<th style="text-align: right;">Df</th>
-<th style="text-align: right;">Sum.Sq</th>
-<th style="text-align: right;">Mean.Sq</th>
-<th style="text-align: right;">F.value</th>
-<th style="text-align: right;">Pr..F.</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">habitat</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1.135</td>
-<td style="text-align: right;">0.568</td>
-<td style="text-align: right;">3.027</td>
-<td style="text-align: right;">0.057</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">site</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0.794</td>
-<td style="text-align: right;">0.265</td>
-<td style="text-align: right;">1.411</td>
-<td style="text-align: right;">0.251</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">habitat:site</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">0.918</td>
-<td style="text-align: right;">0.230</td>
-<td style="text-align: right;">1.224</td>
-<td style="text-align: right;">0.313</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Residuals</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">9.375</td>
-<td style="text-align: right;">0.188</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Per-sample Hill TD/PD: family checks + primary factor model + secondary slope model</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hillR)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ps_ind  <span class="ot">&lt;-</span> ps_individual   <span class="co"># collapsed replicates</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ps_tree <span class="ot">&lt;-</span> tree_ps         <span class="co"># object that already has phylogeny</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">inherits</span>(ps_ind, <span class="st">&quot;phyloseq&quot;</span>), <span class="fu">inherits</span>(ps_tree, <span class="st">&quot;phyloseq&quot;</span>))</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">phy_tree</span>(ps_tree, <span class="at">errorIfNULL =</span> <span class="cn">FALSE</span>)))</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Match taxa between ps_ind and tree_ps tree</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>taxa_ind  <span class="ot">&lt;-</span> <span class="fu">taxa_names</span>(ps_ind)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>tips_tree <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_tree)<span class="sc">$</span>tip.label</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>common_taxa <span class="ot">&lt;-</span> <span class="fu">intersect</span>(taxa_ind, tips_tree)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Prune collapsed object to taxa represented in tree and build matching tree</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>ps_div <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(common_taxa, ps_ind)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>tr_ind <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">keep.tip</span>(<span class="fu">phy_tree</span>(ps_tree), common_taxa)</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>tr_ind<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>ape<span class="sc">::</span><span class="fu">is.rooted</span>(tr_ind)) tr_ind <span class="ot">&lt;-</span> phangorn<span class="sc">::</span><span class="fu">midpoint</span>(tr_ind)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder OTU taxa to match tree tip order (important)</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>ps_div <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(tr_ind<span class="sc">$</span>tip.label, ps_div)</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">taxa_names</span>(ps_div), tr_ind<span class="sc">$</span>tip.label))</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Attach tree to collapsed object</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">phy_tree</span>(ps_div) <span class="ot">&lt;-</span> tr_ind</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="fu">validObject</span>(ps_div)</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">sample_data</span>(ps_div), <span class="st">&quot;data.frame&quot;</span>)</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(meta)</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>site <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>site)</span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>habitat <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  meta<span class="sc">$</span>habitat,</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forest&quot;</span>, <span class="st">&quot;subparamo&quot;</span>, <span class="st">&quot;paramo&quot;</span>),</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>habitat_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(meta<span class="sc">$</span>habitat)</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co"># OTU matrix as taxa x samples -&gt; comm as samples x taxa</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>OTU <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_div), <span class="st">&quot;matrix&quot;</span>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_div)) OTU <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>lib_size <span class="ot">&lt;-</span> <span class="fu">sample_sums</span>(ps_div)</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree/community alignment is already defined above via ps_div + tr_ind</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>tr2 <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_div)</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>comm2 <span class="ot">&lt;-</span> comm[, <span class="fu">taxa_names</span>(ps_div), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Alignment checks</span></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">colnames</span>(comm2), tr2<span class="sc">$</span>tip.label))</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">colnames</span>(comm2)))</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Compatibility wrappers for hillR argument names across versions</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>get_hill_taxa <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">qval =</span> <span class="dv">1</span>) {</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_taxa</span>(x, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">hill_taxa</span>(x, <span class="at">qvalue =</span> qval)</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(out)</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>get_hill_phylo <span class="ot">&lt;-</span> <span class="cf">function</span>(x, tree, <span class="at">qval =</span> <span class="dv">1</span>) {</span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, <span class="at">tree =</span> tree, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, tree, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, <span class="at">tree =</span> tree, <span class="at">qvalue =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">hill_phylo</span>(x, tree, <span class="at">qvalue =</span> qval)</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(out)</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary metrics (q = 1): independent values per sample</span></span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q1 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">1</span>)</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q1 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">1</span>)</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional sensitivity metrics for supplementary checks (not modeled by default)</span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q0 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">0</span>)</span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q2 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">2</span>)</span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q0 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">0</span>)</span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q2 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">2</span>)</span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure tabular class for dplyr/tidyr verbs</span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(meta, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>div_long <span class="ot">&lt;-</span> meta <span class="sc">%&gt;%</span></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SampleID, site, habitat, habitat_num, TD_q1, PD_q1) <span class="sc">%&gt;%</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(TD_q1, PD_q1),</span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;metric&quot;</span>,</span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;estimate&quot;</span></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(metric, <span class="at">TD_q1 =</span> <span class="st">&quot;TD (q=1)&quot;</span>, <span class="at">PD_q1 =</span> <span class="st">&quot;PD (q=1)&quot;</span>))</span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional depth sensitivity covariate</span></span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;lib_size&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(meta)) {</span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>  meta<span class="sc">$</span>lib_size <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sample_sums</span>(ps_div)[meta<span class="sc">$</span>SampleID])</span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>div_long <span class="ot">&lt;-</span> div_long <span class="sc">%&gt;%</span></span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(meta[, <span class="fu">c</span>(<span class="st">&quot;SampleID&quot;</span>, <span class="st">&quot;lib_size&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="at">by =</span> <span class="st">&quot;SampleID&quot;</span>)</span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 1) Family screening before final inference ----------</span></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="co"># Candidate families:</span></span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="co">#  - gaussian:      estimate ~ ...</span></span>
-<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="co">#  - lognormal_lm:  log(estimate) ~ ...</span></span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a><span class="co">#  - gamma_log:     glm(..., family = Gamma(link = &quot;log&quot;))</span></span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>fit_candidates <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, rhs_formula) {</span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>gaussian <span class="ot">&lt;-</span> <span class="fu">lm</span>(rhs_formula, <span class="at">data =</span> dat)</span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>lognormal_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">update</span>(rhs_formula, <span class="fu">log</span>(estimate) <span class="sc">~</span> .), <span class="at">data =</span> dat)</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>gamma_log <span class="ot">&lt;-</span> <span class="fu">glm</span>(rhs_formula, <span class="at">data =</span> dat, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>summarize_candidates <span class="ot">&lt;-</span> <span class="cf">function</span>(fits, metric_label, model_type) {</span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> metric_label,</span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">model_type =</span> model_type,</span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">names</span>(fits),</span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC =</span> <span class="fu">vapply</span>(fits, AIC, <span class="fu">numeric</span>(<span class="dv">1</span>)),</span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a>td_dat <span class="ot">&lt;-</span> <span class="fu">filter</span>(div_long, metric <span class="sc">==</span> <span class="st">&quot;TD (q=1)&quot;</span>)</span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>pd_dat <span class="ot">&lt;-</span> <span class="fu">filter</span>(div_long, metric <span class="sc">==</span> <span class="st">&quot;PD (q=1)&quot;</span>)</span>
-<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a>td_cand_factor <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(td_dat, estimate <span class="sc">~</span> habitat <span class="sc">*</span> site)</span>
-<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>pd_cand_factor <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(pd_dat, estimate <span class="sc">~</span> habitat <span class="sc">*</span> site)</span>
-<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>td_cand_num <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(td_dat, estimate <span class="sc">~</span> habitat_num <span class="sc">*</span> site)</span>
-<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>pd_cand_num <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(pd_dat, estimate <span class="sc">~</span> habitat_num <span class="sc">*</span> site)</span>
-<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>model_screen <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(td_cand_factor, <span class="st">&quot;TD (q=1)&quot;</span>, <span class="st">&quot;factor&quot;</span>),</span>
-<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(pd_cand_factor, <span class="st">&quot;PD (q=1)&quot;</span>, <span class="st">&quot;factor&quot;</span>),</span>
-<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(td_cand_num, <span class="st">&quot;TD (q=1)&quot;</span>, <span class="st">&quot;numeric&quot;</span>),</span>
-<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(pd_cand_num, <span class="st">&quot;PD (q=1)&quot;</span>, <span class="st">&quot;numeric&quot;</span>)</span>
-<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(metric, model_type, AIC)</span>
-<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>model_screen</span>
-<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple residual checks for the top candidate families</span></span>
-<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(td_cand_factor<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;TD factor: lognormal_lm&quot;</span>)</span>
-<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pd_cand_factor<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;PD factor: lognormal_lm&quot;</span>)</span>
-<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(td_cand_num<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;TD numeric: lognormal_lm&quot;</span>)</span>
-<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pd_cand_num<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;PD numeric: lognormal_lm&quot;</span>)</span>
-<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 2) Final models (set after reviewing model_screen + residuals) ----------</span></span>
-<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a><span class="co"># Best model is lognormal_lm by far</span></span>
-<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a>selected_family_td <span class="ot">&lt;-</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
-<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>selected_family_pd <span class="ot">&lt;-</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
-<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>pick_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(fit_list, selected_name) {</span>
-<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>  fit_list[[selected_name]]</span>
-<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary ecological model: habitat as factor</span></span>
-<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>m_td_factor <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(td_cand_factor, selected_family_td)</span>
-<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>m_pd_factor <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(pd_cand_factor, selected_family_pd)</span>
-<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary slope model: habitat ordered as numeric</span></span>
-<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a>m_td_num <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(td_cand_num, selected_family_td)</span>
-<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a>m_pd_num <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(pd_cand_num, selected_family_pd)</span>
-<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA tables</span></span>
-<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a>anova_td_factor <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_td_factor)</span>
-<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a>anova_pd_factor <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_pd_factor)</span>
-<span id="cb9-177"><a href="#cb9-177" aria-hidden="true" tabindex="-1"></a>anova_td_num <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_td_num)</span>
-<span id="cb9-178"><a href="#cb9-178" aria-hidden="true" tabindex="-1"></a>anova_pd_num <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_pd_num)</span>
-<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a>anova_td_factor</span>
-<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a>anova_pd_factor</span>
-<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a>anova_td_num</span>
-<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>anova_pd_num</span>
-<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary inference (factor model): marginal means + habitat contrasts within each site</span></span>
-<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>emm_td <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site) <span class="sc">%&gt;%</span> <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a>emm_pd <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site) <span class="sc">%&gt;%</span> <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>contr_td <span class="ot">&lt;-</span> <span class="fu">contrast</span>(<span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site), <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>), <span class="at">adjust =</span> <span class="st">&quot;holm&quot;</span>)</span>
-<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>contr_pd <span class="ot">&lt;-</span> <span class="fu">contrast</span>(<span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site), <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>), <span class="at">adjust =</span> <span class="st">&quot;holm&quot;</span>)</span>
-<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary inference (numeric model): site-specific slopes</span></span>
-<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>slopes_td <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(m_td_num, <span class="sc">~</span> site, <span class="at">var =</span> <span class="st">&quot;habitat_num&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a>slopes_pd <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(m_pd_num, <span class="sc">~</span> site, <span class="at">var =</span> <span class="st">&quot;habitat_num&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted means at habitat steps from numeric model (consistent with habitat_num)</span></span>
-<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a>emm_td_num_steps <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_td_num, <span class="sc">~</span> site <span class="sc">|</span> habitat_num,</span>
-<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a>                            <span class="at">at =</span> <span class="fu">list</span>(<span class="at">habitat_num =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>emm_pd_num_steps <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_pd_num, <span class="sc">~</span> site <span class="sc">|</span> habitat_num,</span>
-<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a>                            <span class="at">at =</span> <span class="fu">list</span>(<span class="at">habitat_num =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a>emm_td</span>
-<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a>emm_pd</span>
-<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a>contr_td</span>
-<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>contr_pd</span>
-<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a>slopes_td</span>
-<span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>slopes_pd</span>
-<span id="cb9-214"><a href="#cb9-214" aria-hidden="true" tabindex="-1"></a>emm_td_num_steps</span>
-<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a>emm_pd_num_steps</span>
-<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 3) Plot (factor model means/CI + observed values) ----------</span></span>
-<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a>emm_td_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
-<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
-<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site),</span>
-<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
-<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias.adjust =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> <span class="st">&quot;TD (q=1)&quot;</span>)</span>
-<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a>emm_pd_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
-<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
-<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a>    <span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site),</span>
-<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
-<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
-<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias.adjust =</span> <span class="cn">TRUE</span></span>
-<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> <span class="st">&quot;PD (q=1)&quot;</span>)</span>
-<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>emm_plot <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(emm_td_plot, emm_pd_plot) <span class="sc">%&gt;%</span></span>
-<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">habitat =</span> <span class="fu">factor</span>(habitat, <span class="at">levels =</span> <span class="fu">levels</span>(meta<span class="sc">$</span>habitat), <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">factor</span>(site, <span class="at">levels =</span> <span class="fu">levels</span>(meta<span class="sc">$</span>site))</span>
-<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a><span class="co"># emmeans column names vary by model/link; standardize for plotting</span></span>
-<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;emmean&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
-<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>response <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>emmean</span>
-<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;lower.CL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;asymp.LCL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
-<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>lower.CL <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>asymp.LCL</span>
-<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;upper.CL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;asymp.UCL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
-<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>upper.CL <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>asymp.UCL</span>
-<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a><span class="co"># Force original-scale plotting when lognormal models are used and emmeans</span></span>
-<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a><span class="co"># returns only link-scale columns (no explicit response-scale columns).</span></span>
-<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (</span>
-<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;emmean&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span></span>
-<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span>(<span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_td_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_pd_plot))</span>
-<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>) {</span>
-<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a>  is_log_td <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>metric <span class="sc">==</span> <span class="st">&quot;TD (q=1)&quot;</span> <span class="sc">&amp;</span> selected_family_td <span class="sc">==</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
-<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>  is_log_pd <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>metric <span class="sc">==</span> <span class="st">&quot;PD (q=1)&quot;</span> <span class="sc">&amp;</span> selected_family_pd <span class="sc">==</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
-<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>  is_log_any <span class="ot">&lt;-</span> is_log_td <span class="sc">|</span> is_log_pd</span>
-<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>response[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>emmean[is_log_any])</span>
-<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>lower.CL[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>lower.CL[is_log_any])</span>
-<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>upper.CL[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>upper.CL[is_log_any])</span>
-<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed summaries for sanity checks against model-estimated values</span></span>
-<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a>obs_summary <span class="ot">&lt;-</span> div_long <span class="sc">%&gt;%</span></span>
-<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(metric, site, habitat) <span class="sc">%&gt;%</span></span>
-<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
-<span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
-<span id="cb9-275"><a href="#cb9-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs_mean =</span> <span class="fu">mean</span>(estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs_median =</span> <span class="fu">median</span>(estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
-<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a>plot_check <span class="ot">&lt;-</span> emm_plot <span class="sc">%&gt;%</span></span>
-<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(metric, site, habitat, response, lower.CL, upper.CL) <span class="sc">%&gt;%</span></span>
-<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(obs_summary, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;metric&quot;</span>, <span class="st">&quot;site&quot;</span>, <span class="st">&quot;habitat&quot;</span>))</span>
-<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a>plot_check</span>
-<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>model_dodge <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.22</span>)</span>
-<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>p_div_traj <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(div_long, <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> estimate, <span class="at">color =</span> site)) <span class="sc">+</span></span>
-<span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>),</span>
-<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.55</span>,</span>
-<span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.6</span></span>
-<span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
-<span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
-<span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.12</span>,</span>
-<span id="cb9-298"><a href="#cb9-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>,</span>
-<span id="cb9-299"><a href="#cb9-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
-<span id="cb9-300"><a href="#cb9-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
-<span id="cb9-301"><a href="#cb9-301" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-302"><a href="#cb9-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb9-303"><a href="#cb9-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
-<span id="cb9-304"><a href="#cb9-304" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> response, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
-<span id="cb9-305"><a href="#cb9-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
-<span id="cb9-306"><a href="#cb9-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
-<span id="cb9-307"><a href="#cb9-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
-<span id="cb9-308"><a href="#cb9-308" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-309"><a href="#cb9-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb9-310"><a href="#cb9-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
-<span id="cb9-311"><a href="#cb9-311" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> response, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
-<span id="cb9-312"><a href="#cb9-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
-<span id="cb9-313"><a href="#cb9-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
-<span id="cb9-314"><a href="#cb9-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
-<span id="cb9-315"><a href="#cb9-315" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-316"><a href="#cb9-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> metric, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-317"><a href="#cb9-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-318"><a href="#cb9-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Habitat&quot;</span>,</span>
-<span id="cb9-319"><a href="#cb9-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Per-sample Hill diversity&quot;</span></span>
-<span id="cb9-320"><a href="#cb9-320" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-321"><a href="#cb9-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
-<span id="cb9-322"><a href="#cb9-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-323"><a href="#cb9-323" aria-hidden="true" tabindex="-1"></a>p_div_traj</span>
-<span id="cb9-324"><a href="#cb9-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-325"><a href="#cb9-325" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional export</span></span>
-<span id="cb9-326"><a href="#cb9-326" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(anova_td_factor), <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S18_TD_parallelism_anova.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-327"><a href="#cb9-327" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(anova_pd_factor), <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S19_PD_parallelism_anova.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-328"><a href="#cb9-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-329"><a href="#cb9-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-330"><a href="#cb9-330" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
-<span id="cb9-331"><a href="#cb9-331" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(out_fig_dir, <span class="st">&quot;Fig_x_TD_PD_parallel_trajectories.png&quot;</span>),</span>
-<span id="cb9-332"><a href="#cb9-332" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> p_div_traj,</span>
-<span id="cb9-333"><a href="#cb9-333" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb9-334"><a href="#cb9-334" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fl">5.5</span>,</span>
-<span id="cb9-335"><a href="#cb9-335" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">900</span>,</span>
-<span id="cb9-336"><a href="#cb9-336" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">&quot;white&quot;</span></span>
-<span id="cb9-337"><a href="#cb9-337" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section>
-<section id="inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s13s14" class="level3">
-<h3 class="anchored" data-anchor-id="inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s13s14">5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S13–S14)</h3>
-<p>We quantified habitat-associated patterns in taxonomic diversity (TD) and phylogenetic diversity (PD) using iNEXT3D and Hill numbers (q = 0, 1, 2). Diversity estimates were computed from incidence (presence/absence) matrices at the habitat level and evaluated under rarefaction/extrapolation with bootstrap confidence intervals (nboot = 500). Phylogenetic diversity was estimated as meanPD using a pruned phylogeny matched to the observed taxa. The combined curve visualization is presented in main-text Figure 3A; asymptotic summaries are provided in Tables S13–S14, and the per-sample parallelism ANOVA results in Tables S11–S12.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Table S13. Taxonomic diversity (TD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500). Observed and asymptotic estimates are reported with standard errors, 95% confidence intervals, and sample coverage at observed effort and at double effort.</caption>
-<colgroup>
-<col style="width: 15%">
-<col style="width: 24%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 10%">
-<col style="width: 12%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Assemblage</th>
-<th style="text-align: left;">qTD</th>
-<th style="text-align: right;">TD_obs</th>
-<th style="text-align: right;">TD_asy</th>
-<th style="text-align: right;">s.e.</th>
-<th style="text-align: right;">qTD.LCL</th>
-<th style="text-align: right;">qTD.UCL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">Species richness</td>
-<td style="text-align: right;">2521.000</td>
-<td style="text-align: right;">4581.983</td>
-<td style="text-align: right;">125.848</td>
-<td style="text-align: right;">4335.326</td>
-<td style="text-align: right;">4828.640</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">Shannon diversity</td>
-<td style="text-align: right;">1810.823</td>
-<td style="text-align: right;">2927.463</td>
-<td style="text-align: right;">51.242</td>
-<td style="text-align: right;">2827.030</td>
-<td style="text-align: right;">3027.896</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">Simpson diversity</td>
-<td style="text-align: right;">1158.528</td>
-<td style="text-align: right;">1467.726</td>
-<td style="text-align: right;">34.168</td>
-<td style="text-align: right;">1400.758</td>
-<td style="text-align: right;">1534.695</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">Species richness</td>
-<td style="text-align: right;">901.000</td>
-<td style="text-align: right;">1945.702</td>
-<td style="text-align: right;">95.214</td>
-<td style="text-align: right;">1759.086</td>
-<td style="text-align: right;">2132.317</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">Shannon diversity</td>
-<td style="text-align: right;">693.768</td>
-<td style="text-align: right;">1316.325</td>
-<td style="text-align: right;">43.456</td>
-<td style="text-align: right;">1231.153</td>
-<td style="text-align: right;">1401.497</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">Simpson diversity</td>
-<td style="text-align: right;">474.571</td>
-<td style="text-align: right;">661.005</td>
-<td style="text-align: right;">30.584</td>
-<td style="text-align: right;">601.061</td>
-<td style="text-align: right;">720.948</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">Species richness</td>
-<td style="text-align: right;">1533.000</td>
-<td style="text-align: right;">3059.820</td>
-<td style="text-align: right;">108.142</td>
-<td style="text-align: right;">2847.866</td>
-<td style="text-align: right;">3271.775</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">Shannon diversity</td>
-<td style="text-align: right;">1225.295</td>
-<td style="text-align: right;">2341.860</td>
-<td style="text-align: right;">58.351</td>
-<td style="text-align: right;">2227.494</td>
-<td style="text-align: right;">2456.226</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">Simpson diversity</td>
-<td style="text-align: right;">846.718</td>
-<td style="text-align: right;">1247.075</td>
-<td style="text-align: right;">49.323</td>
-<td style="text-align: right;">1150.403</td>
-<td style="text-align: right;">1343.747</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Table S14. Phylogenetic diversity (PD; meanPD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500), including coverage and effective lineage estimates under rarefaction/extrapolation.</caption>
-<colgroup>
-<col style="width: 13%">
-<col style="width: 12%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 9%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Habitat</th>
-<th style="text-align: left;">qPD</th>
-<th style="text-align: right;">PD_obs</th>
-<th style="text-align: right;">PD_asy</th>
-<th style="text-align: right;">s.e.</th>
-<th style="text-align: right;">qPD.LCL</th>
-<th style="text-align: right;">qPD.UCL</th>
-<th style="text-align: right;">Reftime</th>
-<th style="text-align: left;">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">q = 0 PD</td>
-<td style="text-align: right;">185.553</td>
-<td style="text-align: right;">283.343</td>
-<td style="text-align: right;">7.643</td>
-<td style="text-align: right;">268.362</td>
-<td style="text-align: right;">298.324</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">q = 1 PD</td>
-<td style="text-align: right;">96.045</td>
-<td style="text-align: right;">115.843</td>
-<td style="text-align: right;">1.427</td>
-<td style="text-align: right;">113.045</td>
-<td style="text-align: right;">118.641</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Forest</td>
-<td style="text-align: left;">q = 2 PD</td>
-<td style="text-align: right;">53.644</td>
-<td style="text-align: right;">56.697</td>
-<td style="text-align: right;">0.585</td>
-<td style="text-align: right;">55.551</td>
-<td style="text-align: right;">57.842</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">q = 0 PD</td>
-<td style="text-align: right;">81.971</td>
-<td style="text-align: right;">134.076</td>
-<td style="text-align: right;">6.501</td>
-<td style="text-align: right;">121.334</td>
-<td style="text-align: right;">146.818</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">q = 1 PD</td>
-<td style="text-align: right;">46.984</td>
-<td style="text-align: right;">60.900</td>
-<td style="text-align: right;">1.321</td>
-<td style="text-align: right;">58.310</td>
-<td style="text-align: right;">63.489</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Páramo</td>
-<td style="text-align: left;">q = 2 PD</td>
-<td style="text-align: right;">27.101</td>
-<td style="text-align: right;">29.356</td>
-<td style="text-align: right;">0.529</td>
-<td style="text-align: right;">28.320</td>
-<td style="text-align: right;">30.392</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">q = 0 PD</td>
-<td style="text-align: right;">132.936</td>
-<td style="text-align: right;">213.016</td>
-<td style="text-align: right;">7.909</td>
-<td style="text-align: right;">197.514</td>
-<td style="text-align: right;">228.518</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">q = 1 PD</td>
-<td style="text-align: right;">75.157</td>
-<td style="text-align: right;">98.360</td>
-<td style="text-align: right;">1.843</td>
-<td style="text-align: right;">94.748</td>
-<td style="text-align: right;">101.973</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Subpáramo</td>
-<td style="text-align: left;">q = 2 PD</td>
-<td style="text-align: right;">39.842</td>
-<td style="text-align: right;">43.233</td>
-<td style="text-align: right;">0.715</td>
-<td style="text-align: right;">41.831</td>
-<td style="text-align: right;">44.635</td>
-<td style="text-align: right;">0.873</td>
-<td style="text-align: left;">meanPD</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>iNEXT3D diversity analyses (executed on remote server)</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iNEXT<span class="fl">.3</span>D)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: The phylogenetic tree is loaded from tree_ps (objects/tree_ps.rds).</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The GTR inference block below is REDUNDANT — tree_ps already contains the fitted tree.</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># REMOVE the AlignSeqs/optim.pml block if re-running; use phy_tree(tree_ps) directly.</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>labs_map  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">forest =</span> <span class="st">&quot;Forest&quot;</span>, <span class="at">subparamo =</span> <span class="st">&quot;Subpáramo&quot;</span>, <span class="at">paramo =</span> <span class="st">&quot;Páramo&quot;</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>lvl_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Forest&quot;</span>, <span class="st">&quot;Subpáramo&quot;</span>, <span class="st">&quot;Páramo&quot;</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>relabel_inext <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>(<span class="st">&quot;Assemblage&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(df))) <span class="fu">return</span>(df)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df<span class="sc">$</span>Assemblage)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> labs_map[df<span class="sc">$</span>Assemblage]</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Assemblage, <span class="at">levels =</span> lvl_order)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    df</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">$</span>TDInfo   <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDInfo))</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">$</span>TDAsyEst <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDAsyEst))</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(x<span class="sc">$</span>TDiNextEst)) {</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (nm <span class="cf">in</span> <span class="fu">names</span>(x<span class="sc">$</span>TDiNextEst)) x<span class="sc">$</span>TDiNextEst[[nm]] <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDiNextEst[[nm]]))</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>ps_td <span class="ot">&lt;-</span> tree_ps</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sample_data</span>(ps_td))</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>OTU <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_td), <span class="st">&quot;matrix&quot;</span>)</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_td)) OTU <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(<span class="fu">rownames</span>(sd), sd<span class="sc">$</span>habitat), <span class="cf">function</span>(samps){</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> OTU[, <span class="fu">colnames</span>(OTU) <span class="sc">%in%</span> samps, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  M[M <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">storage.mode</span>(M) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  M</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> inc_by_hab_td[<span class="fu">names</span>(inc_by_hab_td) <span class="sc">%in%</span> <span class="fu">names</span>(labs_map)]</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> inc_by_hab_td[<span class="fu">vapply</span>(inc_by_hab_td, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>out_TD <span class="ot">&lt;-</span> <span class="fu">iNEXT3D</span>(<span class="at">data =</span> inc_by_hab_td, <span class="at">diversity =</span> <span class="st">&quot;TD&quot;</span>, <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),</span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>                  <span class="at">datatype =</span> <span class="st">&quot;incidence_raw&quot;</span>, <span class="at">nboot =</span> <span class="dv">500</span>)</span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>out_TD <span class="ot">&lt;-</span> <span class="fu">relabel_inext</span>(out_TD)</span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>tab_s16 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(out_TD<span class="sc">$</span>TDAsyEst) <span class="sc">%&gt;%</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Diversity_order =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    qTD <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Species richness&quot;</span>, qTD <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Shannon diversity&quot;</span>,</span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    qTD <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Simpson diversity&quot;</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(qTD)</span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Habitat =</span> Assemblage)</span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tab_s16, <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S16_iNEXT3D_TD.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>ps_pd <span class="ot">&lt;-</span> tree_ps</span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>sd2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sample_data</span>(ps_pd))</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_pd), <span class="st">&quot;matrix&quot;</span>)</span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_pd)) X <span class="ot">&lt;-</span> <span class="fu">t</span>(X)</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(<span class="fu">rownames</span>(sd2), sd2<span class="sc">$</span>habitat), <span class="cf">function</span>(samps){</span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> X[, <span class="fu">colnames</span>(X) <span class="sc">%in%</span> samps, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>  M[M <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>; <span class="fu">storage.mode</span>(M) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span>; M</span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">names</span>(inc_by_hab_pd) <span class="sc">%in%</span> <span class="fu">names</span>(labs_map)]</span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">vapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_pd)</span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>keep_tips <span class="ot">&lt;-</span> <span class="fu">intersect</span>(tr<span class="sc">$</span>tip.label, <span class="fu">unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(inc_by_hab_pd, rownames))))</span>
-<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>tr2 <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">keep.tip</span>(tr, keep_tips)</span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>tr2<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>ape<span class="sc">::</span><span class="fu">is.rooted</span>(tr2)) tr2 <span class="ot">&lt;-</span> phangorn<span class="sc">::</span><span class="fu">midpoint</span>(tr2)</span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>tipset <span class="ot">&lt;-</span> tr2<span class="sc">$</span>tip.label</span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> <span class="fu">lapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) M[<span class="fu">rownames</span>(M) <span class="sc">%in%</span> tipset, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">vapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>out_PD <span class="ot">&lt;-</span> <span class="fu">iNEXT3D</span>(<span class="at">data =</span> inc_by_hab_pd, <span class="at">diversity =</span> <span class="st">&quot;PD&quot;</span>, <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),</span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>                  <span class="at">datatype =</span> <span class="st">&quot;incidence_raw&quot;</span>, <span class="at">nboot =</span> <span class="dv">500</span>, <span class="at">PDtree =</span> tr2, <span class="at">PDtype =</span> <span class="st">&quot;meanPD&quot;</span>)</span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>tab_s17 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(out_PD<span class="sc">$</span>PDAsyEst) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Habitat =</span> Assemblage)</span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>tab_s17<span class="sc">$</span>Habitat <span class="ot">&lt;-</span> <span class="fu">factor</span>(labs_map[<span class="fu">as.character</span>(tab_s17<span class="sc">$</span>Habitat)], <span class="at">levels =</span> lvl_order)</span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tab_s17, <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S17_iNEXT3D_PD.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-</section>
-<section id="abundance-based-beta-diversity-partitioning-table-s15" class="level3">
-<h3 class="anchored" data-anchor-id="abundance-based-beta-diversity-partitioning-table-s15">5.3 Abundance-based beta-diversity partitioning (Table S15)</h3>
+<section id="abundance-based-beta-diversity-partitioning-table-s11" class="level3">
+<h3 class="anchored" data-anchor-id="abundance-based-beta-diversity-partitioning-table-s11">5.1 Abundance-based beta-diversity partitioning (Table S11)</h3>
 <p>Bray–Curtis dissimilarities were partitioned into balanced variation and abundance gradients across taxonomic levels using the <code>betapart</code> package. Metrics were calculated from rarefied abundance data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
-<caption>Table S15. Bray–Curtis beta-diversity partitioning across taxonomic levels and sites.</caption>
+<caption>Table S11. Bray–Curtis beta-diversity partitioning across taxonomic levels and sites.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Site</th>
@@ -4650,6 +3857,801 @@ Metadata: <code>Data_S1_metadata.csv, Data_S3_soil.csv</code></p>
 </tbody>
 </table>
 </div>
+</div>
+</section>
+<section id="inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s12s13" class="level3">
+<h3 class="anchored" data-anchor-id="inext3d-rarefaction-curves-and-asymptotic-diversity-summaries-tables-s12s13">5.2 iNEXT3D rarefaction curves and asymptotic diversity summaries (Tables S12–S13)</h3>
+<p>We quantified habitat-associated patterns in taxonomic diversity (TD) and phylogenetic diversity (PD) using iNEXT3D and Hill numbers (q = 0, 1, 2). Diversity estimates were computed from incidence (presence/absence) matrices at the habitat level and evaluated under rarefaction/extrapolation with bootstrap confidence intervals (nboot = 500). Phylogenetic diversity was estimated as meanPD using a pruned phylogeny matched to the observed taxa. The combined curve visualization is presented in main-text Figure 3A; asymptotic summaries are provided in Tables S12–S13, and the per-sample parallelism ANOVA results in Tables S14–S15.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table S12. Taxonomic diversity (TD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500). Observed and asymptotic estimates are reported with standard errors, 95% confidence intervals, and sample coverage at observed effort and at double effort.</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 24%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Assemblage</th>
+<th style="text-align: left;">qTD</th>
+<th style="text-align: right;">TD_obs</th>
+<th style="text-align: right;">TD_asy</th>
+<th style="text-align: right;">s.e.</th>
+<th style="text-align: right;">qTD.LCL</th>
+<th style="text-align: right;">qTD.UCL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">Species richness</td>
+<td style="text-align: right;">2521.000</td>
+<td style="text-align: right;">4581.983</td>
+<td style="text-align: right;">125.848</td>
+<td style="text-align: right;">4335.326</td>
+<td style="text-align: right;">4828.640</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">Shannon diversity</td>
+<td style="text-align: right;">1810.823</td>
+<td style="text-align: right;">2927.463</td>
+<td style="text-align: right;">51.242</td>
+<td style="text-align: right;">2827.030</td>
+<td style="text-align: right;">3027.896</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">Simpson diversity</td>
+<td style="text-align: right;">1158.528</td>
+<td style="text-align: right;">1467.726</td>
+<td style="text-align: right;">34.168</td>
+<td style="text-align: right;">1400.758</td>
+<td style="text-align: right;">1534.695</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">Species richness</td>
+<td style="text-align: right;">901.000</td>
+<td style="text-align: right;">1945.702</td>
+<td style="text-align: right;">95.214</td>
+<td style="text-align: right;">1759.086</td>
+<td style="text-align: right;">2132.317</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">Shannon diversity</td>
+<td style="text-align: right;">693.768</td>
+<td style="text-align: right;">1316.325</td>
+<td style="text-align: right;">43.456</td>
+<td style="text-align: right;">1231.153</td>
+<td style="text-align: right;">1401.497</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">Simpson diversity</td>
+<td style="text-align: right;">474.571</td>
+<td style="text-align: right;">661.005</td>
+<td style="text-align: right;">30.584</td>
+<td style="text-align: right;">601.061</td>
+<td style="text-align: right;">720.948</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">Species richness</td>
+<td style="text-align: right;">1533.000</td>
+<td style="text-align: right;">3059.820</td>
+<td style="text-align: right;">108.142</td>
+<td style="text-align: right;">2847.866</td>
+<td style="text-align: right;">3271.775</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">Shannon diversity</td>
+<td style="text-align: right;">1225.295</td>
+<td style="text-align: right;">2341.860</td>
+<td style="text-align: right;">58.351</td>
+<td style="text-align: right;">2227.494</td>
+<td style="text-align: right;">2456.226</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">Simpson diversity</td>
+<td style="text-align: right;">846.718</td>
+<td style="text-align: right;">1247.075</td>
+<td style="text-align: right;">49.323</td>
+<td style="text-align: right;">1150.403</td>
+<td style="text-align: right;">1343.747</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table S13. Phylogenetic diversity (PD; meanPD) summary from iNEXT3D across habitats (q = 0, 1, 2; nboot = 500), including coverage and effective lineage estimates under rarefaction/extrapolation.</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Habitat</th>
+<th style="text-align: left;">qPD</th>
+<th style="text-align: right;">PD_obs</th>
+<th style="text-align: right;">PD_asy</th>
+<th style="text-align: right;">s.e.</th>
+<th style="text-align: right;">qPD.LCL</th>
+<th style="text-align: right;">qPD.UCL</th>
+<th style="text-align: right;">Reftime</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">q = 0 PD</td>
+<td style="text-align: right;">185.553</td>
+<td style="text-align: right;">283.343</td>
+<td style="text-align: right;">7.643</td>
+<td style="text-align: right;">268.362</td>
+<td style="text-align: right;">298.324</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">q = 1 PD</td>
+<td style="text-align: right;">96.045</td>
+<td style="text-align: right;">115.843</td>
+<td style="text-align: right;">1.427</td>
+<td style="text-align: right;">113.045</td>
+<td style="text-align: right;">118.641</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Forest</td>
+<td style="text-align: left;">q = 2 PD</td>
+<td style="text-align: right;">53.644</td>
+<td style="text-align: right;">56.697</td>
+<td style="text-align: right;">0.585</td>
+<td style="text-align: right;">55.551</td>
+<td style="text-align: right;">57.842</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">q = 0 PD</td>
+<td style="text-align: right;">81.971</td>
+<td style="text-align: right;">134.076</td>
+<td style="text-align: right;">6.501</td>
+<td style="text-align: right;">121.334</td>
+<td style="text-align: right;">146.818</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">q = 1 PD</td>
+<td style="text-align: right;">46.984</td>
+<td style="text-align: right;">60.900</td>
+<td style="text-align: right;">1.321</td>
+<td style="text-align: right;">58.310</td>
+<td style="text-align: right;">63.489</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Páramo</td>
+<td style="text-align: left;">q = 2 PD</td>
+<td style="text-align: right;">27.101</td>
+<td style="text-align: right;">29.356</td>
+<td style="text-align: right;">0.529</td>
+<td style="text-align: right;">28.320</td>
+<td style="text-align: right;">30.392</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">q = 0 PD</td>
+<td style="text-align: right;">132.936</td>
+<td style="text-align: right;">213.016</td>
+<td style="text-align: right;">7.909</td>
+<td style="text-align: right;">197.514</td>
+<td style="text-align: right;">228.518</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">q = 1 PD</td>
+<td style="text-align: right;">75.157</td>
+<td style="text-align: right;">98.360</td>
+<td style="text-align: right;">1.843</td>
+<td style="text-align: right;">94.748</td>
+<td style="text-align: right;">101.973</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Subpáramo</td>
+<td style="text-align: left;">q = 2 PD</td>
+<td style="text-align: right;">39.842</td>
+<td style="text-align: right;">43.233</td>
+<td style="text-align: right;">0.715</td>
+<td style="text-align: right;">41.831</td>
+<td style="text-align: right;">44.635</td>
+<td style="text-align: right;">0.873</td>
+<td style="text-align: left;">meanPD</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>iNEXT3D diversity analyses (executed on remote server)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(iNEXT<span class="fl">.3</span>D)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: The phylogenetic tree is loaded from tree_ps (objects/tree_ps.rds).</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The GTR inference block below is REDUNDANT — tree_ps already contains the fitted tree.</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># REMOVE the AlignSeqs/optim.pml block if re-running; use phy_tree(tree_ps) directly.</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>labs_map  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">forest =</span> <span class="st">&quot;Forest&quot;</span>, <span class="at">subparamo =</span> <span class="st">&quot;Subpáramo&quot;</span>, <span class="at">paramo =</span> <span class="st">&quot;Páramo&quot;</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>lvl_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Forest&quot;</span>, <span class="st">&quot;Subpáramo&quot;</span>, <span class="st">&quot;Páramo&quot;</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>relabel_inext <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>(<span class="st">&quot;Assemblage&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(df))) <span class="fu">return</span>(df)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df<span class="sc">$</span>Assemblage)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> labs_map[df<span class="sc">$</span>Assemblage]</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Assemblage <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Assemblage, <span class="at">levels =</span> lvl_order)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    df</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">$</span>TDInfo   <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDInfo))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">$</span>TDAsyEst <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDAsyEst))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(x<span class="sc">$</span>TDiNextEst)) {</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (nm <span class="cf">in</span> <span class="fu">names</span>(x<span class="sc">$</span>TDiNextEst)) x<span class="sc">$</span>TDiNextEst[[nm]] <span class="ot">&lt;-</span> <span class="fu">f</span>(<span class="fu">as.data.frame</span>(x<span class="sc">$</span>TDiNextEst[[nm]]))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>ps_td <span class="ot">&lt;-</span> tree_ps</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sample_data</span>(ps_td))</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>OTU <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_td), <span class="st">&quot;matrix&quot;</span>)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_td)) OTU <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(<span class="fu">rownames</span>(sd), sd<span class="sc">$</span>habitat), <span class="cf">function</span>(samps){</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> OTU[, <span class="fu">colnames</span>(OTU) <span class="sc">%in%</span> samps, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  M[M <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">storage.mode</span>(M) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>  M</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> inc_by_hab_td[<span class="fu">names</span>(inc_by_hab_td) <span class="sc">%in%</span> <span class="fu">names</span>(labs_map)]</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>inc_by_hab_td <span class="ot">&lt;-</span> inc_by_hab_td[<span class="fu">vapply</span>(inc_by_hab_td, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>out_TD <span class="ot">&lt;-</span> <span class="fu">iNEXT3D</span>(<span class="at">data =</span> inc_by_hab_td, <span class="at">diversity =</span> <span class="st">&quot;TD&quot;</span>, <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>                  <span class="at">datatype =</span> <span class="st">&quot;incidence_raw&quot;</span>, <span class="at">nboot =</span> <span class="dv">500</span>)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>out_TD <span class="ot">&lt;-</span> <span class="fu">relabel_inext</span>(out_TD)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>tab_s16 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(out_TD<span class="sc">$</span>TDAsyEst) <span class="sc">%&gt;%</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Diversity_order =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    qTD <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Species richness&quot;</span>, qTD <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Shannon diversity&quot;</span>,</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>    qTD <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Simpson diversity&quot;</span>, <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(qTD)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Habitat =</span> Assemblage)</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tab_s16, <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S16_iNEXT3D_TD.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>ps_pd <span class="ot">&lt;-</span> tree_ps</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>sd2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sample_data</span>(ps_pd))</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_pd), <span class="st">&quot;matrix&quot;</span>)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_pd)) X <span class="ot">&lt;-</span> <span class="fu">t</span>(X)</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">split</span>(<span class="fu">rownames</span>(sd2), sd2<span class="sc">$</span>habitat), <span class="cf">function</span>(samps){</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>  M <span class="ot">&lt;-</span> X[, <span class="fu">colnames</span>(X) <span class="sc">%in%</span> samps, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>  M[M <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span>; <span class="fu">storage.mode</span>(M) <span class="ot">&lt;-</span> <span class="st">&quot;numeric&quot;</span>; M</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">names</span>(inc_by_hab_pd) <span class="sc">%in%</span> <span class="fu">names</span>(labs_map)]</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">vapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>tr <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_pd)</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>keep_tips <span class="ot">&lt;-</span> <span class="fu">intersect</span>(tr<span class="sc">$</span>tip.label, <span class="fu">unique</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(inc_by_hab_pd, rownames))))</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>tr2 <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">keep.tip</span>(tr, keep_tips)</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>tr2<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>ape<span class="sc">::</span><span class="fu">is.rooted</span>(tr2)) tr2 <span class="ot">&lt;-</span> phangorn<span class="sc">::</span><span class="fu">midpoint</span>(tr2)</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>tipset <span class="ot">&lt;-</span> tr2<span class="sc">$</span>tip.label</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> <span class="fu">lapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) M[<span class="fu">rownames</span>(M) <span class="sc">%in%</span> tipset, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>inc_by_hab_pd <span class="ot">&lt;-</span> inc_by_hab_pd[<span class="fu">vapply</span>(inc_by_hab_pd, <span class="cf">function</span>(M) <span class="fu">nrow</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> <span class="fu">ncol</span>(M) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">TRUE</span>)]</span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>out_PD <span class="ot">&lt;-</span> <span class="fu">iNEXT3D</span>(<span class="at">data =</span> inc_by_hab_pd, <span class="at">diversity =</span> <span class="st">&quot;PD&quot;</span>, <span class="at">q =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>),</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>                  <span class="at">datatype =</span> <span class="st">&quot;incidence_raw&quot;</span>, <span class="at">nboot =</span> <span class="dv">500</span>, <span class="at">PDtree =</span> tr2, <span class="at">PDtype =</span> <span class="st">&quot;meanPD&quot;</span>)</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>tab_s17 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(out_PD<span class="sc">$</span>PDAsyEst) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">Habitat =</span> Assemblage)</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>tab_s17<span class="sc">$</span>Habitat <span class="ot">&lt;-</span> <span class="fu">factor</span>(labs_map[<span class="fu">as.character</span>(tab_s17<span class="sc">$</span>Habitat)], <span class="at">levels =</span> lvl_order)</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tab_s17, <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S17_iNEXT3D_PD.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="per-sample-hill-diversity-parallelism-models-tables-s14s15" class="level3">
+<h3 class="anchored" data-anchor-id="per-sample-hill-diversity-parallelism-models-tables-s14s15">5.3 Per-sample Hill diversity: parallelism models (Tables S14–S15)</h3>
+<p>To evaluate whether diversity trajectories are parallel across geographically isolated sites, we model diversity as a function of habitat (ordered along elevation), site, and their interaction. The key term is habitat × site: a weak/non-significant interaction with a strong habitat main effect supports broadly parallel trajectories with site-specific baselines.</p>
+<p>For this section, diversity is computed independently for each sample using Hill numbers: taxonomic diversity (TD) and phylogenetic diversity (PD) at q = 1 (effective Shannon) as the primary metric. This preserves interpretability, keeps consistency with Hill-number logic, and allows direct sample-level inference on trajectory parallelism.</p>
+<p>We use a two-model strategy: (i) a primary habitat-factor model for ecological interpretation, and (ii) a secondary numeric-trend model (ordered habitat steps) to summarize site-specific slopes. Model family is screened first (Gaussian, log-Gaussian, Gamma-log) before final inference.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table S14. ANOVA table for the log-linear model of per-sample taxonomic diversity (TD; Hill q=1) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.52, p=0.21 supports parallel diversity trajectories across sites.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum.Sq</th>
+<th style="text-align: right;">Mean.Sq</th>
+<th style="text-align: right;">F.value</th>
+<th style="text-align: right;">Pr..F.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">habitat</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.748</td>
+<td style="text-align: right;">1.374</td>
+<td style="text-align: right;">4.395</td>
+<td style="text-align: right;">0.017</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">site</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.633</td>
+<td style="text-align: right;">0.211</td>
+<td style="text-align: right;">0.675</td>
+<td style="text-align: right;">0.571</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">habitat:site</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.899</td>
+<td style="text-align: right;">0.475</td>
+<td style="text-align: right;">1.518</td>
+<td style="text-align: right;">0.211</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">15.633</td>
+<td style="text-align: right;">0.313</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table S15. ANOVA table for the log-linear model of per-sample phylogenetic diversity (PD; Hill q=1, meanPD) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.22, p=0.31 supports parallel diversity trajectories across sites.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum.Sq</th>
+<th style="text-align: right;">Mean.Sq</th>
+<th style="text-align: right;">F.value</th>
+<th style="text-align: right;">Pr..F.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">habitat</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.135</td>
+<td style="text-align: right;">0.568</td>
+<td style="text-align: right;">3.027</td>
+<td style="text-align: right;">0.057</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">site</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.794</td>
+<td style="text-align: right;">0.265</td>
+<td style="text-align: right;">1.411</td>
+<td style="text-align: right;">0.251</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">habitat:site</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.918</td>
+<td style="text-align: right;">0.230</td>
+<td style="text-align: right;">1.224</td>
+<td style="text-align: right;">0.313</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">9.375</td>
+<td style="text-align: right;">0.188</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Per-sample Hill TD/PD: family checks + primary factor model + secondary slope model</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hillR)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ps_ind  <span class="ot">&lt;-</span> ps_individual   <span class="co"># collapsed replicates</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ps_tree <span class="ot">&lt;-</span> tree_ps         <span class="co"># object that already has phylogeny</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">inherits</span>(ps_ind, <span class="st">&quot;phyloseq&quot;</span>), <span class="fu">inherits</span>(ps_tree, <span class="st">&quot;phyloseq&quot;</span>))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">is.null</span>(<span class="fu">phy_tree</span>(ps_tree, <span class="at">errorIfNULL =</span> <span class="cn">FALSE</span>)))</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Match taxa between ps_ind and tree_ps tree</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>taxa_ind  <span class="ot">&lt;-</span> <span class="fu">taxa_names</span>(ps_ind)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>tips_tree <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_tree)<span class="sc">$</span>tip.label</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>common_taxa <span class="ot">&lt;-</span> <span class="fu">intersect</span>(taxa_ind, tips_tree)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Prune collapsed object to taxa represented in tree and build matching tree</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>ps_div <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(common_taxa, ps_ind)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>tr_ind <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">keep.tip</span>(<span class="fu">phy_tree</span>(ps_tree), common_taxa)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>tr_ind<span class="sc">$</span>node.label <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>ape<span class="sc">::</span><span class="fu">is.rooted</span>(tr_ind)) tr_ind <span class="ot">&lt;-</span> phangorn<span class="sc">::</span><span class="fu">midpoint</span>(tr_ind)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder OTU taxa to match tree tip order (important)</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>ps_div <span class="ot">&lt;-</span> <span class="fu">prune_taxa</span>(tr_ind<span class="sc">$</span>tip.label, ps_div)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">taxa_names</span>(ps_div), tr_ind<span class="sc">$</span>tip.label))</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Attach tree to collapsed object</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="fu">phy_tree</span>(ps_div) <span class="ot">&lt;-</span> tr_ind</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="fu">validObject</span>(ps_div)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">sample_data</span>(ps_div), <span class="st">&quot;data.frame&quot;</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(meta)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>site <span class="ot">&lt;-</span> <span class="fu">factor</span>(meta<span class="sc">$</span>site)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>habitat <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>  meta<span class="sc">$</span>habitat,</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;forest&quot;</span>, <span class="st">&quot;subparamo&quot;</span>, <span class="st">&quot;paramo&quot;</span>),</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>habitat_num <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(meta<span class="sc">$</span>habitat)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="co"># OTU matrix as taxa x samples -&gt; comm as samples x taxa</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>OTU <span class="ot">&lt;-</span> <span class="fu">as</span>(<span class="fu">otu_table</span>(ps_div), <span class="st">&quot;matrix&quot;</span>)</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">taxa_are_rows</span>(ps_div)) OTU <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">t</span>(OTU)</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>lib_size <span class="ot">&lt;-</span> <span class="fu">sample_sums</span>(ps_div)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Tree/community alignment is already defined above via ps_div + tr_ind</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>tr2 <span class="ot">&lt;-</span> <span class="fu">phy_tree</span>(ps_div)</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>comm2 <span class="ot">&lt;-</span> comm[, <span class="fu">taxa_names</span>(ps_div), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Alignment checks</span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(<span class="fu">colnames</span>(comm2), tr2<span class="sc">$</span>tip.label))</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">colnames</span>(comm2)))</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Compatibility wrappers for hillR argument names across versions</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>get_hill_taxa <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">qval =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_taxa</span>(x, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">hill_taxa</span>(x, <span class="at">qvalue =</span> qval)</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(out)</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>get_hill_phylo <span class="ot">&lt;-</span> <span class="cf">function</span>(x, tree, <span class="at">qval =</span> <span class="dv">1</span>) {</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, <span class="at">tree =</span> tree, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, tree, <span class="at">q =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(<span class="fu">hill_phylo</span>(x, <span class="at">tree =</span> tree, <span class="at">qvalue =</span> qval), <span class="at">error =</span> <span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(out)) out <span class="ot">&lt;-</span> <span class="fu">hill_phylo</span>(x, tree, <span class="at">qvalue =</span> qval)</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(out)</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary metrics (q = 1): independent values per sample</span></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q1 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">1</span>)</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q1 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">1</span>)</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional sensitivity metrics for supplementary checks (not modeled by default)</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q0 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">0</span>)</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>TD_q2 <span class="ot">&lt;-</span> <span class="fu">get_hill_taxa</span>(comm, <span class="at">qval =</span> <span class="dv">2</span>)</span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q0 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">0</span>)</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">$</span>PD_q2 <span class="ot">&lt;-</span> <span class="fu">get_hill_phylo</span>(comm2, <span class="at">tree =</span> tr2, <span class="at">qval =</span> <span class="dv">2</span>)</span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure tabular class for dplyr/tidyr verbs</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(meta, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>div_long <span class="ot">&lt;-</span> meta <span class="sc">%&gt;%</span></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(SampleID, site, habitat, habitat_num, TD_q1, PD_q1) <span class="sc">%&gt;%</span></span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(TD_q1, PD_q1),</span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;metric&quot;</span>,</span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;estimate&quot;</span></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(metric, <span class="at">TD_q1 =</span> <span class="st">&quot;TD (q=1)&quot;</span>, <span class="at">PD_q1 =</span> <span class="st">&quot;PD (q=1)&quot;</span>))</span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional depth sensitivity covariate</span></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;lib_size&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(meta)) {</span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>  meta<span class="sc">$</span>lib_size <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sample_sums</span>(ps_div)[meta<span class="sc">$</span>SampleID])</span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>div_long <span class="ot">&lt;-</span> div_long <span class="sc">%&gt;%</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(meta[, <span class="fu">c</span>(<span class="st">&quot;SampleID&quot;</span>, <span class="st">&quot;lib_size&quot;</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="at">by =</span> <span class="st">&quot;SampleID&quot;</span>)</span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 1) Family screening before final inference ----------</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="co"># Candidate families:</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="co">#  - gaussian:      estimate ~ ...</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="co">#  - lognormal_lm:  log(estimate) ~ ...</span></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="co">#  - gamma_log:     glm(..., family = Gamma(link = &quot;log&quot;))</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>fit_candidates <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, rhs_formula) {</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>gaussian <span class="ot">&lt;-</span> <span class="fu">lm</span>(rhs_formula, <span class="at">data =</span> dat)</span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>lognormal_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">update</span>(rhs_formula, <span class="fu">log</span>(estimate) <span class="sc">~</span> .), <span class="at">data =</span> dat)</span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>  out<span class="sc">$</span>gamma_log <span class="ot">&lt;-</span> <span class="fu">glm</span>(rhs_formula, <span class="at">data =</span> dat, <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>summarize_candidates <span class="ot">&lt;-</span> <span class="cf">function</span>(fits, metric_label, model_type) {</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> metric_label,</span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">model_type =</span> model_type,</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="fu">names</span>(fits),</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">AIC =</span> <span class="fu">vapply</span>(fits, AIC, <span class="fu">numeric</span>(<span class="dv">1</span>)),</span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>td_dat <span class="ot">&lt;-</span> <span class="fu">filter</span>(div_long, metric <span class="sc">==</span> <span class="st">&quot;TD (q=1)&quot;</span>)</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>pd_dat <span class="ot">&lt;-</span> <span class="fu">filter</span>(div_long, metric <span class="sc">==</span> <span class="st">&quot;PD (q=1)&quot;</span>)</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>td_cand_factor <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(td_dat, estimate <span class="sc">~</span> habitat <span class="sc">*</span> site)</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>pd_cand_factor <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(pd_dat, estimate <span class="sc">~</span> habitat <span class="sc">*</span> site)</span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>td_cand_num <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(td_dat, estimate <span class="sc">~</span> habitat_num <span class="sc">*</span> site)</span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>pd_cand_num <span class="ot">&lt;-</span> <span class="fu">fit_candidates</span>(pd_dat, estimate <span class="sc">~</span> habitat_num <span class="sc">*</span> site)</span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>model_screen <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(td_cand_factor, <span class="st">&quot;TD (q=1)&quot;</span>, <span class="st">&quot;factor&quot;</span>),</span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(pd_cand_factor, <span class="st">&quot;PD (q=1)&quot;</span>, <span class="st">&quot;factor&quot;</span>),</span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(td_cand_num, <span class="st">&quot;TD (q=1)&quot;</span>, <span class="st">&quot;numeric&quot;</span>),</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_candidates</span>(pd_cand_num, <span class="st">&quot;PD (q=1)&quot;</span>, <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(metric, model_type, AIC)</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>model_screen</span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple residual checks for the top candidate families</span></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(td_cand_factor<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;TD factor: lognormal_lm&quot;</span>)</span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pd_cand_factor<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;PD factor: lognormal_lm&quot;</span>)</span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(td_cand_num<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;TD numeric: lognormal_lm&quot;</span>)</span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pd_cand_num<span class="sc">$</span>lognormal_lm, <span class="at">main =</span> <span class="st">&quot;PD numeric: lognormal_lm&quot;</span>)</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 2) Final models (set after reviewing model_screen + residuals) ----------</span></span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a><span class="co"># Best model is lognormal_lm by far</span></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a>selected_family_td <span class="ot">&lt;-</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>selected_family_pd <span class="ot">&lt;-</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>pick_fit <span class="ot">&lt;-</span> <span class="cf">function</span>(fit_list, selected_name) {</span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a>  fit_list[[selected_name]]</span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary ecological model: habitat as factor</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>m_td_factor <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(td_cand_factor, selected_family_td)</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>m_pd_factor <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(pd_cand_factor, selected_family_pd)</span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary slope model: habitat ordered as numeric</span></span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>m_td_num <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(td_cand_num, selected_family_td)</span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>m_pd_num <span class="ot">&lt;-</span> <span class="fu">pick_fit</span>(pd_cand_num, selected_family_pd)</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA tables</span></span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>anova_td_factor <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_td_factor)</span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>anova_pd_factor <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_pd_factor)</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>anova_td_num <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_td_num)</span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>anova_pd_num <span class="ot">&lt;-</span> <span class="fu">anova</span>(m_pd_num)</span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>anova_td_factor</span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>anova_pd_factor</span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>anova_td_num</span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>anova_pd_num</span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a><span class="co"># Primary inference (factor model): marginal means + habitat contrasts within each site</span></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a>emm_td <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site) <span class="sc">%&gt;%</span> <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a>emm_pd <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site) <span class="sc">%&gt;%</span> <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a>contr_td <span class="ot">&lt;-</span> <span class="fu">contrast</span>(<span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site), <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>), <span class="at">adjust =</span> <span class="st">&quot;holm&quot;</span>)</span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>contr_pd <span class="ot">&lt;-</span> <span class="fu">contrast</span>(<span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site), <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>), <span class="at">adjust =</span> <span class="st">&quot;holm&quot;</span>)</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a><span class="co"># Secondary inference (numeric model): site-specific slopes</span></span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>slopes_td <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(m_td_num, <span class="sc">~</span> site, <span class="at">var =</span> <span class="st">&quot;habitat_num&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>slopes_pd <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(m_pd_num, <span class="sc">~</span> site, <span class="at">var =</span> <span class="st">&quot;habitat_num&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted means at habitat steps from numeric model (consistent with habitat_num)</span></span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>emm_td_num_steps <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_td_num, <span class="sc">~</span> site <span class="sc">|</span> habitat_num,</span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a>                            <span class="at">at =</span> <span class="fu">list</span>(<span class="at">habitat_num =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a>emm_pd_num_steps <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m_pd_num, <span class="sc">~</span> site <span class="sc">|</span> habitat_num,</span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>                            <span class="at">at =</span> <span class="fu">list</span>(<span class="at">habitat_num =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a>emm_td</span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>emm_pd</span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a>contr_td</span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a>contr_pd</span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a>slopes_td</span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a>slopes_pd</span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>emm_td_num_steps</span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a>emm_pd_num_steps</span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------- 3) Plot (factor model means/CI + observed values) ----------</span></span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a>emm_td_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">emmeans</span>(m_td_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site),</span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a>    <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias.adjust =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> <span class="st">&quot;TD (q=1)&quot;</span>)</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>emm_pd_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>    <span class="fu">emmeans</span>(m_pd_factor, <span class="sc">~</span> habitat <span class="sc">|</span> site),</span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>    <span class="at">infer =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>    <span class="at">bias.adjust =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">metric =</span> <span class="st">&quot;PD (q=1)&quot;</span>)</span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>emm_plot <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(emm_td_plot, emm_pd_plot) <span class="sc">%&gt;%</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>    <span class="at">habitat =</span> <span class="fu">factor</span>(habitat, <span class="at">levels =</span> <span class="fu">levels</span>(meta<span class="sc">$</span>habitat), <span class="at">ordered =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> <span class="fu">factor</span>(site, <span class="at">levels =</span> <span class="fu">levels</span>(meta<span class="sc">$</span>site))</span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a><span class="co"># emmeans column names vary by model/link; standardize for plotting</span></span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;emmean&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>response <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>emmean</span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;lower.CL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;asymp.LCL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>lower.CL <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>asymp.LCL</span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="st">&quot;upper.CL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;asymp.UCL&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot)) {</span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>upper.CL <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>asymp.UCL</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a><span class="co"># Force original-scale plotting when lognormal models are used and emmeans</span></span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="co"># returns only link-scale columns (no explicit response-scale columns).</span></span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (</span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;emmean&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_plot) <span class="sc">&amp;&amp;</span></span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span>(<span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_td_plot) <span class="sc">&amp;&amp;</span> <span class="st">&quot;response&quot;</span> <span class="sc">%in%</span> <span class="fu">names</span>(emm_pd_plot))</span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>) {</span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a>  is_log_td <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>metric <span class="sc">==</span> <span class="st">&quot;TD (q=1)&quot;</span> <span class="sc">&amp;</span> selected_family_td <span class="sc">==</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>  is_log_pd <span class="ot">&lt;-</span> emm_plot<span class="sc">$</span>metric <span class="sc">==</span> <span class="st">&quot;PD (q=1)&quot;</span> <span class="sc">&amp;</span> selected_family_pd <span class="sc">==</span> <span class="st">&quot;lognormal_lm&quot;</span></span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a>  is_log_any <span class="ot">&lt;-</span> is_log_td <span class="sc">|</span> is_log_pd</span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>response[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>emmean[is_log_any])</span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>lower.CL[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>lower.CL[is_log_any])</span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>  emm_plot<span class="sc">$</span>upper.CL[is_log_any] <span class="ot">&lt;-</span> <span class="fu">exp</span>(emm_plot<span class="sc">$</span>upper.CL[is_log_any])</span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed summaries for sanity checks against model-estimated values</span></span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>obs_summary <span class="ot">&lt;-</span> div_long <span class="sc">%&gt;%</span></span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(metric, site, habitat) <span class="sc">%&gt;%</span></span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(</span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> dplyr<span class="sc">::</span><span class="fu">n</span>(),</span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs_mean =</span> <span class="fu">mean</span>(estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">obs_median =</span> <span class="fu">median</span>(estimate, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>plot_check <span class="ot">&lt;-</span> emm_plot <span class="sc">%&gt;%</span></span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(metric, site, habitat, response, lower.CL, upper.CL) <span class="sc">%&gt;%</span></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(obs_summary, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;metric&quot;</span>, <span class="st">&quot;site&quot;</span>, <span class="st">&quot;habitat&quot;</span>))</span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>plot_check</span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>model_dodge <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.22</span>)</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>p_div_traj <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(div_long, <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> estimate, <span class="at">color =</span> site)) <span class="sc">+</span></span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">height =</span> <span class="dv">0</span>),</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.55</span>,</span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.6</span></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.12</span>,</span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.6</span>,</span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> response, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> emm_plot,</span>
+<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> habitat, <span class="at">y =</span> response, <span class="at">color =</span> site, <span class="at">group =</span> site),</span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> model_dodge,</span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> metric, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Habitat&quot;</span>,</span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Per-sample Hill diversity&quot;</span></span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
+<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a>p_div_traj</span>
+<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional export</span></span>
+<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(anova_td_factor), <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S18_TD_parallelism_anova.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(anova_pd_factor), <span class="fu">file.path</span>(out_tab_dir, <span class="st">&quot;Table_S19_PD_parallelism_anova.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-328"><a href="#cb10-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-329"><a href="#cb10-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(</span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="fu">file.path</span>(out_fig_dir, <span class="st">&quot;Fig_x_TD_PD_parallel_trajectories.png&quot;</span>),</span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> p_div_traj,</span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="fl">5.5</span>,</span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">900</span>,</span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <hr>
 </section>
