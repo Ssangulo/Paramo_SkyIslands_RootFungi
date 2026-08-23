@@ -77,8 +77,8 @@ out_obj_dir <- "objects"
 site_colors <- c(BEL = "#E69F00", DOM = "#009E73", MA = "#56B4E9", NV = "#D55E00")
 site_labels <- c(BEL = "Belmira", DOM = "Las Domínguez", MA = "Matarredonda", NV = "La Nevera")
 
-# Habitat colors (Dark2)
-habitat_colors <- c("Forest" = "#1b9e77", "Subpáramo" = "#d95f02", "Páramo" = "#7570b3")
+# Habitat colors (Figure 3A; kept distinct from site_colors above)
+habitat_colors <- c("Forest" = "#332288", "Subpáramo" = "#AA4499", "Páramo" = "#661100")
 
 # Shared base theme — all main figures use theme_classic(base_size = 11)
 # (Defined per-chunk as base_theme; replicated here for reference)
@@ -187,6 +187,31 @@ kable(
 | Genus    | Forest      | 32,8                  | 34,2                 |
 | Genus    | Subpáramo   | 32,1                  | 32,2                 |
 | Genus    | Páramo      | 31,4                  | 32,7                 |
+
+### 2.3 Soil background subtraction
+
+Soil controls were used as a third tier of negative control, alongside PCR blanks and extraction blanks, and were applied as a *count subtraction* rather than as a sample-level exclusion. Within each sampling location, the maximum read count observed per OTU across that location's co-sampled soil control(s) was subtracted from every root PCR replicate collected at the same location, and any resulting negative value was set to zero. The subtraction was applied to raw read counts, before the two-PCR-replicate detection filter and before PCR replicates were collapsed into samples; soil rows were then removed, leaving the root-only dataset used in all downstream analyses. If a location group contained no matching soil row the per-OTU maximum is undefined, and the affected values were reset to zero. The identical operation had already been applied one step earlier using PCR blanks and extraction blanks as the reference rows.
+
+```{r}
+#| eval: false
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
+#| code-summary: "Soil background subtraction (from Scripts/full_pipeline_DADA2.R)"
+
+# Applied within each sampling location (the OTU table is split by Fieldcontrol
+# before this function is mapped over the resulting list). Rows = PCR replicates,
+# columns = OTUs. mind is the per-OTU maximum across that location's soil controls.
+fb.blank.change <- function(x){
+  mind <- apply(x[grep("S_S1_1|S_S1_2|S_S1_3|S_S1_4|S_S1_5|S_S1_6|S_S1_7|S_S2_1|S_S2_2|S_S2_3|S_S2_4|S_S2_5", rownames(x)), ], 2, function(y) max(y, na.rm = TRUE))
+  x1 <- sweep(x, 2, mind)   # subtract the local soil background, per OTU
+  x1 <- pmax(x1, 0)         # floor negative counts at zero
+  return(x1)
+}
+```
+
+**What this removes, and what it does not.** Because the operation subtracts a background level rather than deleting shared taxa, it does not exclude fungi that occur in both soil and roots. An OTU is lost from a given root sample only where its root read count does not exceed the soil maximum at that location; taxa genuinely enriched in roots retain their excess signal. Consistent with this, 1,269 of the 3,689 OTUs recovered from soils were also retained in the final root dataset, and *Leohumicola* — abundant in both compartments — remains one of the dominant root genera (main-text Figure 4C). Root-associated fungi with a soil interface, and dormant propagules of root-associated taxa residing in the soil pool, are therefore represented in the analysed data. The rationale is not that soil-derived taxa are uninformative, but that each root sample is corrected against soil from its own location, which removes precisely the component of root community variation that tracks local soil composition; habitat signal that survives this correction is consequently not attributable to soil carry-over from incomplete root washing or recalcitrant surface-bound cells.
+
+**Depth dependence — an acknowledged limitation.** The subtraction operates on raw counts and is not normalised for the sequencing depth of the soil control relative to each root sample. Median depths were comparable between the two sample types (65,311 versus 71,084 reads per PCR replicate after merging under the non-pooled strategy; Table S2), so the correction is not grossly asymmetric, but it remains depth-dependent: a fixed count is removed from root samples that differ in depth, so its proportional effect is larger in shallow-sequenced samples and largest for taxa spanning the soil–root continuum. The procedure therefore trades one source of bias (incomplete root washing, surface-bound soil taxa) for another (depth-dependent magnitude of count removal), and it is conservative with respect to root–soil overlap: genuine overlap is removed together with carry-over. The communities analysed here are accordingly best interpreted as the root-enriched fraction of the fungal community rather than as the complete root mycobiome.
 
 ## Section 3: Taxonomic overview
 
@@ -901,6 +926,10 @@ ggsave(
 
 Diversity trajectories were assessed using three complementary approaches: per-sample Hill diversity models to test parallelism across sites, iNEXT3D rarefaction/extrapolation curves for habitat-level estimates, and beta-diversity partitioning. All analyses require a rooted phylogenetic tree, inferred below. Analyses are presented in computation order; Figure 3 follows as a composite of pre-computed outputs.
 
+**Alignment and tree inference.** OTU reference sequences (ITS2; the 4,386 OTUs of the replicate-filtered, soil-subtracted root dataset, retaining both root replicates per plant) were aligned with the profile-to-profile aligner `AlignSeqs` in DECIPHER (Wright 2016), with sequence anchoring disabled (`anchor = NA`). No post-alignment curation, masking or trimming was applied. ITS2 is length-variable and hypervariable, so automated trimming heuristics discard a large share of the phylogenetically informative sites; and because the alignment is used only to derive a single fixed topology on which all samples are subsequently compared, alignment uncertainty enters every sample's diversity estimate identically rather than differentially by habitat. A neighbour-joining tree built from maximum-likelihood distances (`dist.ml`) provided the starting topology, which was then optimised by maximum likelihood with `optim.pml` in phangorn (Schliep 2011) under GTR + Γ + I with four discrete rate categories, simultaneously optimising base frequencies, the rate matrix, branch lengths, the gamma shape parameter and the proportion of invariant sites, using stochastic rearrangements. The tree was inferred unrooted and midpoint-rooted (`phangorn::midpoint`) before use in phylogenetic diversity, NRI and NTI calculations.
+
+**Substitution model.** GTR + Γ + I was adopted a priori rather than selected by a formal model-selection test, following the standard DADA2/phyloseq phylogenetic workflow (Callahan et al. 2016). It is the most parameter-rich time-reversible model available in `optim.pml`, so under-parameterisation is not a concern, and a formal model test across 4,386 ITS2 sequences was computationally prohibitive at this scale. All phylogenetic metrics reported here (Faith's PD, phylogenetic Hill numbers, NRI and NTI) are comparative statistics computed from relative branch lengths on this single shared topology, and are therefore expected to be robust to moderate differences in substitution model.
+
 ```{r}
 #| eval: false
 #| echo: !expr knitr::is_html_output()
@@ -1090,6 +1119,10 @@ For this section, diversity is computed independently for each sample using Hill
 
 We use a two-model strategy: (i) a primary habitat-factor model for ecological interpretation, and (ii) a secondary numeric-trend model (ordered habitat steps) to summarize site-specific slopes. Model family is screened first (Gaussian, log-Gaussian, Gamma-log) before final inference.
 
+**Post-hoc pairwise habitat contrasts (Table S15b).** Habitat is a categorical predictor, so the omnibus *F*-test for the habitat term establishes that habitats differ but does not identify which pairs differ, or in which direction. We therefore followed it with pairwise contrasts among the three habitats. The habitat × site interaction is non-significant for both metrics (Tables S14–S15), and the full design contains empty habitat × site cells (Matarredonda has no forest, Belmira no páramo), which makes habitat marginal means non-estimable from the interaction model; pairwise contrasts were therefore estimated from the corresponding additive model, log(diversity) ~ habitat + site, and Tukey-adjusted for the three comparisons. Contrasts are reported on the response scale as ratios of effective diversity, so a ratio above one indicates higher diversity in the first habitat.
+
+The direction of every contrast is consistent with a decline along the gradient: estimated marginal diversity falls from forest (TD 18.3, PD 1.96) to subpáramo (13.2, 1.70) and páramo (13.3, 1.66), and both forest-versus-higher-habitat ratios exceed one (TD forest/subpáramo 1.39, forest/páramo 1.38; PD 1.15 and 1.18). No individual pairwise contrast is resolved after correction for multiple comparisons, however (all Tukey-adjusted *p* ≥ 0.17; Table S15b), and the subpáramo–páramo contrast is essentially flat (TD ratio 0.99, PD 1.03). The significant omnibus habitat term for TD (Table S14) is thus carried by the combined forest-versus-páramo-belt difference rather than by any single resolved pair, and the post-hoc tests give no additional support for a stepwise decline across successive habitats at the per-sample level. Two features of the data limit resolution here: the per-habitat sample sizes available for pairwise inference are small (n = 25, 20 and 15 for forest, subpáramo and páramo), and the flat subpáramo–páramo contrast at the sample level contrasts with the habitat-level rarefaction curves, where páramo is clearly the least diverse assemblage (Figure 3A, Tables S12–S13). Taken together these suggest that the further decline into páramo detected at the habitat (gamma) level reflects reduced among-sample turnover rather than lower per-sample (alpha) diversity — a distinction the omnibus habitat test alone does not expose.
+
 ```{r}
 #| echo: false
 library(knitr)
@@ -1113,6 +1146,19 @@ kable(
   tab_s19,
   digits = 3,
   caption = "Table S15. ANOVA table for the log-linear model of per-sample phylogenetic diversity (PD; Hill q=1, meanPD) as a function of habitat, site, and their interaction. Habitat × site interaction F(4,50)=1.22, p=0.31 supports parallel diversity trajectories across sites."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+tab_s15b <- read.csv("tables/Table_S15b_habitat_posthoc.csv")
+
+kable(
+  tab_s15b,
+  digits = 3,
+  caption = "Table S15b. Post-hoc pairwise contrasts among habitats for per-sample Hill diversity (q=1), for taxonomic (TD) and phylogenetic (PD) diversity. Contrasts were estimated from the additive models log(diversity) ~ habitat + site and Tukey-adjusted for three comparisons; the additive model is used because the habitat × site interaction is non-significant (Tables S14–S15) and the full design contains empty habitat × site cells, which makes habitat marginal means non-estimable from the interaction model. Estimates are back-transformed to the response scale: ratio is the multiplicative difference in effective diversity between the two habitats (ratio > 1 = higher diversity in the first habitat), with 95% confidence limits."
 )
 ```
 
@@ -1315,6 +1361,36 @@ contr_td <- contrast(emmeans(m_td_factor, ~ habitat | site), method = "pairwise"
 contr_pd <- contrast(emmeans(m_pd_factor, ~ habitat | site), method = "pairwise") %>%
   summary(infer = c(TRUE, TRUE), adjust = "holm")
 
+# Post-hoc: marginal pairwise habitat contrasts (Table S15b).
+# The habitat x site interaction is non-significant (Tables S14-S15), and the
+# design has empty habitat x site cells (MA has no forest, BEL no paramo), which
+# makes marginal habitat means non-estimable from the interaction model above.
+# Contrasts are therefore taken from the corresponding additive model.
+m_td_add <- lm(log(estimate) ~ habitat + site, data = td_dat)
+m_pd_add <- lm(log(estimate) ~ habitat + site, data = pd_dat)
+
+posthoc_one <- function(mod, metric_label) {
+  as.data.frame(summary(
+    contrast(emmeans(mod, ~ habitat), method = "pairwise"),
+    infer = c(TRUE, TRUE), adjust = "tukey", type = "response"
+  )) %>%
+    dplyr::mutate(metric = metric_label, .before = 1)
+}
+
+posthoc_habitat <- dplyr::bind_rows(
+  posthoc_one(m_td_add, "TD (q=1)"),
+  posthoc_one(m_pd_add, "PD (q=1)")
+) %>%
+  dplyr::select(-dplyr::any_of("null"))
+
+# Marginal (site-averaged) habitat means quoted in the section text
+emm_td_marginal <- summary(emmeans(m_td_add, ~ habitat), type = "response")
+emm_pd_marginal <- summary(emmeans(m_pd_add, ~ habitat), type = "response")
+
+posthoc_habitat
+emm_td_marginal
+emm_pd_marginal
+
 # Secondary inference (numeric model): site-specific slopes
 slopes_td <- emtrends(m_td_num, ~ site, var = "habitat_num") %>%
   summary(infer = c(TRUE, TRUE))
@@ -1449,6 +1525,7 @@ p_div_traj
 # Optional export
 write.csv(as.data.frame(anova_td_factor), file.path(out_tab_dir, "Table_S18_TD_parallelism_anova.csv"), row.names = FALSE)
 write.csv(as.data.frame(anova_pd_factor), file.path(out_tab_dir, "Table_S19_PD_parallelism_anova.csv"), row.names = FALSE)
+write.csv(posthoc_habitat, file.path(out_tab_dir, "Table_S15b_habitat_posthoc.csv"), row.names = FALSE)
 
 
 ggsave(
@@ -1517,10 +1594,15 @@ site_labels <- c(
 )
 
 # Habitat color palette for Panel A (Dark2 colorblind-safe)
+# Habitat palette for Panel A, chosen in a hue family the site palette of Panel B
+# does not occupy (indigo/purple/maroon vs orange/green/sky/vermillion), so the two
+# panels are not confused. Minimum CIE dE2000 to any site colour is 30.8 under normal
+# vision and 14.9 under simulated tritanopia (the Dark2 palette used previously was
+# 0.9 from the DOM site colour); minimum separation within the panel is 13.3.
 habitat_colors <- c(
-  "Forest"    = "#1b9e77",
-  "Subpáramo" = "#d95f02",
-  "Páramo"    = "#7570b3"
+  "Forest"    = "#332288",
+  "Subpáramo" = "#AA4499",
+  "Páramo"    = "#661100"
 )
 
 # EXACT SAME BASE THEME AS FIGURE 2
@@ -1528,9 +1610,9 @@ base_theme <- theme_classic(base_size = 11) +
   theme(
     axis.title      = element_text(size = 9),
     axis.text       = element_text(size = 7, color = "black"),
-    legend.title    = element_text(size = 5, face = "bold"),
-    legend.text     = element_text(size = 4.5),
-    legend.key.size = unit(0.6, "lines"),
+    legend.title    = element_text(size = 7, face = "bold"),
+    legend.text     = element_text(size = 6.5),
+    legend.key.size = unit(0.85, "lines"),
     legend.position = "right",
     plot.tag        = element_text(size = 13, face = "bold"),
     strip.background = element_blank()
@@ -1716,7 +1798,7 @@ panel_A_PD <- base_iNEXT_plot(
     legend.box = "horizontal",
     legend.justification = "center",
     legend.title = element_blank(),
-    legend.text = element_text(size = 5),
+    legend.text = element_text(size = 6.5),
     legend.key.width = unit(1.2, "lines"),
     legend.spacing.x = unit(0.6, "lines"),
     legend.margin = margin(t = 1, r = 0, b = 0, l = 0)
@@ -1847,7 +1929,9 @@ fig3 <- ((panel_A_TD / panel_A_PD) | panel_B) +
 
 ggsave(
   filename = file.path(out_fig_dir, "Figure_3_iNEXT_rarefaction_trajectories.png"),
-  plot = fig3, width = 17.4, height = 6.8, units = "cm", dpi = 900, bg = "white"
+  # 28 x 11 cm is the canvas the committed figure was produced on (9921 x 3897 px
+  # at 900 dpi); the previous 17.4 x 6.8 cm crushed the panel-A facet labels.
+  plot = fig3, width = 28, height = 11, units = "cm", dpi = 900, bg = "white"
 )
 
 ```
@@ -2303,6 +2387,7 @@ plot_betareg_fig4 <- function(
   y_limits = c(0, 1),
   x_limits = NULL,
   x_label = "Elevation (m)",
+  y_label = "Relative abundance",
   effect_label = NULL
 ) {
   
@@ -2386,7 +2471,7 @@ plot_betareg_fig4 <- function(
     ) +
     scale_color_manual(values = site_colors, labels = site_labels, name = "Site") +
     scale_fill_manual(values = site_colors, guide = "none") +
-    scale_y_continuous("Relative abundance (proportion)", limits = y_limits) +
+    scale_y_continuous(y_label, limits = y_limits) +
     scale_x_continuous(x_label, limits = x_limits) +
     labs(tag = label_prefix) +
     base_theme +
@@ -2422,7 +2507,8 @@ panel_A <- plot_betareg_fig4(
   model = mod_list[["helotiales"]],
   data = df_list[["helotiales"]],
   label_prefix = "A",
-  y_limits = c(0, 1)
+  y_limits = c(0, 1),
+  y_label = "Relative abundance of Helotiales"
 ) +
   scale_x_continuous("", limits = x_shared) +   # no label — B carries the shared x label
   annotate(
@@ -2438,7 +2524,8 @@ panel_B <- plot_betareg_fig4(
   model = mod_list[["sebacinales"]],
   data = df_list[["sebacinales"]],
   label_prefix = "B",
-  y_limits = c(0, 0.75)
+  y_limits = c(0, 0.75),
+  y_label = "Relative abundance of Sebacinales"
 ) +
   scale_x_continuous("Elevation (m)", limits = x_shared) +  # explicit shared x label for A+B column
   annotate(
