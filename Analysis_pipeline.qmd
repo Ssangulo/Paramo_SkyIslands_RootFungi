@@ -757,9 +757,9 @@ base_theme <- theme_classic(base_size = 11) +
   theme(
     axis.title      = element_text(size = 9),
     axis.text       = element_text(size = 7, color = "black"),
-    legend.title    = element_text(size = 5, face = "bold"),
-    legend.text     = element_text(size = 4.5),
-    legend.key.size = unit(0.6, "lines"),
+    legend.title    = element_text(size = 8, face = "bold"),
+    legend.text     = element_text(size = 8),
+    legend.key.size = unit(0.7, "lines"),
     legend.position = "right",
     plot.tag        = element_text(size = 13, face = "bold"),
     strip.background = element_blank()
@@ -962,20 +962,20 @@ tree_data_rg2.N <- merge_phyloseq(alldat.N[[2]], fit$tree)
 saveRDS(tree_data_rg2.N, file.path(out_obj_dir, "tree_ps.rds"))
 ```
 
-### 5.1 Abundance-based beta-diversity partitioning (Table S11)
+### 5.1 Incidence-based beta-diversity partitioning (Table S11)
 
-Bray–Curtis dissimilarities were partitioned into balanced variation and abundance gradients across taxonomic levels using the `betapart` package. Metrics were calculated from rarefied abundance data.
+Sørensen dissimilarities were partitioned into turnover and nestedness-resultant components across taxonomic levels using the `betapart` package, on presence–absence data rarefied to 28,122 reads (the minimum observed library), retaining all 60 per-plant communities.
 
 ```{r}
 #| echo: false
 library(knitr)
 
-tab_s11 <- read.csv("tables/Table_S11_Bray_partitioning.csv")
+tab_s11 <- read.csv("tables/Table_S11_Sorensen_partitioning.csv")
 
 kable(
   tab_s11,
   digits = 4,
-  caption = "Table S11. Bray–Curtis beta-diversity partitioning across taxonomic levels and sites."
+  caption = "Table S11. Sørensen beta-diversity partitioning across taxonomic levels and sites. βSIM = turnover (taxon replacement), βSNE = nestedness-resultant component, βSOR = total Sørensen dissimilarity (βSIM + βSNE); N_units = number of taxonomic units resolved at that rank; Turnover_pct = βSIM as a percentage of βSOR. Computed with beta.multi() on presence–absence data rarefied to 28,122 reads."
 )
 ```
 
@@ -1610,9 +1610,9 @@ base_theme <- theme_classic(base_size = 11) +
   theme(
     axis.title      = element_text(size = 9),
     axis.text       = element_text(size = 7, color = "black"),
-    legend.title    = element_text(size = 7, face = "bold"),
-    legend.text     = element_text(size = 6.5),
-    legend.key.size = unit(0.85, "lines"),
+    legend.title    = element_text(size = 10.2, face = "bold"),
+    legend.text     = element_text(size = 10.2),
+    legend.key.size = unit(0.89, "lines"),
     legend.position = "right",
     plot.tag        = element_text(size = 13, face = "bold"),
     strip.background = element_blank()
@@ -1798,9 +1798,10 @@ panel_A_PD <- base_iNEXT_plot(
     legend.box = "horizontal",
     legend.justification = "center",
     legend.title = element_blank(),
-    legend.text = element_text(size = 6.5),
-    legend.key.width = unit(1.2, "lines"),
-    legend.spacing.x = unit(0.6, "lines"),
+    legend.text = element_text(size = 10.2, margin = margin(l = 3)),
+    legend.key.width = unit(0.95, "lines"),
+    legend.spacing.x = unit(0.15, "lines"),
+    legend.key.spacing.x = unit(3, "pt"),
     legend.margin = margin(t = 1, r = 0, b = 0, l = 0)
   )
 
@@ -2682,15 +2683,29 @@ library(knitr)
 
 gllvm_tab <- read.csv("tables/File_S2_GLLVM_table.csv")
 
-kable(
-  gllvm_tab[1:10, c(
-    "Order", "Genus", "n_OTUs",
-    "w_mean_beta_paramo", "w_mean_beta_subparamo",
-    "perc_enriched_paramo_w", "perc_enriched_subparamo_w"
-  )],
-  digits = 3,
-  caption = "Data S2 (preview). Selected columns from the GLLVM genus-level summary. The full table with all metrics is provided as a CSV file."
-)
+gllvm_prev <- gllvm_tab[1:10, c(
+  "Order", "Genus", "n_OTUs",
+  "w_mean_beta_paramo", "w_mean_beta_subparamo",
+  "perc_enriched_paramo_w", "perc_enriched_subparamo_w"
+)]
+
+if (knitr::is_latex_output()) {
+  # PDF only: the full column names are wider than the LaTeX tabular allows and
+  # overlap in the header row, so print short codes and expand them in the caption.
+  kable(
+    gllvm_prev,
+    digits = 3,
+    col.names = c("Order", "Genus", "n_OTUs",
+                  "beta_P", "beta_S", "enrich_P", "enrich_S"),
+    caption = "Data S2 (preview). Selected columns from the GLLVM genus-level summary. Column names are abbreviated here: n_OTUs = number of OTUs assigned to the genus; beta_P = w_mean_beta_paramo and beta_S = w_mean_beta_subparamo (abundance-weighted mean GLLVM coefficient for paramo and subparamo, relative to forest); enrich_P = perc_enriched_paramo_w and enrich_S = perc_enriched_subparamo_w (abundance-weighted percentage enrichment in paramo and subparamo, relative to forest). The full table with all metrics, under its original column names, is provided as a CSV file."
+  )
+} else {
+  kable(
+    gllvm_prev,
+    digits = 3,
+    caption = "Data S2 (preview). Selected columns from the GLLVM genus-level summary. The full table with all metrics is provided as a CSV file."
+  )
+}
 ```
 
 ```{r}
