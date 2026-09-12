@@ -1,0 +1,248 @@
+iNEXT.3D version: 1.0.12 | nboot = 500
+Taxa: ps_individual = 4386, tree_ps = 4386, shared and in tree = 4386
+PD reference time (tree height): 0.8733
+Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+Also defined by ‘tidytree’
+Sampling units per habitat (plants): forest=25, subparamo=20, paramo=15
+Sampling units per habitat (roots):  forest=50, subparamo=40, paramo=30
+Unique_ID not found in tree_ps sample data; cross-check skipped.
+Running iNEXT3D TD (plant units) ...
+Running iNEXT3D PD (plant units) ...
+Running coverage-standardised estimates (plant units) ...
+Running iNEXT3D TD (root-sample units) ...
+Running iNEXT3D PD (root-sample units) ...
+Running coverage-standardised estimates (root-sample units) ...
+
+==== Pairwise habitat comparisons (CI overlap; Holm-adjusted Wald p) ====
+       level                 basis diversity q                pair ratio
+       plant            asymptotic        PD 0    Forest vs Páramo  2.28
+ root_sample            asymptotic        PD 0    Forest vs Páramo  2.11
+       plant            asymptotic        PD 0 Forest vs Subpáramo  1.32
+ root_sample            asymptotic        PD 0 Forest vs Subpáramo  1.33
+       plant            asymptotic        PD 0 Subpáramo vs Páramo  1.72
+ root_sample            asymptotic        PD 0 Subpáramo vs Páramo  1.59
+       plant            asymptotic        PD 1    Forest vs Páramo  1.85
+ root_sample            asymptotic        PD 1    Forest vs Páramo  1.90
+       plant            asymptotic        PD 1 Forest vs Subpáramo  1.14
+ root_sample            asymptotic        PD 1 Forest vs Subpáramo  1.18
+       plant            asymptotic        PD 1 Subpáramo vs Páramo  1.63
+ root_sample            asymptotic        PD 1 Subpáramo vs Páramo  1.62
+       plant            asymptotic        PD 2    Forest vs Páramo  1.78
+ root_sample            asymptotic        PD 2    Forest vs Páramo  1.93
+       plant            asymptotic        PD 2 Forest vs Subpáramo  1.22
+ root_sample            asymptotic        PD 2 Forest vs Subpáramo  1.31
+       plant            asymptotic        PD 2 Subpáramo vs Páramo  1.46
+ root_sample            asymptotic        PD 2 Subpáramo vs Páramo  1.47
+       plant            asymptotic        TD 0    Forest vs Páramo  2.56
+ root_sample            asymptotic        TD 0    Forest vs Páramo  2.35
+       plant            asymptotic        TD 0 Forest vs Subpáramo  1.31
+ root_sample            asymptotic        TD 0 Forest vs Subpáramo  1.50
+       plant            asymptotic        TD 0 Subpáramo vs Páramo  1.95
+ root_sample            asymptotic        TD 0 Subpáramo vs Páramo  1.57
+       plant            asymptotic        TD 1    Forest vs Páramo  2.23
+ root_sample            asymptotic        TD 1    Forest vs Páramo  2.22
+       plant            asymptotic        TD 1 Forest vs Subpáramo  1.08
+ root_sample            asymptotic        TD 1 Forest vs Subpáramo  1.25
+       plant            asymptotic        TD 1 Subpáramo vs Páramo  2.06
+ root_sample            asymptotic        TD 1 Subpáramo vs Páramo  1.78
+       plant            asymptotic        TD 2    Forest vs Páramo  2.00
+ root_sample            asymptotic        TD 2    Forest vs Páramo  2.22
+       plant            asymptotic        TD 2 Forest vs Subpáramo  0.99
+ root_sample            asymptotic        TD 2 Forest vs Subpáramo  1.18
+       plant            asymptotic        TD 2 Subpáramo vs Páramo  2.03
+ root_sample            asymptotic        TD 2 Subpáramo vs Páramo  1.89
+       plant coverage_standardised        PD 0    Forest vs Páramo  1.91
+ root_sample coverage_standardised        PD 0    Forest vs Páramo  1.94
+       plant coverage_standardised        PD 0 Forest vs Subpáramo  1.04
+ root_sample coverage_standardised        PD 0 Forest vs Subpáramo  1.21
+       plant coverage_standardised        PD 0 Subpáramo vs Páramo  1.85
+ root_sample coverage_standardised        PD 0 Subpáramo vs Páramo  1.60
+       plant coverage_standardised        PD 1    Forest vs Páramo  1.79
+ root_sample coverage_standardised        PD 1    Forest vs Páramo  1.86
+       plant coverage_standardised        PD 1 Forest vs Subpáramo  1.05
+ root_sample coverage_standardised        PD 1 Forest vs Subpáramo  1.16
+       plant coverage_standardised        PD 1 Subpáramo vs Páramo  1.71
+ root_sample coverage_standardised        PD 1 Subpáramo vs Páramo  1.60
+       plant coverage_standardised        PD 2    Forest vs Páramo  1.80
+ root_sample coverage_standardised        PD 2    Forest vs Páramo  1.93
+       plant coverage_standardised        PD 2 Forest vs Subpáramo  1.21
+ root_sample coverage_standardised        PD 2 Forest vs Subpáramo  1.32
+       plant coverage_standardised        PD 2 Subpáramo vs Páramo  1.49
+ root_sample coverage_standardised        PD 2 Subpáramo vs Páramo  1.47
+       plant coverage_standardised        TD 0    Forest vs Páramo  2.20
+ root_sample coverage_standardised        TD 0    Forest vs Páramo  2.24
+       plant coverage_standardised        TD 0 Forest vs Subpáramo  1.07
+ root_sample coverage_standardised        TD 0 Forest vs Subpáramo  1.36
+       plant coverage_standardised        TD 0 Subpáramo vs Páramo  2.06
+ root_sample coverage_standardised        TD 0 Subpáramo vs Páramo  1.65
+       plant coverage_standardised        TD 1    Forest vs Páramo  2.11
+ root_sample coverage_standardised        TD 1    Forest vs Páramo  2.16
+       plant coverage_standardised        TD 1 Forest vs Subpáramo  1.00
+ root_sample coverage_standardised        TD 1 Forest vs Subpáramo  1.23
+       plant coverage_standardised        TD 1 Subpáramo vs Páramo  2.11
+ root_sample coverage_standardised        TD 1 Subpáramo vs Páramo  1.76
+       plant coverage_standardised        TD 2    Forest vs Páramo  2.08
+ root_sample coverage_standardised        TD 2    Forest vs Páramo  2.23
+       plant coverage_standardised        TD 2 Forest vs Subpáramo  1.04
+ root_sample coverage_standardised        TD 2 Forest vs Subpáramo  1.23
+       plant coverage_standardised        TD 2 Subpáramo vs Páramo  2.00
+ root_sample coverage_standardised        TD 2 Subpáramo vs Páramo  1.81
+ ci_overlap    p_holm
+      FALSE  6.20e-50
+      FALSE  3.73e-47
+      FALSE  2.60e-08
+      FALSE  5.76e-11
+      FALSE  1.35e-17
+      FALSE  3.38e-16
+      FALSE 7.93e-135
+      FALSE 6.85e-177
+      FALSE  8.58e-08
+      FALSE  6.42e-14
+      FALSE  2.75e-53
+      FALSE  1.26e-59
+      FALSE 4.95e-191
+      FALSE 9.38e-278
+      FALSE  3.28e-29
+      FALSE  1.34e-47
+      FALSE  1.13e-54
+      FALSE  5.15e-53
+      FALSE  4.81e-56
+      FALSE  2.60e-68
+      FALSE  2.01e-07
+      FALSE  1.41e-21
+      FALSE  4.68e-21
+      FALSE  1.12e-14
+      FALSE  7.48e-82
+      FALSE 4.09e-124
+       TRUE  3.95e-02
+      FALSE  7.24e-14
+      FALSE  6.59e-40
+      FALSE  1.96e-43
+      FALSE  3.84e-43
+      FALSE  9.03e-59
+       TRUE  8.05e-01
+      FALSE  5.75e-04
+      FALSE  6.57e-24
+      FALSE  1.43e-21
+      FALSE  5.66e-87
+      FALSE  6.82e-97
+       TRUE  2.46e-01
+      FALSE  1.96e-11
+      FALSE  1.52e-51
+      FALSE  1.76e-33
+      FALSE 5.58e-134
+      FALSE 5.62e-181
+       TRUE  4.50e-02
+      FALSE  1.14e-13
+      FALSE  9.46e-73
+      FALSE  9.11e-67
+      FALSE 1.01e-222
+      FALSE 1.06e-265
+      FALSE  1.18e-30
+      FALSE  1.95e-54
+      FALSE  2.20e-71
+      FALSE  1.77e-58
+      FALSE  1.59e-64
+      FALSE  3.46e-94
+       TRUE  1.51e-01
+      FALSE  1.07e-17
+      FALSE  2.71e-29
+      FALSE  4.15e-22
+      FALSE  1.00e-68
+      FALSE 4.46e-111
+       TRUE  9.92e-01
+      FALSE  1.33e-10
+      FALSE  3.98e-35
+      FALSE  3.49e-36
+      FALSE  5.57e-71
+      FALSE  1.11e-86
+       TRUE  3.90e-01
+      FALSE  7.74e-08
+      FALSE  4.74e-33
+      FALSE  5.51e-28
+
+==== CI width: plant units relative to root-sample units ====
+                 basis diversity q   habitat      plant root_sample
+            asymptotic        TD 0    forest 779.251663  454.559815
+            asymptotic        TD 1    forest 360.327148  201.046215
+            asymptotic        TD 2    forest 222.200096  148.189540
+            asymptotic        TD 0    paramo 510.567912  375.435006
+            asymptotic        TD 1    paramo 296.644594  174.203416
+            asymptotic        TD 2    paramo 197.611857  126.473285
+            asymptotic        TD 0 subparamo 795.552664  422.690418
+            asymptotic        TD 1 subparamo 498.827216  231.679360
+            asymptotic        TD 2 subparamo 366.226207  202.824380
+            asymptotic        PD 0    forest  40.555083   31.549992
+            asymptotic        PD 1    forest   7.925966    5.484443
+            asymptotic        PD 2    forest   3.195123    2.211050
+            asymptotic        PD 0    paramo  26.076948   25.166110
+            asymptotic        PD 1    paramo   7.346241    5.239214
+            asymptotic        PD 2    paramo   3.216341    2.037923
+            asymptotic        PD 0 subparamo  39.214783   27.859342
+            asymptotic        PD 1 subparamo  10.476689    7.309942
+            asymptotic        PD 2 subparamo   3.818637    2.893418
+ coverage_standardised        TD 0    forest 270.861163  235.384590
+ coverage_standardised        TD 1    forest 194.448120  141.317070
+ coverage_standardised        TD 2    forest 133.725924  102.307491
+ coverage_standardised        TD 0 subparamo 402.019943  281.254175
+ coverage_standardised        TD 1 subparamo 314.175230  184.160637
+ coverage_standardised        TD 2 subparamo 208.463679  133.621612
+ coverage_standardised        TD 0    paramo 207.011474  216.070294
+ coverage_standardised        TD 1    paramo 151.883117  133.189928
+ coverage_standardised        TD 2    paramo 101.868812   87.772213
+ coverage_standardised        PD 0    forest  13.797134   14.124580
+ coverage_standardised        PD 1    forest   5.832796    4.610057
+ coverage_standardised        PD 2    forest   2.801927    2.160448
+ coverage_standardised        PD 0 subparamo  18.717571   16.736162
+ coverage_standardised        PD 1 subparamo   8.211528    5.955917
+ coverage_standardised        PD 2 subparamo   3.213171    2.491916
+ coverage_standardised        PD 0    paramo  12.278357   13.247230
+ coverage_standardised        PD 1    paramo   5.648144    4.501243
+ coverage_standardised        PD 2    paramo   2.710466    2.020421
+ width_ratio_plant_over_root
+                        1.71
+                        1.79
+                        1.50
+                        1.36
+                        1.70
+                        1.56
+                        1.88
+                        2.15
+                        1.81
+                        1.29
+                        1.45
+                        1.45
+                        1.04
+                        1.40
+                        1.58
+                        1.41
+                        1.43
+                        1.32
+                        1.15
+                        1.38
+                        1.31
+                        1.43
+                        1.71
+                        1.56
+                        0.96
+                        1.14
+                        1.16
+                        0.98
+                        1.27
+                        1.30
+                        1.12
+                        1.38
+                        1.29
+                        0.93
+                        1.25
+                        1.34
+
+Coverage level used for coverage-standardised estimates:
+       level diversity  coverage
+       plant        TD 0.6000150
+       plant        PD 0.6000150
+ root_sample        TD 0.7852508
+ root_sample        PD 0.7852508
+
+Done. Outputs written to tables/ and objects/
+Figure 3A (plant units) written to figures/Figure_3A_iNEXT_plant_units.png

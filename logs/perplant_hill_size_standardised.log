@@ -1,0 +1,83 @@
+iNEXT.3D version: 1.0.12
+Taxa in tree: 4386 | PD reference time: 0.8733
+Plants: 60 (forest=25, subparamo=20, paramo=15)
+Library size range: 28122-882416 | standardisation depth: 28122
+Singletons per plant (median [range]): 0 [0-0]
+Estimating size-standardised TD ...
+Estimating size-standardised PD (meanPD) ...
+Error family for the habitat models: gamma_log
+Methods used: Observed=6, Rarefaction=354
+Sample coverage at standardisation depth (TD): 0.9989-1
+
+==== Omnibus tests (size-standardised; habitat adjusted for site) ====
+ diversity q                         term df1 df2     F        p
+        TD 0 habitat x site (parallelism)   4  50 1.500 0.217000
+        TD 0  habitat (adjusted for site)   2  54 9.210 0.000361
+        TD 0  site (adjusted for habitat)   3  54 0.808 0.495000
+        TD 1 habitat x site (parallelism)   4  50 1.430 0.237000
+        TD 1  habitat (adjusted for site)   2  54 3.210 0.048300
+        TD 1  site (adjusted for habitat)   3  54 0.451 0.717000
+        TD 2 habitat x site (parallelism)   4  50 1.400 0.247000
+        TD 2  habitat (adjusted for site)   2  54 2.000 0.145000
+        TD 2  site (adjusted for habitat)   3  54 0.283 0.838000
+        PD 0 habitat x site (parallelism)   4  50 1.000 0.416000
+        PD 0  habitat (adjusted for site)   2  54 9.610 0.000268
+        PD 0  site (adjusted for habitat)   3  54 0.614 0.609000
+        PD 1 habitat x site (parallelism)   4  50 3.810 0.008860
+        PD 1  habitat (adjusted for site)   2  54 4.070 0.022500
+        PD 1  site (adjusted for habitat)   3  54 3.390 0.024400
+        PD 2 habitat x site (parallelism)   4  50 7.270 0.000107
+        PD 2  habitat (adjusted for site)   2  54 4.540 0.015100
+        PD 2  site (adjusted for habitat)   3  54 6.500 0.000778
+
+==== Tukey pairwise contrasts (ratio of effective diversity) ====
+ diversity q           contrast ratio lower upper  p_tukey
+        TD 0 forest / subparamo 1.520 1.180  1.96 0.000550
+        TD 0    forest / paramo 1.690 1.260  2.26 0.000207
+        TD 0 subparamo / paramo 1.110 0.840  1.46 0.644000
+        TD 1 forest / subparamo 1.480 0.993  2.20 0.054900
+        TD 1    forest / paramo 1.530 0.963  2.42 0.078400
+        TD 1 subparamo / paramo 1.030 0.666  1.60 0.983000
+        TD 2 forest / subparamo 1.420 0.920  2.20 0.135000
+        TD 2    forest / paramo 1.330 0.799  2.20 0.378000
+        TD 2 subparamo / paramo 0.932 0.576  1.51 0.933000
+        PD 0 forest / subparamo 1.390 1.130  1.72 0.001090
+        PD 0    forest / paramo 1.580 1.240  2.02 0.000104
+        PD 0 subparamo / paramo 1.130 0.899  1.43 0.397000
+        PD 1 forest / subparamo 1.180 0.966  1.44 0.124000
+        PD 1    forest / paramo 1.270 1.000  1.60 0.047200
+        PD 1 subparamo / paramo 1.070 0.859  1.34 0.730000
+        PD 2 forest / subparamo 1.160 1.020  1.33 0.022700
+        PD 2    forest / paramo 1.150 0.982  1.34 0.094000
+        PD 2 subparamo / paramo 0.986 0.852  1.14 0.969000
+
+==== Polynomial contrasts on ordered habitat (log scale) ====
+ diversity q  contrast estimate        p
+        TD 0    linear   -0.523 7.09e-05
+        TD 0 quadratic    0.315 9.18e-02
+        TD 1    linear   -0.423 3.13e-02
+        TD 1 quadratic    0.358 2.22e-01
+        TD 2    linear   -0.282 1.85e-01
+        TD 2 quadratic    0.423 1.88e-01
+        PD 0    linear   -0.458 3.55e-05
+        PD 0 quadratic    0.206 1.87e-01
+        PD 1    linear   -0.235 1.82e-02
+        PD 1 quadratic    0.096 5.15e-01
+        PD 2    linear   -0.136 3.81e-02
+        PD 2 quadratic    0.165 9.38e-02
+
+==== Diagnostic: published unstandardised q = 1 values ====
+ diversity q                                                  test df1 df2
+        TD 1 Type I habitat, interaction model (published S14-S15)   2  50
+        TD 1             habitat adjusted for site, additive model   2  54
+        PD 1 Type I habitat, interaction model (published S14-S15)   2  50
+        PD 1             habitat adjusted for site, additive model   2  54
+     F      p
+ 4.390 0.0175
+ 1.920 0.1560
+ 3.030 0.0574
+ 0.718 0.4920
+
+Done.
+Figure 3B written to figures/Figure_3B_perplant_size_std.png
+Full Figure 3 written to figures/Figure_3_corrected.png

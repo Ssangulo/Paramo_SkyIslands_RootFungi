@@ -1,0 +1,42 @@
+
+Site slopes are on the proportion scale (change in relative abundance per 100 m).
+
+                      fraction n_OTUs share_of_Helotiales_reads plants_present
+              Helotiales (all)    436                    1.0000             60
+    Helotiales, genus assigned    139                    0.2780             57
+  Helotiales, genus unassigned    297                    0.7220             60
+   family: (family unassigned)    265                    0.5580             60
+          family: Dermateaceae     15                    0.0443             32
+        family: Discinellaceae     14                    0.0283             32
+       family: Hyaloscyphaceae     43                    0.1000             42
+            family: Lachnaceae     13                    0.0480             23
+          family: Mollisiaceae     20                    0.1420             22
+        family: Myxotrichaceae     16                    0.0214             26
+         family: Pezizellaceae     17                    0.0373             30
+         family: Vibrisseaceae      1                    0.0121             10
+ mean_prop odds_change_pct_per_100m p_elevation p_elevation_x_site slope_BEL
+   0.43300                   10.600      0.0166             0.0601  0.027800
+   0.11200                    4.580      0.3550             0.0600  0.051300
+   0.32000                   11.100      0.0186             0.1100 -0.003020
+   0.27000                    8.540      0.0681             0.0627 -0.012700
+   0.02070                   -3.460      0.4520             0.8770 -0.001410
+   0.02120                   -5.040      0.2880             0.7380 -0.000381
+   0.03880                   11.100      0.0211             0.0178  0.059800
+   0.01930                    0.681      0.8900             0.9090  0.000972
+   0.02780                    7.660      0.1380             0.4690  0.021700
+   0.00949                   -0.690      0.8600             0.5920  0.002250
+   0.01010                    2.630      0.5180             0.4660 -0.000985
+   0.01160                   10.900      0.0110             0.0235  0.000000
+ slope_DOM  slope_MA  slope_NV note
+  5.66e-02  9.61e-03  0.000119     
+  2.80e-03  1.51e-02 -0.006420     
+  4.63e-02  1.36e-03  0.011800     
+  4.11e-02 -2.19e-02  0.012000     
+ -5.03e-05  1.69e-03 -0.001850     
+  1.95e-04  1.04e-05 -0.004490     
+ -2.67e-04  1.06e-02  0.000536     
+  4.76e-04 -4.79e-03  0.000256     
+  2.84e-03  1.48e-03  0.000810     
+ -1.30e-03 -9.20e-05 -0.000319     
+ -2.00e-04  2.28e-03  0.001180     
+  5.60e-03  0.00e+00  0.000000     

@@ -1,0 +1,98 @@
+vegan 2.7.2 | phyloseq 1.54.0 | R 4.5.2
+ps_individual: 60 plants x 4386 OTUs; total reads 14096752
+
+==== Row order: otu_table vs sample_data identical: TRUE ====
+vegan default vs standard robust Aitchison, mean relative difference: 0.435 
+Row order (NV + DOM subset) identical: TRUE 
+decostand kept rownames: TRUE | rfy vs X order identical: TRUE | rfy vs sample_data order identical: TRUE 
+
+==== Published vs recomputed (matches = within 5%) ====
+                             table                quantity published recomputed
+                          S5 dbRDA               habitat F   1.40800    1.40800
+                          S5 dbRDA        habitat variance  22.72000   22.72000
+                          S5 dbRDA       residual variance 435.50000  435.50000
+                      S7 PERMANOVA                 site R2   0.05576    0.05576
+                      S7 PERMANOVA              habitat R2   0.10150    0.10150
+                      S7 PERMANOVA         site:habitat R2   0.09327    0.09327
+                      S7 PERMANOVA                  site F   1.78600    1.78600
+                      S7 PERMANOVA               habitat F   1.62600    1.62600
+                      S7 PERMANOVA          site:habitat F   1.49300    1.49300
+                     S8 betadisper               habitat F  11.30000   11.30000
+                     S9 betadisper                  site F   0.31420    0.31420
+                     S8 dispersion    forest mean distance  23.63000   23.63000
+                     S8 dispersion    paramo mean distance  17.15000   17.15000
+                     S8 dispersion subparamo mean distance  17.79000   17.79000
+ S10 centroid (positional pairing)               habitat F  14.72000   14.72000
+ S10 centroid (positional pairing)    residual mean square  12.80000   12.80000
+                      S10 centroid               habitat F  14.72000   14.72000
+                      S10 centroid                  site F   3.59700    3.59700
+                      S10 centroid        habitat x site F   1.27900    1.27900
+                      S10 centroid    residual mean square  12.80000   12.80000
+                      S10 centroid  habitat sum of squares 376.70000  376.70000
+   rel_diff matches
+  6.306e-16    TRUE
+  2.971e-15    TRUE
+ -6.526e-16    TRUE
+  0.000e+00    TRUE
+ -3.007e-15    TRUE
+ -1.488e-16    TRUE
+  2.238e-15    TRUE
+  2.732e-15    TRUE
+  2.082e-15    TRUE
+ -2.200e-15    TRUE
+  2.509e-14    TRUE
+  1.353e-15    TRUE
+  2.694e-15    TRUE
+ -7.986e-16    TRUE
+ -3.983e-15    TRUE
+ -2.082e-15    TRUE
+ -3.983e-15    TRUE
+  5.680e-15    TRUE
+ -1.388e-15    TRUE
+ -2.082e-15    TRUE
+ -2.414e-15    TRUE
+
+==== Centroid diagnostics ====
+Distance to site centroid, appendix method: mean 20.74 sd 4.548 range 11.27 - 31.2 
+Distance to site centroid, betadisper:      mean 20.71 sd 4.841 
+Correlation between the two: 0.999 
+Published residual mean square: 12.8 (residual SD 3.577 )
+
+Mean distance by site x habitat (appendix method):
+ site   habitat  n  mean    sd
+  BEL    forest 10 25.01 3.507
+  BEL subparamo  5 23.50 4.092
+  DOM    forest  5 23.34 4.253
+  DOM    paramo  5 16.26 3.829
+  DOM subparamo  5 19.11 3.008
+   MA    paramo  5 18.42 2.782
+   MA subparamo  5 16.09 3.070
+   NV    forest 10 22.46 4.407
+   NV    paramo  5 19.20 2.533
+   NV subparamo  5 18.05 2.547
+
+Type I table, appendix method:
+Analysis of Variance Table
+
+Response: y
+             Df Sum Sq Mean Sq F value    Pr(>F)    
+habitat       2 376.75 188.373 14.7186 9.411e-06 ***
+site          3 138.10  46.032  3.5967   0.01974 *  
+habitat:site  4  65.50  16.374  1.2794   0.29060    
+Residuals    50 639.91  12.798                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Type I table, betadisper distances:
+Analysis of Variance Table
+
+Response: y
+             Df Sum Sq Mean Sq F value    Pr(>F)    
+habitat       2 425.80 212.901 14.3116 1.218e-05 ***
+site          3 128.31  42.770  2.8751   0.04529 *  
+habitat:site  4  84.76  21.191  1.4245   0.23955    
+Residuals    50 743.81  14.876                      
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Done.

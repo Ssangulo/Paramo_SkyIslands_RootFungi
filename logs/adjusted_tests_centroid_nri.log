@@ -1,0 +1,72 @@
+Plants: 60 | locations: 12
+Loading cached NRI/NTI: objects/nri_nti_per_plant_999.rds
+
+==== Reproduction check: NRI/NTI median (IQR) per habitat ====
+Published Table S19: forest NRI_aw 0.991 (3.02), NTI_aw 3.053 (1.70); paramo 1.435 (1.85), 3.277 (1.62);
+                      subparamo 1.675 (1.77), 2.831 (1.40)
+   habitat  n       NRI_aw       NTI_aw       NRI_pa       NTI_pa
+    forest 25 1.057 (3.01) 3.111 (1.96) 0.631 (2.16) 5.750 (2.32)
+ subparamo 20 1.698 (1.69) 2.779 (1.40) 0.385 (1.50) 4.928 (2.54)
+    paramo 15 1.419 (1.80) 3.253 (1.66) 0.838 (2.83) 4.804 (1.98)
+Published Table S10 (centroid, Type I): habitat F(2,50) = 14.7; site F(3,50) = 3.60; habitat x site F(4,50) = 1.28, p = 0.29
+Published Table S20 (Type I): NTI_aw habitat F = 0.51, p = 0.60; site F = 1.82, p = 0.16; NRI_aw habitat F = 1.27, p = 0.29; site F = 3.42, p = 0.024
+
+==== Tests ====
+      response                                               test df1 df2
+ dist_centroid                        habitat, Type I (published)   2  50
+ dist_centroid                           site, Type I (published)   3  50
+ dist_centroid                          habitat adjusted for site   2  54
+ dist_centroid                          site adjusted for habitat   3  54
+ dist_centroid                         habitat x site interaction   4  50
+ dist_centroid habitat adjusted for site, location means (n = 12)   2   6
+ dist_centroid site adjusted for habitat, location means (n = 12)   3   6
+        NRI_aw                        habitat, Type I (published)   2  50
+        NRI_aw                           site, Type I (published)   3  50
+        NRI_aw                          habitat adjusted for site   2  54
+        NRI_aw                          site adjusted for habitat   3  54
+        NRI_aw                         habitat x site interaction   4  50
+        NRI_aw habitat adjusted for site, location means (n = 12)   2   6
+        NRI_aw site adjusted for habitat, location means (n = 12)   3   6
+        NTI_aw                        habitat, Type I (published)   2  50
+        NTI_aw                           site, Type I (published)   3  50
+        NTI_aw                          habitat adjusted for site   2  54
+        NTI_aw                          site adjusted for habitat   3  54
+        NTI_aw                         habitat x site interaction   4  50
+        NTI_aw habitat adjusted for site, location means (n = 12)   2   6
+        NTI_aw site adjusted for habitat, location means (n = 12)   3   6
+      F        p
+ 14.700 9.41e-06
+  3.600 1.97e-02
+  6.110 4.06e-03
+  3.520 2.09e-02
+  1.280 2.91e-01
+  3.020 1.23e-01
+  1.740 2.57e-01
+  1.170 3.19e-01
+  3.660 1.83e-02
+  0.750 4.77e-01
+  3.290 2.73e-02
+  2.520 5.30e-02
+  0.481 6.40e-01
+  2.110 2.00e-01
+  0.704 5.00e-01
+  1.760 1.66e-01
+  0.861 4.28e-01
+  1.640 1.90e-01
+  1.990 1.11e-01
+  0.435 6.66e-01
+  0.830 5.24e-01
+
+==== Tukey pairwise habitat contrasts (additive model) ====
+      response           contrast estimate  lower upper       p
+ dist_centroid forest - subparamo   3.6000  0.827 6.380 0.00785
+ dist_centroid    forest - paramo   3.8600  0.635 7.080 0.01530
+ dist_centroid subparamo - paramo   0.2540 -2.810 3.320 0.97800
+        NRI_aw forest - subparamo  -0.5220 -1.690 0.644 0.53100
+        NRI_aw    forest - paramo  -0.5800 -1.930 0.774 0.56000
+        NRI_aw subparamo - paramo  -0.0582 -1.350 1.230 0.99300
+        NTI_aw forest - subparamo   0.6040 -0.541 1.750 0.41700
+        NTI_aw    forest - paramo   0.1840 -1.150 1.510 0.94000
+        NTI_aw subparamo - paramo  -0.4200 -1.680 0.844 0.70400
+
+Done.

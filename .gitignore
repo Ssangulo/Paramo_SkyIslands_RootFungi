@@ -5,3 +5,4 @@
 
 # Only the specific large file that caused problems
 objects/fit_nb_2.rds
+.Rproj.user
