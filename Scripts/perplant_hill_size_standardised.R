@@ -371,14 +371,31 @@ ggsave(file.path(out_fig_dir, "Figure_3B_perplant_size_std.png"),
        plot = panel_B, width = 15, height = 11, units = "cm", dpi = 900, bg = "white")
 message("Figure 3B written to ", file.path(out_fig_dir, "Figure_3B_perplant_size_std.png"))
 
+# ---- Main-text figure export: PNG + JPEG + EPS ------------------------------
+# EPS is written through cairo, which keeps text and lines as vectors; layers
+# with alpha are rasterised at fallback_resolution, since the EPS format has no
+# transparency.
+save_main_fig <- function(stem, plot, width, height, units = "cm", dpi = 900) {
+  has_ragg <- requireNamespace("ragg", quietly = TRUE)
+  ggsave(paste0(stem, ".png"), plot = plot, width = width, height = height,
+         units = units, dpi = dpi, bg = "white",
+         device = if (has_ragg) ragg::agg_png else "png")
+  ggsave(paste0(stem, ".jpeg"), plot = plot, width = width, height = height,
+         units = units, dpi = dpi, bg = "white", quality = 95,
+         device = if (has_ragg) ragg::agg_jpeg else "jpeg")
+  ggsave(paste0(stem, ".eps"), plot = plot, width = width, height = height,
+         units = units, bg = "white",
+         device = grDevices::cairo_ps, fallback_resolution = 600)
+  message("Written: ", stem, ".png / .jpeg / .eps")
+}
+
 # ---- Assemble full corrected Figure 3 if Panel A is available ---------------
 panel_A_path <- file.path("objects", "Figure_3A_panel_plant_units.rds")
 if (file.exists(panel_A_path)) {
   panel_A_plant <- readRDS(panel_A_path)
   fig3 <- (panel_A_plant | panel_B) + plot_layout(widths = c(1.1, 1), guides = "keep")
-  ggsave(file.path(out_fig_dir, "Figure_3_corrected.png"),
-         plot = fig3, width = FIG_W, height = FIG_H, units = "cm", dpi = 900, bg = "white")
-  message("Full Figure 3 written to ", file.path(out_fig_dir, "Figure_3_corrected.png"))
+  save_main_fig(file.path(out_fig_dir, "Figure_3_corrected"), fig3,
+                width = FIG_W, height = FIG_H)
 } else {
   message("Panel A object not found; run the Figure 3A block of iNEXT3D_plant_level.R to assemble the full figure.")
 }

@@ -647,7 +647,23 @@ fig4 <- ((panel_A / panel_B) |
   plot_layout(widths = c(1, 1.15))
 
 # ---- Save -------------------------------------------------------------------
-ggsave(file.path(out_fig_dir, "Figure_4_option2_pooled.png"),
-       plot = fig4, width = 22, height = 17, units = "cm", dpi = 900, bg = "white",
-       device = if (requireNamespace("ragg", quietly = TRUE)) ragg::agg_png else "png")
-message("Written: ", file.path(out_fig_dir, "Figure_4_option2_pooled.png"))
+# ---- Main-text figure export: PNG + JPEG + EPS ------------------------------
+# EPS is written through cairo, which keeps text and lines as vectors; layers
+# with alpha are rasterised at fallback_resolution, since the EPS format has no
+# transparency.
+save_main_fig <- function(stem, plot, width, height, units = "cm", dpi = 900) {
+  has_ragg <- requireNamespace("ragg", quietly = TRUE)
+  ggsave(paste0(stem, ".png"), plot = plot, width = width, height = height,
+         units = units, dpi = dpi, bg = "white",
+         device = if (has_ragg) ragg::agg_png else "png")
+  ggsave(paste0(stem, ".jpeg"), plot = plot, width = width, height = height,
+         units = units, dpi = dpi, bg = "white", quality = 95,
+         device = if (has_ragg) ragg::agg_jpeg else "jpeg")
+  ggsave(paste0(stem, ".eps"), plot = plot, width = width, height = height,
+         units = units, bg = "white",
+         device = grDevices::cairo_ps, fallback_resolution = 600)
+  message("Written: ", stem, ".png / .jpeg / .eps")
+}
+
+save_main_fig(file.path(out_fig_dir, "Figure_4_option2_pooled"), fig4,
+              width = 22, height = 17)
