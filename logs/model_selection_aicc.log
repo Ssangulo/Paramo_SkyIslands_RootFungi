@@ -1,3 +1,9 @@
+Warning message:
+In checkDepPackageVersion(dep_pkg = "TMB") :
+  Package version inconsistency detected.
+glmmTMB was built with TMB version 1.9.16
+Current TMB version is 1.9.17
+Please re-install glmmTMB from source or restore original ‘TMB’ package (see '?reinstalling' for more information)
 
 ==== A-C. Interaction vs additive (negative dAICc favours the interaction) ====
               comparison dAICc_int_vs_add dAICc_add_vs_null     best_by_AICc

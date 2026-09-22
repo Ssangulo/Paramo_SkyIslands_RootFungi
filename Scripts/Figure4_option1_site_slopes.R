@@ -12,7 +12,7 @@
 # of elevation x site.
 #
 # Run from the repository root:  Rscript Scripts/Figure4_option1_site_slopes.R
-# Inputs : objects/ps_individual.rds, objects/p_heat_glmm.rds (from genus_glmm_habitat.R)
+# Inputs : objects/ps_individual.rds, objects/p_heat_glmm.rds (from Figure4_pooled_glmm.R)
 # Output : figures/Figure_4_option1_site_slopes.png
 # =============================================================================
 
@@ -153,18 +153,19 @@ panel_A <- plot_site_slopes(m_hel$int, df_hel, "A", c(0, 1),    "Relative abunda
 panel_B <- plot_site_slopes(m_seb$int, df_seb, "B", c(0, 0.75), "Relative abundance of Sebacinales", lab_seb)
 
 # ---- Panel C: genus-level GLMM heatmap ---------------------------------------
-# Genus-level GLMM heatmap from genus_glmm_habitat.R (replaces the GLLVM p_heat)
+# Genus-level GLMM heatmap from Figure4_pooled_glmm.R (replaces the GLLVM p_heat)
 p_heat_path <- file.path(out_obj_dir, "p_heat_glmm.rds")
-if (!file.exists(p_heat_path)) stop("Run genus_glmm_habitat.R first: ", p_heat_path, " not found")
+if (!file.exists(p_heat_path)) stop("Run Figure4_pooled_glmm.R first: ", p_heat_path, " not found")
 p_heat <- readRDS(p_heat_path)
 stopifnot(inherits(p_heat, "ggplot"))
 
-# Genus label colours by order, taken from the heatmap data (other orders grey)
+# Genus label colours mark the two focal orders only (Panel C's selection rule);
+# every other order, Chaetothyriales included, stays neutral grey.
 genus_levels  <- levels(p_heat$data$Genus)
 if (is.null(genus_levels)) genus_levels <- unique(as.character(p_heat$data$Genus))
 ord_by_genus  <- tapply(as.character(p_heat$data$Order), as.character(p_heat$data$Genus), `[`, 1)
 genus_orders  <- unname(ord_by_genus[genus_levels])
-order_colors  <- c(Helotiales = "#7B4F9E", Sebacinales = "#E69F00", Chaetothyriales = "#FF0000")
+order_colors  <- c(Helotiales = "#7B4F9E", Sebacinales = "#E69F00")
 y_axis_colors <- unname(ifelse(genus_orders %in% names(order_colors), order_colors[genus_orders], "grey30"))
 
 panel_C <- p_heat +

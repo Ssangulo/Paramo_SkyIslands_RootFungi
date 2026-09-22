@@ -56,7 +56,7 @@
 "Carcinomyces","BEL","forest",10,0,0
 "Carlosrosaea","BEL","forest",10,2,9.2682063633071e-06
 "Catenulostroma","BEL","forest",10,0,0
-"Cephalotheca","BEL","forest",10,5,0.00337926420103477
+"Cephalotheca","BEL","forest",10,5,0.00337926420103478
 "Ceratobasidium","BEL","forest",10,1,0.00010025290135197
 "Ceriporia","BEL","forest",10,1,1.59675903537506e-05
 "Chaetocapnodium","BEL","forest",10,1,1.39684783614807e-05
@@ -246,7 +246,7 @@
 "Pezizellaster","BEL","forest",10,0,0
 "Pezoloma","BEL","forest",10,0,0
 "Phaeosphaeria","BEL","forest",10,0,0
-"Phaeotremella","BEL","forest",10,2,7.499048224826e-06
+"Phaeotremella","BEL","forest",10,2,7.49904822482599e-06
 "Phialocephala","BEL","forest",10,0,0
 "Pholiota","BEL","forest",10,0,0
 "Phylloscypha","BEL","forest",10,1,6.95767712338206e-06
@@ -277,7 +277,7 @@
 "Pseudopenidiella","BEL","forest",10,0,0
 "Pseudophialocephala","BEL","forest",10,0,0
 "Pseudophialophora","BEL","forest",10,0,0
-"Pseudoplectania","BEL","forest",10,5,0.0205719796963839
+"Pseudoplectania","BEL","forest",10,5,0.020571979696384
 "Pseudorobillarda","BEL","forest",10,1,4.10595180525014e-06
 "Pseudosigmoidea","BEL","forest",10,3,9.04248667281587e-05
 "Psilocybe","BEL","forest",10,0,0
@@ -429,7 +429,7 @@
 "Cladosporium","DOM","forest",5,1,0.000177943446030849
 "Clathrosphaerina","DOM","forest",5,0,0
 "Clathrus","DOM","forest",5,0,0
-"Clavaria","DOM","forest",5,2,0.002886696081928
+"Clavaria","DOM","forest",5,2,0.00288669608192799
 "Clavulinopsis","DOM","forest",5,2,0.000740955403366943
 "Clitopilus","DOM","forest",5,0,0
 "Clohesyomyces","DOM","forest",5,0,0
@@ -527,7 +527,7 @@
 "Infundichalara","DOM","forest",5,1,1.89627382193989e-05
 "Jalapriya","DOM","forest",5,0,0
 "Juncaceicola","DOM","forest",5,1,0.000279889105548702
-"Knufia","DOM","forest",5,3,7.36096762861356e-05
+"Knufia","DOM","forest",5,3,7.36096762861355e-05
 "Kockovaella","DOM","forest",5,0,0
 "Krasilnikovozyma","DOM","forest",5,0,0
 "Kurtzmanomyces","DOM","forest",5,0,0
@@ -812,7 +812,7 @@
 "Cortinarius","NV","forest",10,0,0
 "Cotylidia","NV","forest",10,0,0
 "Crocicreas","NV","forest",10,3,0.000101207295259828
-"Cryptocoryneum","NV","forest",10,2,8.0727949748611e-06
+"Cryptocoryneum","NV","forest",10,2,8.07279497486111e-06
 "Cryptodiscus","NV","forest",10,1,5.43860046681321e-05
 "Cudoniella","NV","forest",10,1,0.000304937753531963
 "Curvibasidium","NV","forest",10,0,0
@@ -1012,7 +1012,7 @@
 "Recurvomyces","NV","forest",10,1,0.000180444817456987
 "Renatobasidium","NV","forest",10,0,0
 "Rhexocercosporidium","NV","forest",10,0,0
-"Rhexodenticula","NV","forest",10,3,2.1142715116976e-05
+"Rhexodenticula","NV","forest",10,3,2.11427151169759e-05
 "Rhizoglomus","NV","forest",10,0,0
 "Rhizophagus","NV","forest",10,0,0
 "Rhodosporidiobolus","NV","forest",10,0,0
@@ -1037,7 +1037,7 @@
 "Solicoccozyma","NV","forest",10,0,0
 "Sordaria","NV","forest",10,0,0
 "Spirosphaera","NV","forest",10,1,0.00336130927402434
-"Sporidesmiella","NV","forest",10,2,6.9811346084606e-05
+"Sporidesmiella","NV","forest",10,2,6.98113460846061e-05
 "Stachybotrys","NV","forest",10,1,4.56684381841871e-05
 "Stagonospora","NV","forest",10,0,0
 "Stemphylium","NV","forest",10,0,0
@@ -1465,7 +1465,7 @@
 "Aspergillus","DOM","subparamo",5,0,0
 "Asterostroma","DOM","subparamo",5,0,0
 "Athelia","DOM","subparamo",5,0,0
-"Athelopsis","DOM","subparamo",5,3,0.0604595756403582
+"Athelopsis","DOM","subparamo",5,3,0.0604595756403581
 "Atheniella","DOM","subparamo",5,0,0
 "Atractospora","DOM","subparamo",5,0,0
 "Aureobasidium","DOM","subparamo",5,0,0
@@ -1697,7 +1697,7 @@
 "Plectosphaerella","DOM","subparamo",5,0,0
 "Pleuroascus","DOM","subparamo",5,0,0
 "Pochonia","DOM","subparamo",5,1,8.90980919559553e-05
-"Podila","DOM","subparamo",5,1,8.5735899806674e-05
+"Podila","DOM","subparamo",5,1,8.57358998066739e-05
 "Podospora","DOM","subparamo",5,0,0
 "Polydesmia","DOM","subparamo",5,0,0
 "Polylobatispora","DOM","subparamo",5,0,0
@@ -2451,7 +2451,7 @@
 "Ramichloridium","NV","subparamo",5,0,0
 "Recurvomyces","NV","subparamo",5,0,0
 "Renatobasidium","NV","subparamo",5,0,0
-"Rhexocercosporidium","NV","subparamo",5,1,0.00075475016304069
+"Rhexocercosporidium","NV","subparamo",5,1,0.000754750163040691
 "Rhexodenticula","NV","subparamo",5,0,0
 "Rhizoglomus","NV","subparamo",5,0,0
 "Rhizophagus","NV","subparamo",5,0,0
@@ -3265,7 +3265,7 @@
 "Aspergillus","NV","paramo",5,0,0
 "Asterostroma","NV","paramo",5,0,0
 "Athelia","NV","paramo",5,0,0
-"Athelopsis","NV","paramo",5,1,5.7770402297223e-05
+"Athelopsis","NV","paramo",5,1,5.77704022972231e-05
 "Atheniella","NV","paramo",5,0,0
 "Atractospora","NV","paramo",5,0,0
 "Aureobasidium","NV","paramo",5,0,0

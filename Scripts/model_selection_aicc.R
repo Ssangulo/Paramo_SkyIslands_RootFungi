@@ -195,7 +195,7 @@ if (file.exists(gres_path)) {
   write.csv(genus_ic, file.path(out_tab_dir, "model_selection_aicc_genus.csv"), row.names = FALSE)
 } else {
   genus_ic <- NULL
-  message("tables/genus_glmm_results.csv not found; run genus_glmm_habitat.R first. Skipping section D.")
+  message("tables/genus_glmm_results.csv not found; run Figure4_pooled_glmm.R first. Skipping section D.")
 }
 
 # =============================================================================

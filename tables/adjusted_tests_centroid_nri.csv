@@ -1,22 +1,22 @@
 "response","test","df1","df2","F","p"
-"dist_centroid","habitat, Type I (published)",2,50,14.718588632531,9.41141711492421e-06
-"dist_centroid","site, Type I (published)",3,50,3.59674307226021,0.0197437267138672
+"dist_centroid","habitat, Type I (published)",2,50,14.7185886325311,9.41141711492414e-06
+"dist_centroid","site, Type I (published)",3,50,3.5967430722602,0.0197437267138675
 "dist_centroid","habitat adjusted for site",2,54,6.10832785107782,0.0040599058351236
-"dist_centroid","site adjusted for habitat",3,54,3.52381767966271,0.0208919425603797
-"dist_centroid","habitat x site interaction",4,50,1.27938244528036,0.290603044619155
+"dist_centroid","site adjusted for habitat",3,54,3.52381767966269,0.0208919425603801
+"dist_centroid","habitat x site interaction",4,50,1.27938244528036,0.290603044619154
 "dist_centroid","habitat adjusted for site, location means (n = 12)",2,6,3.02449286969991,0.123481609061395
 "dist_centroid","site adjusted for habitat, location means (n = 12)",3,6,1.74479198008041,0.257094048737673
 "NRI_aw","habitat, Type I (published)",2,50,1.16885215137831,0.31906809442625
-"NRI_aw","site, Type I (published)",3,50,3.66208465518579,0.0183285676118496
-"NRI_aw","habitat adjusted for site",2,54,0.75040777830531,0.477033262684408
-"NRI_aw","site adjusted for habitat",3,54,3.29248917760426,0.027321402036518
+"NRI_aw","site, Type I (published)",3,50,3.66208465518578,0.0183285676118496
+"NRI_aw","habitat adjusted for site",2,54,0.750407778305291,0.477033262684417
+"NRI_aw","site adjusted for habitat",3,54,3.29248917760425,0.0273214020365183
 "NRI_aw","habitat x site interaction",4,50,2.51543062959477,0.0530043927201542
-"NRI_aw","habitat adjusted for site, location means (n = 12)",2,6,0.481390126288476,0.639890532135919
-"NRI_aw","site adjusted for habitat, location means (n = 12)",3,6,2.11214732420528,0.200058206209608
+"NRI_aw","habitat adjusted for site, location means (n = 12)",2,6,0.481390126288474,0.63989053213592
+"NRI_aw","site adjusted for habitat, location means (n = 12)",3,6,2.11214732420527,0.200058206209608
 "NTI_aw","habitat, Type I (published)",2,50,0.703547635385882,0.499658734374245
 "NTI_aw","site, Type I (published)",3,50,1.76384667061784,0.166081133024697
-"NTI_aw","habitat adjusted for site",2,54,0.861472030967199,0.428264485671584
-"NTI_aw","site adjusted for habitat",3,54,1.64346401658108,0.190144275509756
+"NTI_aw","habitat adjusted for site",2,54,0.861472030967176,0.428264485671594
+"NTI_aw","site adjusted for habitat",3,54,1.64346401658107,0.190144275509758
 "NTI_aw","habitat x site interaction",4,50,1.98886608596229,0.110525411487408
 "NTI_aw","habitat adjusted for site, location means (n = 12)",2,6,0.43520985326973,0.6660455726468
 "NTI_aw","site adjusted for habitat, location means (n = 12)",3,6,0.830266924286928,0.523937595408711

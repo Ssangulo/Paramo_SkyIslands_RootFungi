@@ -47,6 +47,33 @@
  PD q=2    forest / paramo       NA   0.07390  0.094000
  PD q=2 subparamo / paramo       NA   0.98300  0.969000
 
+==== Model structure within each family (AICc) ====
+ metric    family dAICc_habitat dAICc_interaction           best
+ TD q=0  gaussian       -17.300              7.49 habitat + site
+ TD q=0 lognormal        -9.930              4.70 habitat + site
+ TD q=0 gamma_log       -13.000              5.66 habitat + site
+ TD q=1  gaussian        -2.290              7.97 habitat + site
+ TD q=1 lognormal         0.930              4.46      site only
+ TD q=1 gamma_log        -2.010              5.06 habitat + site
+ TD q=2  gaussian         0.846              7.36      site only
+ TD q=2 lognormal         2.800              5.04      site only
+ TD q=2 gamma_log         0.536              4.84      site only
+ PD q=0  gaussian       -17.200              8.33 habitat + site
+ PD q=0 lognormal       -10.700              6.41 habitat + site
+ PD q=0 gamma_log       -13.500              7.39 habitat + site
+ PD q=1  gaussian        -2.110             -4.24 habitat * site
+ PD q=1 lognormal        -1.650             -4.82 habitat * site
+ PD q=1 gamma_log        -3.470             -6.09 habitat * site
+ PD q=2  gaussian        -4.780            -22.60 habitat * site
+ PD q=2 lognormal        -4.020            -15.70 habitat * site
+ PD q=2 gamma_log        -4.320            -16.80 habitat * site
+
+==== Total AICc across all six metric/order combinations, by family ====
+    family total_dAICc_vs_best
+ gamma_log                1770
+ lognormal                1790
+  gaussian                1850
+
 ==== Tukey habitat contrasts: effect sizes ====
  metric           contrast    family      scale estimate
  TD q=0 forest - subparamo  gaussian difference 51.60000

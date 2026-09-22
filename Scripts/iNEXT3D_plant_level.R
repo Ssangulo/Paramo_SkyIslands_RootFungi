@@ -126,6 +126,12 @@ if ("Unique_ID" %in% names(sd_root)) {
 }
 
 # ---- Run iNEXT3D (asymptotic + coverage-standardised) -----------------------
+# Coverage-standardised estimates for BOTH unit sets are taken at the plant-unit
+# default level (Cmin of the plant incidence data, 0.600), so plant and root
+# rows in the comparison tables are at the same coverage.
+COV_LEVEL <- iNEXT.3D:::check.level(inc_plant, "incidence_raw", "coverage", NULL)
+message("Coverage level for standardised estimates: ", signif(COV_LEVEL, 6))
+
 run_inext <- function(inc, label) {
   message("Running iNEXT3D TD (", label, ") ...")
   set.seed(SEED)
@@ -139,10 +145,10 @@ run_inext <- function(inc, label) {
   message("Running coverage-standardised estimates (", label, ") ...")
   set.seed(SEED)
   td_cov <- estimate3D(data = inc, diversity = "TD", q = c(0, 1, 2),
-                       datatype = "incidence_raw", base = "coverage", nboot = NBOOT)
+                       datatype = "incidence_raw", base = "coverage", level = COV_LEVEL, nboot = NBOOT)
   set.seed(SEED)
   pd_cov <- estimate3D(data = inc, diversity = "PD", q = c(0, 1, 2),
-                       datatype = "incidence_raw", base = "coverage", nboot = NBOOT,
+                       datatype = "incidence_raw", base = "coverage", level = COV_LEVEL, nboot = NBOOT,
                        PDtree = tr, PDreftime = reftime, PDtype = "meanPD")
   list(TD = td, PD = pd, TD_cov = td_cov, PD_cov = pd_cov)
 }

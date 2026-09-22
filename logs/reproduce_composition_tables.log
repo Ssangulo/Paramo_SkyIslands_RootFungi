@@ -1,4 +1,4 @@
-vegan 2.7.2 | phyloseq 1.54.0 | R 4.5.2
+vegan 2.7.2 | phyloseq 1.46.0 | R 4.3.3
 ps_individual: 60 plants x 4386 OTUs; total reads 14096752
 
 ==== Row order: otu_table vs sample_data identical: TRUE ====
@@ -30,27 +30,27 @@ decostand kept rownames: TRUE | rfy vs X order identical: TRUE | rfy vs sample_d
                       S10 centroid    residual mean square  12.80000   12.80000
                       S10 centroid  habitat sum of squares 376.70000  376.70000
    rel_diff matches
-  6.306e-16    TRUE
-  2.971e-15    TRUE
- -6.526e-16    TRUE
+ -3.784e-15    TRUE
+ -7.819e-16    TRUE
   0.000e+00    TRUE
- -3.007e-15    TRUE
- -1.488e-16    TRUE
+ -2.489e-16    TRUE
+ -3.554e-15    TRUE
+  2.976e-16    TRUE
   2.238e-15    TRUE
-  2.732e-15    TRUE
-  2.082e-15    TRUE
- -2.200e-15    TRUE
-  2.509e-14    TRUE
-  1.353e-15    TRUE
-  2.694e-15    TRUE
- -7.986e-16    TRUE
- -3.983e-15    TRUE
+  2.459e-15    TRUE
+  2.825e-15    TRUE
+ -8.329e-15    TRUE
+  1.590e-15    TRUE
+  1.052e-15    TRUE
+  3.108e-15    TRUE
+ -1.198e-15    TRUE
+ -3.259e-15    TRUE
  -2.082e-15    TRUE
- -3.983e-15    TRUE
-  5.680e-15    TRUE
- -1.388e-15    TRUE
+ -3.259e-15    TRUE
+  2.593e-15    TRUE
+ -3.471e-16    TRUE
  -2.082e-15    TRUE
- -2.414e-15    TRUE
+ -1.660e-15    TRUE
 
 ==== Centroid diagnostics ====
 Distance to site centroid, appendix method: mean 20.74 sd 4.548 range 11.27 - 31.2 

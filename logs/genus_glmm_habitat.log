@@ -1,4 +1,10 @@
-glmmTMB 1.1.14 | emmeans 2.0.0
+Warning message:
+In checkDepPackageVersion(dep_pkg = "TMB") :
+  Package version inconsistency detected.
+glmmTMB was built with TMB version 1.9.16
+Current TMB version is 1.9.17
+Please re-install glmmTMB from source or restore original ‘TMB’ package (see '?reinstalling' for more information)
+glmmTMB 1.1.9 | emmeans 2.0.4
 Plants: 60 | locations: 12 | library size range: 28122-882416
 OTUs with genus assigned: 1428 of 4386 (7 Meliniomyces OTUs merged into Hyaloscypha)
 Genera: 360 assigned | 56 pass the prevalence filter (>= 10 plants, >= 1000 reads)

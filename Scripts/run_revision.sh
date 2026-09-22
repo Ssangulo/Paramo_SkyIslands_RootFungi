@@ -34,9 +34,8 @@ run perplant_hill_size_standardised.R  # rarefied per-plant Hill numbers, tests,
 run parallelism_diagnostics.R          # needs objects/perplant_hill_size_std.rds from the previous step
 
 # --- Taxa ---------------------------------------------------------------------
-run genus_glmm_habitat.R               # writes objects/p_heat_glmm.rds for Figure 4C
+run Figure4_pooled_glmm.R              # genus GLMMs + main-text Figure 4 (one script)
 run helotiales_fraction_check.R
-run Figure4_option2_pooled.R           # main-text Figure 4
 run Figure4_option1_site_slopes.R      # reference only; safe to comment out
 
 # --- Composition and phylogenetic structure -----------------------------------
