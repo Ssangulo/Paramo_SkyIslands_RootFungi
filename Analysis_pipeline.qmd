@@ -1743,7 +1743,7 @@ Four-panel composite figure combining order-level elevational trends (beta-regre
 #   tables/genus_glmm_results.csv           full genus results (Data S2)
 #   tables/genus_glmm_presence_by_site.csv  presence per site x habitat
 #   objects/p_heat_glmm.rds                 Panel C, also read by
-#                                           Figure4_option1_site_slopes.R
+#                                           archive/Scripts/Figure4_option1_site_slopes.R (superseded)
 #   figures/genus_glmm_heatmap.png          Panel C on its own
 #
 # Panel D fits its own beta regressions; its coefficients reproduce

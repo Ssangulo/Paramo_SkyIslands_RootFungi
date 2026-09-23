@@ -1,6 +1,0 @@
-"0","#| echo: false"
-"0","library(knitr)"
-"0",""
-"0","tab_terms <- read.csv(""tables/Table_S4_dbRDA_terms.csv"")"
-"0","kable(tab_terms, digits = 3,"
-"0","      caption = ""Table S4a. dbRDA permutation tests (by term; 999 permutations)."")"

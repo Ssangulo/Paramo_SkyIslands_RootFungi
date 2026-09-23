@@ -1,5 +1,0 @@
-"0","#| echo: false"
-"0","library(knitr)"
-"0",""
-"0","tab_s5 <- read.csv(""tables/Table_S5_PERMANOVA.csv"")"
-"0","kable(tab_s5, digits = 3, caption = ""Table S5a. PERMANOVA (adonis2) results by term."")"

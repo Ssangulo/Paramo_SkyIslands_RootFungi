@@ -1,5 +1,0 @@
-"0",""
-"0","test_site <- read.csv(""tables/Table_S5_betadisper_test_site.csv"")"
-"0",""
-"0","kable(test_site, digits = 3,"
-"0","      caption = ""Table S5c. Site beta-dispersion permutation test."")"

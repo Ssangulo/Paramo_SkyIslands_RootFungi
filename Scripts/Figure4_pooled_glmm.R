@@ -59,7 +59,7 @@
 #          tables/genus_glmm_results.csv           (full results; new Data S2)
 #          tables/genus_glmm_presence_by_site.csv  (presence per site x habitat)
 #          objects/p_heat_glmm.rds                 (Panel C, also read by
-#                                                   Figure4_option1_site_slopes.R)
+#                                                   archive/Scripts/Figure4_option1_site_slopes.R)
 #          figures/genus_glmm_heatmap.png          (Panel C on its own)
 #
 # Panel D's coefficients reproduce tables/helotiales_fraction_check.csv; that
@@ -591,7 +591,7 @@ panel_D <- ggplot() +
 
 # ---- Panel C: genus-level GLMM heatmap ---------------------------------------
 # p_heat is the heatmap built in Part 1 (also saved to objects/p_heat_glmm.rds
-# for Figure4_option1_site_slopes.R).
+# for archive/Scripts/Figure4_option1_site_slopes.R).
 stopifnot(inherits(p_heat, "ggplot"))
 
 # Genus label colours mark the two focal orders only (Panel C's selection rule);

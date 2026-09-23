@@ -1,6 +1,0 @@
-"0",""
-"0","#| echo: false"
-"0","library(knitr)"
-"0",""
-"0","tab_s6 <- read.csv(""tables/Table_S6_centroid_model.csv"")"
-"0","kable(tab_s6, digits = 3)"

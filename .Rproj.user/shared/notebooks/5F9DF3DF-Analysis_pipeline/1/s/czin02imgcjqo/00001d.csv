@@ -1,4 +1,0 @@
-"0",""
-"0","tab_axis <- read.csv(""tables/Table_S4_dbRDA_axes.csv"")"
-"0","kable(tab_axis, digits = 3,"
-"0","      caption = ""Table S4b. dbRDA permutation tests (by constrained axis; 999 permutations)."")"

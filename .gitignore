@@ -6,3 +6,14 @@
 # Only the specific large file that caused problems
 objects/fit_nb_2.rds
 .Rproj.user
+
+# OS / editor / quarto caches
+.DS_Store
+.Rproj.user/
+.quarto/
+
+# Internal notes and superseded working files (kept on disk, not shipped)
+_archive/
+
+# DEMs downloaded by Scripts/map_code.R on first run
+objects/dem_colombia_z*.tif

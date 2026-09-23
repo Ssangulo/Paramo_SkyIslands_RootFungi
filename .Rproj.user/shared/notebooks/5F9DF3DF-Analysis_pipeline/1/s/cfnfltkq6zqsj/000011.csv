@@ -1,7 +1,0 @@
-"0",""
-"0","disp_hab <- read.csv(""tables/Table_S5_dispersion_habitat.csv"")"
-"0","test_hab <- read.csv(""tables/Table_S5_betadisper_test_habitat.csv"")"
-"0",""
-"0","kable(disp_hab, digits = 3,"
-"0","      caption = paste0(""Table S5b. Habitat beta-dispersion (distance to centroid). Permutation test p = "","
-"0","                       signif(test_hab$p_value[1], 3), "".""))"

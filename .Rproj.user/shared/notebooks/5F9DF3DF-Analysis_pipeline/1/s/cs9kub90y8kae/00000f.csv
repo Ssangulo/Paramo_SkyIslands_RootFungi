@@ -1,6 +1,0 @@
-"0","#| echo: false"
-"0","library(knitr)"
-"0",""
-"0","tab_s9 <- read.csv(""tables/Table_S9_betareg_elevation_effects.csv"")"
-"0","kable(tab_s9, digits = 4,"
-"0","      caption = ""Table S9. Elevation effects from beta regression models for the dominant orders (mean submodel), with pseudo-R²."")"
