@@ -49,7 +49,7 @@ All figures (PNG) and result tables (CSV) are stored within the project reposito
 
 **Data availability.**
 
-Repository: [Root_fungi_DADA2](https://github.com/Ssangulo/Root_fungi_DADA2)\
+Repository: [Paramo_SkyIslands_RootFungi](https://github.com/Ssangulo/Paramo_SkyIslands_RootFungi)\
 Sequence data: ENA accession number PRJEB107725\
 Metadata: `Data_S1_metadata.csv, Data_S3_soil.csv`
 
@@ -94,6 +94,10 @@ lvl_order <- c("Forest", "Subpáramo", "Páramo")
 ## Section 1: Data and object loading {.unnumbered}
 
 All pre-computed R objects are loaded here. Computationally intensive analyses (genus-level GLMMs, iNEXT3D, NTI/NRI, phylogeny inference) were executed on a remote server; their outputs are stored in `objects/` and loaded as needed.
+
+**How this document relates to the code.** All analysis chunks in this appendix are set to `eval: false`: rendering the document does not re-run any analysis. Tables are read from the saved CSV files in `tables/` and figures are embedded from `figures/`. The analyses of the revision (Sections 4.3, 5.2–5.3, 6, 8 and 10) are run by the scripts in `Scripts/`, in the order given by `Scripts/run_revision.sh`, from the repository root; each code chunk below names the script that produces the corresponding outputs.
+
+**Software versions.** Revision analyses were run in R 4.5.2 with vegan 2.7.2, phyloseq 1.54.0, iNEXT.3D 1.0.12 and glmmTMB 1.1.14, and reproduced independently in R 4.3.3 (vegan 2.7.2, phyloseq 1.46.0, iNEXT.3D 1.0.12, glmmTMB 1.1.9, betareg 3.2.4, emmeans 2.0.4, picante 1.8.2), with all tables identical to within 10⁻⁶. The vegan version matters for the composition analyses: from vegan 2.7-1, `decostand(method = "rclr")` and `vegdist(method = "robust.aitchison")` impute zeros by default, which does not reproduce the published robust CLR (zeros kept at zero). The code in Section 4 therefore computes the transform explicitly (`rclr_std()`).
 
 ```{r load-objects}
 #| eval: false
@@ -599,7 +603,7 @@ write.csv(test_site,  file.path(out_tab_dir, "Table_S9_betadisper_test_site.csv"
 
 ### 4.3 Centroid-based turnover model (Table S10)
 
-To quantify the magnitude of community turnover across habitats while accounting for spatial structure, we calculated the Aitchison distance of each sample to its site-specific centroid and modelled turnover as a function of habitat, site, and their interaction. Table S10 reports sequential (Type I) tests, in which habitat is not adjusted for site. Adjusted for site, habitat still affected turnover magnitude ($F_{2,54}=6.11$, $p=0.004$), with forest plants further from their site centroid than subpáramo (difference 3.6, $p=0.008$) or páramo plants (3.9, $p=0.015$), whereas the habitat × site interaction was not significant, indicating consistent habitat-associated turnover magnitude across geographically isolated páramo regions (`adjusted_tests_centroid_nri.csv`).
+To quantify the magnitude of community turnover across habitats while accounting for spatial structure, we calculated the Aitchison distance of each sample to its site-specific centroid and modelled turnover as a function of habitat, site, and their interaction. Table S10 reports sequential (Type I) tests, in which habitat is not adjusted for site. Adjusted for site, habitat still affected turnover magnitude ($F_{2,54}=6.11$, $p=0.004$), with forest plants further from their site centroid than subpáramo (difference 3.6, $p=0.008$) or páramo plants (3.9, $p=0.015$), whereas the habitat × site interaction was not significant, indicating consistent habitat-associated turnover magnitude across geographically isolated páramo regions (Tables S10b–S10c). Because most habitat × site cells are a single sampling location of five plants, plants within a location are not independent replicates of habitat; refitted on location means (n = 12), neither habitat ($p=0.12$) nor site ($p=0.26$) is detectable (Table S10b), so the plant-level p-values should be read as optimistic.
 
 Panel B in the main manuscript Figure 2 summarizes this model (habitat adjusted for site $F_{2,54}=6.11$, $p=0.004$; habitat × site $F_{4,50}=1.28$, $p=0.29$), with Matarredonda (MA) shown as a dashed trend due to a compressed gradient.
 
@@ -609,8 +613,48 @@ library(knitr)
 
 tab_s10 <- read.csv("tables/Table_S10_centroid_model.csv")
 kable(tab_s10, digits = 3,
-      caption = "Table S10. Linear model results for centroid-based turnover.")
+      caption = "Table S10. Linear model results for centroid-based turnover (sequential, Type I tests: habitat is entered first and is not adjusted for site). Site-adjusted tests are given in Table S10b.")
 
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+adj_tests <- read.csv("tables/adjusted_tests_centroid_nri.csv")
+tab_s10b <- subset(adj_tests, response == "dist_centroid")
+kable(tab_s10b, digits = 4, row.names = FALSE,
+      caption = "Table S10b. Centroid-based turnover: habitat and site each adjusted for the other (additive model, n = 60 plants), the habitat × site interaction by model comparison, the published sequential (Type I) tests for reference, and the additive model refitted on location means (n = 12 locations).")
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+adj_pw <- read.csv("tables/adjusted_pairwise_centroid_nri.csv")
+tab_s10c <- subset(adj_pw, response == "dist_centroid")
+kable(tab_s10c, digits = 4, row.names = FALSE,
+      caption = "Table S10c. Tukey-adjusted pairwise habitat contrasts in distance to site centroid, from the additive model (habitat + site). Estimates are differences in Aitchison distance (first habitat minus second), with 95% confidence limits.")
+```
+
+```{r}
+#| eval: false
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
+#| code-summary: "Site-adjusted centroid tests, Tukey contrasts and location means (Scripts/adjusted_tests_centroid_nri.R)"
+
+# Run from the repository root:
+#   Rscript Scripts/adjusted_tests_centroid_nri.R
+#
+# Inputs : objects/ps_individual.rds, objects/tree_ps.rds
+# Method : distance to site centroid computed as below (rclr_std, Euclidean distance to the site
+#          centroid); lm(dist_centroid ~ habitat + site) with drop1() F-tests (each term adjusted for
+#          the other); habitat x site by model comparison; Tukey contrasts (emmeans) from the additive
+#          model; the additive model refitted on location means (n = 12).
+#
+# Key outputs saved:
+#   - tables/adjusted_tests_centroid_nri.csv      (Table S10b; NRI/NTI rows in Table S20)
+#   - tables/adjusted_pairwise_centroid_nri.csv   (Table S10c)
 ```
 
 ```{r}
@@ -945,7 +989,7 @@ ggsave(
 
 ![](figures/Figure_2_dbRDA_centroid.png)
 
-**Figure 2**: Community composition and turnover across habitats. Panel A: dbRDA ordination of RAF communities conditioned on site (color = site, shape = habitat; permutation $F=1.41$, $p=0.001$). Panel B: centroid-based turnover model (distance to site-specific centroid across habitats), with MA shown as dashed due to incomplete gradient (habitat $F_{2,50}=14.7$, $p<0.001$; habitat × site $F_{4,50}=1.28$, $p=0.29$).
+**Figure 2**: Community composition and turnover across habitats. Panel A: dbRDA ordination of RAF communities conditioned on site (color = site, shape = habitat; permutation $F=1.41$, $p=0.001$). Panel B: centroid-based turnover model (distance to site-specific centroid across habitats), with MA shown as dashed due to incomplete gradient (habitat adjusted for site $F_{2,54}=6.11$, $p=0.004$; habitat × site $F_{4,50}=1.28$, $p=0.29$).
 
 ## Section 5: Diversity trajectories {.page-break-before}
 
@@ -959,7 +1003,7 @@ Diversity trajectories were assessed using three complementary approaches: per-p
 #| eval: false
 #| echo: !expr knitr::is_html_output()
 #| code-fold: true
-#| code-summary: "Phylogenetic tree inference (GTR+Γ; executed on server)"
+#| code-summary: "Phylogenetic tree inference (GTR+Γ+I; executed on server)"
 
 library(DECIPHER)
 library(Biostrings)
@@ -1008,7 +1052,7 @@ kable(
 
 We quantified habitat-associated patterns in taxonomic diversity (TD) and phylogenetic diversity (PD) using iNEXT3D and Hill numbers (q = 0, 1, 2). Diversity estimates were computed from incidence (presence/absence) matrices at the habitat level, with plants as sampling units (an OTU is present in a plant if detected in either of its two root samples; 25, 20 and 15 plants in forest, subpáramo and páramo), and evaluated under rarefaction/extrapolation with bootstrap confidence intervals (nboot = 500). Phylogenetic diversity was estimated as meanPD (effective number of lineages) using a pruned phylogeny matched to the observed taxa. The combined curve visualization is presented in main-text Figure 3A; asymptotic summaries are provided in Tables S12–S13, coverage-standardised estimates in Table S13b, and the per-plant parallelism models in Tables S14–S15.
 
-Sample coverage at the reference sample size is 0.58, 0.42 and 0.49 in forest, subpáramo and páramo, and 70–79% of the OTUs of each habitat are detected in a single plant, so the asymptotic estimates of Tables S12–S13 rest on a large undetected fraction and on habitats of unequal completeness. Habitats are therefore compared at a common sample coverage of 60% (Table S13b), the level iNEXT adopts by default: it is the coverage subpáramo attains at twice its observed number of plants, which is the recommended limit for extrapolation. Páramo is roughly half as diverse as forest and subpáramo for every metric and order, with non-overlapping confidence intervals. Forest and subpáramo do not differ in TD at any order (ratios 1.00–1.07, overlapping CIs) and differ only slightly in PD (ratios 1.04–1.21). Habitat-level diversity therefore follows forest ≈ subpáramo > páramo rather than a steady decline.
+Sample coverage at the reference sample size is 0.58, 0.42 and 0.49 in forest, subpáramo and páramo, and 70–79% of the OTUs of each habitat are detected in a single plant, so the asymptotic estimates of Tables S12–S13 rest on a large undetected fraction and on habitats of unequal completeness. Habitats are therefore compared at a common sample coverage of 60% (Table S13b), the level iNEXT adopts by default: it is the coverage subpáramo attains at twice its observed number of plants, which is the recommended limit for extrapolation. Páramo is roughly half as diverse as forest and subpáramo for every metric and order, with non-overlapping confidence intervals. Forest and subpáramo do not differ in TD at any order (ratios 1.00–1.07, overlapping CIs) and differ only slightly in PD (ratios 1.04–1.21). Habitat-level diversity therefore follows forest ≈ subpáramo > páramo rather than a steady decline. Pairwise comparisons at 60% coverage are given in Table S13c.
 
 ```{r}
 #| echo: false
@@ -1053,6 +1097,21 @@ kable(
 ```
 
 ```{r}
+#| echo: false
+library(knitr)
+
+pw_inext <- read.csv("tables/iNEXT3D_pairwise_habitat_plant_vs_root.csv")
+tab_s13c <- subset(pw_inext, level == "plant" & basis == "coverage_standardised",
+                   select = c(diversity, q, pair, est_1, est_2, ratio, ci_overlap, z, p_holm))
+kable(
+  tab_s13c,
+  digits = 3,
+  row.names = FALSE,
+  caption = "Table S13c. Pairwise habitat comparisons of coverage-standardised diversity (60% coverage; plants as sampling units). est_1 and est_2 are the estimates for the first and second habitat of each pair, ratio = est_1 / est_2, ci_overlap indicates whether the two 95% bootstrap confidence intervals overlap, and z and p_holm are from a z-test on the bootstrap standard errors, Holm-adjusted across the three pairs."
+)
+```
+
+```{r}
 #| eval: false
 #| echo: !expr knitr::is_html_output()
 #| code-fold: true
@@ -1082,13 +1141,15 @@ For this section, diversity is computed independently for each plant using Hill 
 
 Models are gamma GLMs with a log link, so habitat effects are ratios of effective diversity; gamma had the lowest summed AICc in a Jacobian-corrected screen against Gaussian and log-normal models, and habitat results were refitted under all three families as a sensitivity check.
 
-Adjusted for site, habitat affects per-plant richness (TD q = 0: $F_{2,54}=9.21$, $p=0.0004$; PD q = 0: $F_{2,54}=9.61$, $p=0.0003$), with the pairwise contrasts reported below (Table S15b). The habitat effect is still present at q = 1 (TD $F_{2,54}=3.21$, $p=0.048$), though AICc marginally prefers dropping habitat at this order and no pairwise contrast resolves there, and it is gone by q = 2 (TD $p=0.15$). The habitat × site interaction is absent for TD at every order ($p=0.22$–$0.25$) and for PD at q = 0 ($p=0.42$), but present for abundance-weighted PD (q = 1: $F_{4,50}=3.81$, $p=0.009$; q = 2: $F_{4,50}=7.27$, $p=0.0001$), where it is driven by the single forest location at Las Domínguez. AICc agrees with every one of these decisions: the additive model carries Akaike weights of 0.91 (TD q = 0) and 0.96 (PD q = 0) against the interaction model, while at PD q = 1 and q = 2 the interaction model carries 0.89 and 1.00.
+Adjusted for site, habitat affects per-plant richness (TD q = 0: $F_{2,54}=9.21$, $p=0.0004$; PD q = 0: $F_{2,54}=9.61$, $p=0.0003$), with the pairwise contrasts reported below (Table S15b). The habitat effect is still present at q = 1 (TD $F_{2,54}=3.21$, $p=0.048$; AICc also retains habitat, ΔAICc −2.0), though no pairwise contrast resolves there, and it is gone by q = 2 (TD $p=0.15$). The habitat × site interaction is absent for TD at every order ($p=0.22$–$0.25$) and for PD at q = 0 ($p=0.42$), but present for abundance-weighted PD (q = 1: $F_{4,50}=3.81$, $p=0.009$; q = 2: $F_{4,50}=7.27$, $p=0.0001$), where it is driven by the single forest location at Las Domínguez. AICc agrees with every one of these decisions: across the site-only, additive and interaction gamma models, the additive model carries Akaike weights of 0.94 (TD q = 0) and 0.98 (PD q = 0), while at PD q = 1 and q = 2 the interaction model carries 0.95 and 1.00 (Table S21).
 
 **Post-hoc pairwise habitat contrasts (Table S15b).** Habitat is a categorical predictor, so the omnibus *F*-test for the habitat term establishes that habitats differ but does not identify which pairs differ, or in which direction. We therefore followed it with pairwise contrasts among the three habitats, taken from the same additive model as the omnibus test (gamma GLM with a log link, diversity ~ habitat + site) and Tukey-adjusted for the three comparisons. Taking both tests from one model matters: in the published version the omnibus test was sequential (Type I, habitat entered before site and therefore not adjusted for it) while the contrasts came from the additive model, so the two asked different questions and a significant habitat term could sit alongside no resolved pair. The full design also contains empty habitat × site cells (Matarredonda has no forest, Belmira no páramo), which makes habitat marginal means non-estimable from the interaction model. Contrasts are reported on the response scale as ratios of effective diversity, so a ratio above one indicates higher diversity in the first habitat.
 
 The per-plant decline is concentrated at the forest boundary. At q = 0 both forest contrasts are resolved for each metric (TD forest/subpáramo 1.52, *p* = 0.0005; forest/páramo 1.69, *p* = 0.0002; PD 1.39, *p* = 0.001 and 1.58, *p* = 0.0001), while subpáramo and páramo do not differ (TD 1.11, *p* = 0.64; PD 1.13, *p* = 0.40): marginal richness falls from forest (TD 146.9, PD 20.1) to subpáramo (96.6, 14.4) and páramo (87.1, 12.7), with the second step flat. At q = 1 the direction is the same but nothing resolves (TD forest/subpáramo 1.48, *p* = 0.055; forest/páramo 1.53, *p* = 0.078), and at q = 2 no TD contrast is resolved at all. Polynomial contrasts across the ordered habitats are significant for TD at q = 0 (*p* \< 0.0001) and q = 1 (*p* = 0.031) and for PD at q = 0 (*p* = 0.00004), so diversity does fall along the gradient — but as one step at the treeline rather than a stepwise decline across successive habitats.
 
 For abundance-weighted PD (q = 1–2) the habitat × site interaction is supported (Table S15), so no common habitat trajectory applies and neither the marginal contrasts nor the polynomial trends of the additive model are inferential there; the corresponding rows of Table S15b are reported for completeness only. From the interaction model, the habitat effect at these orders is confined to Las Domínguez, where forest plants exceed subpáramo (q = 1: 1.69×, *p* = 0.002; q = 2: 1.62×, *p* \< 0.001) and páramo (1.81×, *p* = 0.0004; 1.55×, *p* \< 0.001), while no habitat contrast is resolved at any other site. Per-habitat sample sizes for pairwise inference remain small (n = 25, 20 and 15 plants for forest, subpáramo and páramo).
+
+**Which site drives the PD interaction.** The interaction at q = 1–2 disappears only when Las Domínguez is dropped (q = 1: $p=0.18$; q = 2: $p=0.23$), stays significant or borderline ($p \le 0.054$) when any other site is dropped, and is strong within the two complete gradients alone (NV + DOM: $p=0.012$ and $p=0.0001$; Table S15c). Las Domínguez forest plants have abundance-weighted PD of 2.21 (q = 1), against 1.43–1.44 in the other forests, and then fall to subpáramo and páramo levels; every other site is flat (Figure S3b, Table S15d). The pattern is not one unusual plant: removing influential plants (Cook's distance) leaves it significant ($p=0.029$ at q = 1; $p=0.0004$ at q = 2). It is partly linked to Helotiales dominance, which predicts lower abundance-weighted PD at q = 2 ($p<0.001$; not at q = 1, $p=0.18$); adding it as a covariate reduces the q = 2 interaction from $F=7.27$ to $F=4.51$ ($p=0.0035$; Table S15e). Because Las Domínguez forest is a single location (DOM_3), this site-dependence cannot be separated from a stand effect. TD, by contrast, is parallel between the two complete gradients at every order (NV + DOM, all $p \ge 0.34$).
 
 This differs from the habitat-level pattern in Section 5.2, where forest and subpáramo are indistinguishable and páramo is clearly the poorest assemblage: per plant the break is at the forest boundary, per habitat it is at the páramo boundary. The two are consistent if subpáramo plants are individually poorer than forest plants but more different from one another, so that the habitat total keeps pace with forest, while páramo plants are individually as rich as subpáramo plants but more alike. This comparison is qualitative only, since the per-plant values are abundance-based and the habitat-level values incidence-based.
 
@@ -1138,6 +1199,51 @@ kable(
 ```
 
 ```{r}
+#| echo: false
+library(knitr)
+
+loso <- read.csv("tables/diag_leave_one_site_out.csv")
+kable(
+  loso,
+  digits = 4,
+  row.names = FALSE,
+  caption = "Table S15c. Habitat × site interaction tests for per-plant TD and PD (gamma GLMs, log link) with all sites, with each site left out in turn, and within the two complete gradients (NV + DOM). df1 and df2 are the numerator and denominator degrees of freedom of the model-comparison F-test."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+wsc <- read.csv("tables/diag_within_site_contrasts.csv")
+tab_s15d <- subset(wsc, diversity == "PD" & q %in% c(1, 2),
+                   select = c(diversity, q, site, contrast, ratio, lower.CL, upper.CL, p.value))
+kable(
+  tab_s15d,
+  digits = 4,
+  row.names = FALSE,
+  caption = "Table S15d. Within-site habitat contrasts for abundance-weighted PD (q = 1, 2) from the habitat × site interaction model (gamma GLM, log link), as ratios of effective diversity with 95% confidence limits and Tukey-adjusted p-values within each site. Only contrasts estimable within a site are shown (BEL has no páramo, MA no forest)."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+pdlin <- read.csv("tables/diag_PD_interaction_vs_lineages.csv")
+kable(
+  pdlin,
+  digits = 4,
+  row.names = FALSE,
+  caption = "Table S15e. Habitat × site interaction for abundance-weighted PD (q = 1, 2) with and without the logit relative abundance of Helotiales and/or Sebacinales as a covariate. hel_assoc and seb_assoc give the slope and p-value of each lineage covariate on per-plant PD; F and p are for the interaction term under each covariate set."
+)
+```
+
+![](figures/diag_parallelism_sites.png)
+
+**Figure S3b**: Site trajectories across habitats for per-plant abundance-weighted phylogenetic diversity (PD, meanPD; q = 1 and q = 2; rarefied to 28,122 reads) and for Helotiales and Sebacinales relative abundance. Small points are individual plants; large points joined by lines are site means. The PD interaction is driven by the single Las Domínguez forest location (DOM_3). *Code: Scripts/parallelism_diagnostics.R.*
+
+```{r}
 #| eval: false
 #| echo: !expr knitr::is_html_output()
 #| code-fold: true
@@ -1157,7 +1263,9 @@ kable(
 # Key outputs saved:
 #   - tables/perplant_hill_size_std_omnibus.csv   (Tables S14-S15)
 #   - tables/perplant_hill_size_std_pairwise.csv, _emmeans.csv, _trend.csv, _values.csv
-#   - tables/diag_leave_one_site_out.csv, diag_site_trajectories.csv
+#   - tables/diag_leave_one_site_out.csv, diag_within_site_contrasts.csv,
+#     diag_PD_interaction_vs_lineages.csv, diag_influential_plants_PD.csv (Tables S15c-e)
+#   - figures/diag_parallelism_sites.png                                    (Figure S3b)
 #   - tables/family_sensitivity_*.csv, model_selection_aicc.csv
 #   - objects/perplant_hill_size_std.rds          (Figure 3B)
 ```
@@ -1194,7 +1302,7 @@ To quantify elevational trends in the relative abundance of dominant fungal line
 
 We focus on helotiales and sebacinales, the two most abundant orders, which also showed the only significant elevation responses. For both orders, fitted relationships and raw data are shown in Figure 4 (Panels A-B), while full model summaries are provided in Tables S16 and S17. Elevation effects for the eight most abundant orders are summarized in Table S18.
 
-Coefficients are on the logit scale: the Helotiales elevation coefficient (+0.101 per 100 m, p = 0.017) corresponds to +10.6% in the odds, or about +2.5 percentage points per 100 m at the mean Helotiales proportion (0.43); the Sebacinales coefficient (−0.100 per 100 m, p = 0.033) corresponds to about −0.7 percentage points. Site-specific elevation slopes were not supported for either order (elevation × site likelihood-ratio test: Helotiales p = 0.060, Sebacinales p = 0.33; ΔAICc +0.6 and +4.6), so the additive model is retained.
+Coefficients are on the logit scale: the Helotiales elevation coefficient (+0.101 per 100 m, p = 0.017) corresponds to +10.6% in the odds, or about +2.5 percentage points per 100 m at the mean Helotiales proportion (0.43); the Sebacinales coefficient (−0.100 per 100 m, p = 0.033) corresponds to about −0.7 percentage points. Because an additive `elevation + site` model forces every site to share one elevation slope, parallel lineage turnover was tested explicitly rather than assumed. Site-specific elevation slopes were not supported for either order (elevation × site likelihood-ratio test: Helotiales p = 0.060, Sebacinales p = 0.33; ΔAICc +0.6 and +4.6), nor were site-specific habitat effects (habitat × site: Helotiales p = 0.042 but ΔAICc +1.5, Akaike weight 0.28; Sebacinales p = 0.19, ΔAICc +5.1), so the additive model is retained and the across-site trends are what is reported (Tables S18b–S18c). For Sebacinales, AICc does not support habitat as a predictor at all (site-only model preferred, ΔAICc +2.5 for habitat + site), so there is no support for a subpáramo peak. Elevation varies among locations rather than plants, so the pooled p-values are on the optimistic side.
 
 Model diagnostics were examined to assess fit and identify potential violations of distributional assumptions. Diagnostic plots include Pearson residuals versus fitted values and elevation, quantile residual Q–Q plots, and leverage values (Figures S4–S5).
 
@@ -1223,6 +1331,43 @@ library(knitr)
 tab_s14 <- read.csv("tables/Table_S14_betareg_other_orders.csv")
 kable(tab_s14, digits = 4,
       caption = "Table S18. Elevation effects from beta regression models for the dominant orders (mean submodel), with pseudo-R².")
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+lin_tests <- read.csv("tables/diag_lineage_parallelism_tests.csv")
+kable(lin_tests, digits = 4, row.names = FALSE,
+      caption = "Table S18b. Likelihood-ratio tests of site-specific trends in Helotiales and Sebacinales relative abundance (beta regression, logit link, n = 60 plants): elevation × site and habitat × site (cell-means parameterisation, which handles the empty habitat × site cells) against the additive model. published_elev_coef and published_elev_p are the elevation coefficient (per m, logit scale) and p-value of the additive model (Tables S16–S17).")
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+lin_slopes <- read.csv("tables/diag_lineage_site_slopes.csv")
+kable(lin_slopes, digits = 4, row.names = FALSE,
+      caption = "Table S18c. Site-specific elevation slopes of Helotiales and Sebacinales relative abundance from the elevation × site beta regression, on the proportion scale (change in proportion per 100 m, with asymptotic 95% confidence limits). These are reported for completeness only: the interaction is not supported (Table S18b), so the additive model and its across-site slope are the result.")
+```
+
+```{r}
+#| eval: false
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
+#| code-summary: "Lineage parallelism tests and site slopes (Scripts/parallelism_diagnostics.R, part B)"
+
+# Run from the repository root:
+#   Rscript Scripts/parallelism_diagnostics.R
+#
+# Inputs : objects/ps_individual.rds, objects/perplant_hill_size_std.rds
+# Method : beta regressions as in the chunk below (Smithson-Verkuilen transform, logit link);
+#          elevation x site and habitat x site tested by likelihood ratio against the additive
+#          model; site-specific slopes from emmeans::emtrends on the proportion scale.
+#
+# Key outputs saved:
+#   - tables/diag_lineage_parallelism_tests.csv   (Table S18b)
+#   - tables/diag_lineage_site_slopes.csv         (Table S18c)
 ```
 
 ------------------------------------------------------------------------
@@ -1610,7 +1755,7 @@ Four-panel composite figure combining order-level elevational trends (beta-regre
 
 We modelled genus-level habitat responses with a negative binomial generalized linear mixed model per genus (glmmTMB), replacing the earlier GLLVM, whose genus-level coefficients had diverged because many OTUs never occurred in the forest reference habitat. Reads were pooled to genus per plant (*Meliniomyces* merged into *Hyaloscypha*), and genera present in ≥ 10 plants with ≥ 1,000 reads were retained (56 genera). Each model was `count ~ habitat + site + offset(log(library size)) + (1 | location)`: site as a genus-specific fixed effect accounts for the partial confounding of habitat and site, and the location random effect makes the 12 sampling locations the replicates for habitat. Contrasts against forest are reported as fold changes with 95% confidence intervals and Benjamini–Hochberg q-values across genera; genera absent from a habitat are flagged rather than given a fold change.
 
-Four genera had a significant contrast against forest, and every one is a decline (*Capnobotryella*, *Cephalotheca*, *Oidiodendron*, *Gyoerffyella*); no genus was significantly more abundant in subpáramo or páramo than in forest. *Acephala* had the strongest habitat support of any genus (omnibus q = 0.029) but occurs only at two Las Domínguez locations and was never detected in forest. The order-level Helotiales increase (Section 6.1) is carried by genus-unassigned OTUs (72% of Helotiales reads; +11.1% in the odds per 100 m, p = 0.019), whereas genus-assigned Helotiales show no trend (p = 0.36).
+Four genera had a significant contrast against forest, and every one is a decline (*Capnobotryella*, *Cephalotheca*, *Oidiodendron*, *Gyoerffyella*); no genus was significantly more abundant in subpáramo or páramo than in forest. *Acephala* had the strongest habitat support of any genus (omnibus q = 0.029) but occurs only at two Las Domínguez locations and was never detected in forest. The order-level Helotiales increase (Section 6.1) is carried by genus-unassigned OTUs (72% of Helotiales reads; +11.1% in the odds per 100 m, p = 0.019), whereas genus-assigned Helotiales show no trend (p = 0.36; Table S18d). Site dependence is not supported in the unassigned fraction either (elevation × site p = 0.11). Hyaloscyphaceae is the only family with a significant elevation × site interaction (p = 0.018; the increase is confined to Belmira), and it holds 10% of Helotiales reads; no other family trends. Because these are relative abundances, a rising Helotiales share cannot be separated from losses in other lineages.
 
 Figure 4C shows 12 of the 56 modelled genera. Rows are selected before any effect size is examined: Helotiales and Sebacinales genera above an abundance floor of 40,000 reads, together with every genus whose contrast against forest is resolved at BH q \< 0.05 regardless of order or abundance, so that each significant result appears in the figure. *Capronia* is retained as a single named exception, being the most abundant Chaetothyriales genus of the published figure; no abundance threshold admits it without also admitting four more abundant genera that have no habitat support. This replaces the earlier selection, which carried all 14 genera of the published GLLVM figure whether or not they were supported.
 
@@ -1642,6 +1787,20 @@ kable(
   col.names = c("Genus", "Order", "Plants F", "Plants S", "Plants P",
                 "S/F ratio", "S/F q", "P/F ratio", "P/F q"),
   caption = "Data S2 (preview). The 12 genera shown in Figure 4C, in the same top-to-bottom order as the panel, from the per-genus negative binomial GLMMs. Plants F/S/P = number of plants in which the genus was detected in forest, subpáramo and páramo; S/F and P/F = fold change in subpáramo and páramo relative to forest, with Benjamini–Hochberg q-values across genera. A genus never detected in forest has no estimable fold change against it (shown as NA here and as \"abs. F\" in Figure 4C), and a contrast whose fit returned no usable standard error has a fold change but no confidence limits or q-value (NA). The complete 56-genus table is provided as Data S2."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+hel_frac <- read.csv("tables/helotiales_fraction_check.csv")
+hel_frac <- hel_frac[, setdiff(names(hel_frac), "note")]
+kable(
+  hel_frac,
+  digits = 4,
+  row.names = FALSE,
+  caption = "Table S18d. The Helotiales elevation trend split into genus-assigned and genus-unassigned OTUs, and by family. Each fraction is fitted with the same additive beta regression as Table S16 (proportion of total reads per plant ~ elevation + site). share_of_Helotiales_reads = fraction of all Helotiales reads; mean_prop = mean proportion of total reads per plant; odds_change_pct_per_100m = percentage change in the odds per 100 m, 100 × (exp(β) − 1) with β per 100 m on the logit scale; p_elevation_x_site = likelihood-ratio test of site-specific slopes; slope_* = site-specific slopes from the elevation × site model (change in proportion per 100 m)."
 )
 ```
 
@@ -1680,7 +1839,7 @@ Functional guilds from root samples were assigned using FUNGuild based on the cu
 # Functional guild assignment was performed using FUNGuild prior to figure generation.
 #
 # The full annotation workflow is available in the GitHub repository:
-#   scripts/funguild_script.R
+#   Scripts/funguild_script.R
 #
 # Input:
 #  - Taxonomically annotated ASV/OTU table
@@ -1694,7 +1853,7 @@ Functional guilds from root samples were assigned using FUNGuild based on the cu
 
 ## Section 8: Phylogenetic community structure
 
-Phylogenetic community structure was quantified using Net Relatedness Index (NRI; based on MPD) and Nearest Taxon Index (NTI; based on MNTD), calculated under a taxa-label null model with 999 randomizations using both abundance-weighted (aw) and presence–absence (pa) versions. Indices were computed per plant (n = 60). Habitat-level summaries are reported as median (IQR) (Table S19). Habitat and site effects on abundance-weighted metrics were evaluated with linear models, each adjusted for the other (habitat + site; Table S20): neither index differed among habitats (NRI p = 0.48; NTI p = 0.43), whereas NRI differed among sites ($F_{3,54}=3.29$, $p=0.027$) and NTI did not (p = 0.19).
+Phylogenetic community structure was quantified using Net Relatedness Index (NRI; based on MPD) and Nearest Taxon Index (NTI; based on MNTD), calculated under a taxa-label null model with 999 randomizations using both abundance-weighted (aw) and presence–absence (pa) versions. Indices were computed per plant (n = 60). Habitat-level summaries are reported as median (IQR) (Table S19). Habitat and site effects on abundance-weighted metrics were evaluated with linear models, each adjusted for the other (habitat + site; Table S20): neither index differed among habitats (NRI p = 0.48; NTI p = 0.43), whereas NRI differed among sites ($F_{3,54}=3.29$, $p=0.027$) and NTI did not (p = 0.19). AICc agrees: for both indices the site-only model is preferred over habitat + site (ΔAICc +3.4 and +3.2), and the borderline NRI habitat × site term ($p=0.053$) receives no AICc support (Table S22). On location means (n = 12) the NRI site effect is not detectable ($p=0.20$; `adjusted_tests_centroid_nri.csv`).
 
 ```{r}
 #| echo: false
@@ -1747,3 +1906,71 @@ The full soil dataset, including all measured variables is archived in the repos
 ![](figures/Fig_S10_soil.png)\
 \
 **Figure S7**: Correlation heatmap of bulk soil physicochemical variables measured at each sampling location (n = 12). Colors indicate Pearson correlation among soil variables and elevation.
+
+## Section 10: Model structure and model selection
+
+Every additive versus interaction decision in this appendix was made with a likelihood-ratio test or a model-comparison F-test and cross-checked against AIC, AICc, BIC and Akaike weights. The rule applied throughout is that where the interaction is not supported, the additive model is the model and is what is reported; site-specific estimates from an unsupported interaction are not treated as results. The two frameworks agree everywhere except in two places, both of which make the reported models more conservative: for NRI, AICc prefers the site-only model over both the additive and interaction models (the additive model is retained, and habitat is not significant in it); and for Helotiales habitat × site, the likelihood-ratio test gives $p=0.042$ but AICc does not support the interaction (ΔAICc +1.5), so the additive model is retained. On this basis the interaction is retained only for abundance-weighted PD at q = 1 and q = 2.
+
+```{r}
+#| echo: false
+library(knitr)
+
+struct <- read.csv("tables/family_sensitivity_structure.csv")
+kable(
+  struct,
+  digits = 2,
+  row.names = FALSE,
+  caption = "Table S21. Model structure for per-plant Hill diversity (rarefied to 28,122 reads) under three error families: AICc of the site-only, additive (habitat + site) and interaction (habitat × site) models; dAICc_habitat = AICc(habitat + site) − AICc(site only); dAICc_interaction = AICc(habitat × site) − AICc(habitat + site); best = lowest-AICc model. Log-normal AICc includes the Jacobian of the log transform so that it is comparable with the other families. The reported models are gamma with a log link (gamma_log)."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+ms <- read.csv("tables/model_selection_aicc.csv")
+tab_s22 <- subset(ms, !grepl("^per-plant", comparison),
+                  select = c(comparison, model, k, logLik, AICc, dAICc, weight_AICc, BIC))
+kable(
+  tab_s22,
+  digits = 3,
+  row.names = FALSE,
+  caption = "Table S22. Model selection for centroid-based turnover, abundance-weighted NRI and NTI (linear models, n = 60 plants) and Helotiales and Sebacinales relative abundance (beta regressions): site-only, additive and interaction models compared by AICc (dAICc relative to the best model; weight_AICc = Akaike weight) and BIC. Per-plant diversity is given in Table S21."
+)
+```
+
+```{r}
+#| echo: false
+library(knitr)
+
+ms_gen <- read.csv("tables/model_selection_aicc_genus.csv")
+tab_s23 <- ms_gen[, c("genus", "order", "dAICc_habitat", "habitat_supported_AICc",
+                      "omnibus_p", "omnibus_q", "subparamo_vs_forest_q", "paramo_vs_forest_q")]
+kable(
+  tab_s23,
+  digits = 4,
+  row.names = FALSE,
+  caption = "Table S23. Support for habitat in the per-genus negative binomial GLMMs (56 genera; Section 6.3): dAICc_habitat = AICc(habitat + site) − AICc(site only), with habitat_supported_AICc = TRUE where dAICc_habitat < −2; omnibus_p/q = likelihood-ratio test of habitat and its Benjamini–Hochberg q-value across genera; subparamo/paramo_vs_forest_q = BH q-values of the contrasts against forest (NA where the genus is absent from forest or the contrast is not estimable)."
+)
+```
+
+```{r}
+#| eval: false
+#| echo: !expr knitr::is_html_output()
+#| code-fold: true
+#| code-summary: "Model selection (Scripts/model_selection_aicc.R, Scripts/family_sensitivity.R)"
+
+# Run from the repository root (after the per-plant, genus and NRI/NTI scripts):
+#   Rscript Scripts/model_selection_aicc.R   # AIC, AICc, BIC and Akaike weights for every additive vs
+#                                            # interaction decision; Jacobian-corrected family screen
+#   Rscript Scripts/family_sensitivity.R     # per-plant habitat results and structure under gaussian,
+#                                            # lognormal and gamma
+#
+# Key outputs saved:
+#   - tables/family_sensitivity_structure.csv  (Table S21)
+#   - tables/model_selection_aicc.csv          (Table S22; its per-plant rows are log-normal fits,
+#                                               superseded by Table S21)
+#   - tables/model_selection_aicc_genus.csv    (Table S23)
+#   - tables/model_selection_family_screen.csv, family_sensitivity_habitat.csv,
+#     family_sensitivity_contrasts.csv
+```

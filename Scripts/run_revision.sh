@@ -13,7 +13,8 @@
 #     set both to "lognormal" to reproduce the earlier version).
 #   - Model structure: interaction retained only where AICc supports it, which
 #     is abundance-weighted PD at q = 1 and q = 2. Everywhere else additive.
-#   - Figure 4 uses option 2 (one across-site line); option 1 is reference only.
+#   - Figure 4 uses one across-site line (additive model); the superseded
+#     site-slopes version is in archive/.
 # =============================================================================
 set -euo pipefail
 
@@ -36,7 +37,6 @@ run parallelism_diagnostics.R          # needs objects/perplant_hill_size_std.rd
 # --- Taxa ---------------------------------------------------------------------
 run Figure4_pooled_glmm.R              # genus GLMMs + main-text Figure 4 (one script)
 run helotiales_fraction_check.R
-run Figure4_option1_site_slopes.R      # reference only; safe to comment out
 
 # --- Composition and phylogenetic structure -----------------------------------
 run adjusted_tests_centroid_nri.R      # slow unless objects/nri_nti_per_plant_999.rds exists
