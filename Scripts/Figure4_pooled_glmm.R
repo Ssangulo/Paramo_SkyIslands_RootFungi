@@ -642,9 +642,21 @@ panel_B <- panel_B +
   ) +
   guides(color = guide_legend(nrow = 2, byrow = TRUE), fill = "none")
 
-fig4 <- ((panel_A / panel_B) |
-         ((panel_C / panel_D) + plot_layout(heights = c(1, 1.5)))) +
-  plot_layout(widths = c(1, 1.15))
+# free() releases D's left edge from C's (long genus labels) alignment, so D's
+# panel widens into that space and its y title sits against its own axis.
+# C gets a blank two-line y title of D's size: it holds the column's left
+# margin at its previous width, so panels A-C keep their exact positions.
+# The layout is one flat design (not (A/B) | (C/D)) because patchwork 1.3.2
+# errors on free() two nesting levels deep.
+panel_C <- panel_C +
+  labs(y = " \n ") +
+  theme(axis.title.y = element_text(size = 9, angle = 90, vjust = 1, lineheight = 0.9,
+                                    margin = margin(r = 2.75)))
+
+fig4 <- wrap_plots(L = panel_A / panel_B, C = panel_C,
+                   D = free(panel_D, type = "panel", side = "l"),
+                   design = "LC\nLD") +
+  plot_layout(widths = c(1, 1.15), heights = c(1, 1.5))
 
 # ---- Save -------------------------------------------------------------------
 # ---- Main-text figure export: PNG + JPEG + EPS ------------------------------
