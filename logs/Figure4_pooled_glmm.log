@@ -1,0 +1,95 @@
+Warning message:
+In checkDepPackageVersion(dep_pkg = "TMB") :
+  Package version inconsistency detected.
+glmmTMB was built with TMB version 1.9.16
+Current TMB version is 1.9.17
+Please re-install glmmTMB from source or restore original ‘TMB’ package (see '?reinstalling' for more information)
+glmmTMB 1.1.9 | emmeans 2.0.4
+Plants: 60 | locations: 12 | library size range: 28122-882416
+OTUs with genus assigned: 1428 of 4386 (7 Meliniomyces OTUs merged into Hyaloscypha)
+Genera: 360 assigned | 56 pass the prevalence filter (>= 10 plants, >= 1000 reads)
+Published Figure 4C genera NOT modelled (absent or below prevalence filter): Pseudoplectania, Xenochalara
+Fitting 56 genus models ...
+Figure 4C rows: 12 (Serendipita, Leohumicola, Lachnum, Pezicula, Hyaloscypha, Oidiodendron, Capronia, Pezoloma, Acephala, Gyoerffyella, Capnobotryella, Cephalotheca)
+
+==== Genus GLMM: models fitted = 56 | converged = 56 ====
+Omnibus habitat effect, q < 0.05 : 5 genera
+
+==== Published Figure 4C genera ====
+        genus           order n_OTUs plants_present present_F present_S
+ Gyoerffyella      Helotiales      8             22        14         4
+ Oidiodendron      Helotiales     14             26        17         8
+     Pezicula      Helotiales      5             24        12         4
+  Serendipita     Sebacinales     62             46        22        14
+  Coniochaeta  Coniochaetales      9             10         4         2
+     Capronia Chaetothyriales     19             21        10         6
+  Hyaloscypha      Helotiales     10             23         8         9
+  Leohumicola      Helotiales     13             15         7         6
+ Sclerococcum  Sclerococcales      7             23         8        11
+      Lachnum      Helotiales      6             16         6         7
+     Pezoloma      Helotiales      2             11         5         5
+     Acephala      Helotiales      1             10         0         5
+ present_P      SvF  SvF_q      PvF  PvF_q               NV              DOM
+         4 3.82e-02 0.2780 4.14e-03 0.0131 higher in forest higher in paramo
+         1 1.29e-02 0.1740 6.33e-05 0.0141      forest only      forest only
+         8 9.88e-02 0.7620 8.59e+02 0.1460 higher in forest      paramo only
+        10 6.22e-01 0.8550 1.19e-01 0.1840 higher in forest higher in forest
+         4 4.71e-02 0.7620 3.02e+02 0.2330 higher in paramo higher in paramo
+         5 1.62e+01 0.2910 2.63e+01 0.4110 higher in paramo           absent
+         6 1.78e+00 0.8610 5.57e+00 0.5340 higher in paramo      forest only
+         2 1.11e+01 0.7620 8.98e+00 0.5490 higher in paramo      forest only
+         4 1.06e+02 0.5980 4.89e-02 0.6480 higher in paramo      forest only
+         3 1.02e+03 0.0592 1.16e+00 0.9880 higher in forest higher in paramo
+         1 1.33e-01     NA 2.03e-03     NA      forest only higher in paramo
+         5       NA     NA       NA     NA           absent      paramo only
+ converged
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+      TRUE
+Not modelled: Pseudoplectania, Xenochalara 
+
+==== All genera with q < 0.05 for paramo vs forest or subparamo vs forest ====
+          genus             order      SvF   SvF_q      PvF  PvF_q      PvS
+   Gyoerffyella        Helotiales 3.82e-02 0.27800 4.14e-03 0.0131 1.08e-01
+   Oidiodendron        Helotiales 1.29e-02 0.17400 6.33e-05 0.0141 4.92e-03
+ Capnobotryella Mycosphaerellales 4.51e-05 0.00943 3.12e-05 0.0141 6.91e-01
+   Cephalotheca   Cephalothecales 2.66e-05 0.00943 8.98e-02 0.5490 3.37e+03
+ PvS_q               NV              DOM
+ 0.502 higher in forest higher in paramo
+ 0.277      forest only      forest only
+ 0.918      forest only higher in forest
+ 0.214 higher in paramo      forest only
+
+==== Genera absent from a habitat (contrasts not estimable) ====
+         genus           order absent_from plants_present plants_present_forest
+      Acephala      Helotiales      forest             10                     0
+  Tetracladium      Helotiales      paramo             10                     7
+     Conlarium Atractosporales   subparamo             12                     9
+ Cyphellophora Chaetothyriales      paramo             11                    10
+      Pochonia     Hypocreales      paramo             10                     7
+ plants_present_subparamo plants_present_paramo
+                        5                     5
+                        3                     0
+                        0                     3
+                        1                     0
+                        3                     0
+
+Outputs: tables/genus_glmm_results.csv, tables/genus_glmm_presence_by_site.csv, objects/p_heat_glmm.rds, figures/genus_glmm_heatmap.png
+Done.
+Plants: 60
+Helotiales: Across sites: beta = +0.101 per 100 m
+(logit scale), p = 0.017
+Sebacinales: Across sites: beta = -0.100 per 100 m
+(logit scale), p = 0.033
+Helotiales, Genus unassigned: 297 OTUs, 72% of Helotiales reads | beta = +0.105 per 100 m (logit scale), p = 0.019
+Helotiales, Genus assigned: 139 OTUs, 28% of Helotiales reads | beta = +0.045 per 100 m (logit scale), p = 0.355
+Written: figures/Figure_4_option2_pooled.png / .jpeg / .eps

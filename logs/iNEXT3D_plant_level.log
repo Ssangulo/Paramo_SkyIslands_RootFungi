@@ -6,6 +6,7 @@ Also defined by ‘tidytree’
 Sampling units per habitat (plants): forest=25, subparamo=20, paramo=15
 Sampling units per habitat (roots):  forest=50, subparamo=40, paramo=30
 Unique_ID not found in tree_ps sample data; cross-check skipped.
+Coverage level for standardised estimates: 0.600015
 Running iNEXT3D TD (plant units) ...
 Running iNEXT3D PD (plant units) ...
 Running coverage-standardised estimates (plant units) ...
@@ -52,41 +53,41 @@ Running coverage-standardised estimates (root-sample units) ...
        plant            asymptotic        TD 2 Subpáramo vs Páramo  2.03
  root_sample            asymptotic        TD 2 Subpáramo vs Páramo  1.89
        plant coverage_standardised        PD 0    Forest vs Páramo  1.91
- root_sample coverage_standardised        PD 0    Forest vs Páramo  1.94
+ root_sample coverage_standardised        PD 0    Forest vs Páramo  1.85
        plant coverage_standardised        PD 0 Forest vs Subpáramo  1.04
- root_sample coverage_standardised        PD 0 Forest vs Subpáramo  1.21
+ root_sample coverage_standardised        PD 0 Forest vs Subpáramo  1.09
        plant coverage_standardised        PD 0 Subpáramo vs Páramo  1.85
- root_sample coverage_standardised        PD 0 Subpáramo vs Páramo  1.60
+ root_sample coverage_standardised        PD 0 Subpáramo vs Páramo  1.69
        plant coverage_standardised        PD 1    Forest vs Páramo  1.79
- root_sample coverage_standardised        PD 1    Forest vs Páramo  1.86
+ root_sample coverage_standardised        PD 1    Forest vs Páramo  1.87
        plant coverage_standardised        PD 1 Forest vs Subpáramo  1.05
- root_sample coverage_standardised        PD 1 Forest vs Subpáramo  1.16
+ root_sample coverage_standardised        PD 1 Forest vs Subpáramo  1.14
        plant coverage_standardised        PD 1 Subpáramo vs Páramo  1.71
- root_sample coverage_standardised        PD 1 Subpáramo vs Páramo  1.60
+ root_sample coverage_standardised        PD 1 Subpáramo vs Páramo  1.64
        plant coverage_standardised        PD 2    Forest vs Páramo  1.80
- root_sample coverage_standardised        PD 2    Forest vs Páramo  1.93
+ root_sample coverage_standardised        PD 2    Forest vs Páramo  1.92
        plant coverage_standardised        PD 2 Forest vs Subpáramo  1.21
- root_sample coverage_standardised        PD 2 Forest vs Subpáramo  1.32
+ root_sample coverage_standardised        PD 2 Forest vs Subpáramo  1.30
        plant coverage_standardised        PD 2 Subpáramo vs Páramo  1.49
- root_sample coverage_standardised        PD 2 Subpáramo vs Páramo  1.47
+ root_sample coverage_standardised        PD 2 Subpáramo vs Páramo  1.48
        plant coverage_standardised        TD 0    Forest vs Páramo  2.20
- root_sample coverage_standardised        TD 0    Forest vs Páramo  2.24
+ root_sample coverage_standardised        TD 0    Forest vs Páramo  2.13
        plant coverage_standardised        TD 0 Forest vs Subpáramo  1.07
- root_sample coverage_standardised        TD 0 Forest vs Subpáramo  1.36
+ root_sample coverage_standardised        TD 0 Forest vs Subpáramo  1.18
        plant coverage_standardised        TD 0 Subpáramo vs Páramo  2.06
- root_sample coverage_standardised        TD 0 Subpáramo vs Páramo  1.65
+ root_sample coverage_standardised        TD 0 Subpáramo vs Páramo  1.81
        plant coverage_standardised        TD 1    Forest vs Páramo  2.11
- root_sample coverage_standardised        TD 1    Forest vs Páramo  2.16
+ root_sample coverage_standardised        TD 1    Forest vs Páramo  2.15
        plant coverage_standardised        TD 1 Forest vs Subpáramo  1.00
- root_sample coverage_standardised        TD 1 Forest vs Subpáramo  1.23
+ root_sample coverage_standardised        TD 1 Forest vs Subpáramo  1.16
        plant coverage_standardised        TD 1 Subpáramo vs Páramo  2.11
- root_sample coverage_standardised        TD 1 Subpáramo vs Páramo  1.76
+ root_sample coverage_standardised        TD 1 Subpáramo vs Páramo  1.85
        plant coverage_standardised        TD 2    Forest vs Páramo  2.08
- root_sample coverage_standardised        TD 2    Forest vs Páramo  2.23
+ root_sample coverage_standardised        TD 2    Forest vs Páramo  2.18
        plant coverage_standardised        TD 2 Forest vs Subpáramo  1.04
- root_sample coverage_standardised        TD 2 Forest vs Subpáramo  1.23
+ root_sample coverage_standardised        TD 2 Forest vs Subpáramo  1.19
        plant coverage_standardised        TD 2 Subpáramo vs Páramo  2.00
- root_sample coverage_standardised        TD 2 Subpáramo vs Páramo  1.81
+ root_sample coverage_standardised        TD 2 Subpáramo vs Páramo  1.83
  ci_overlap    p_holm
       FALSE  6.20e-50
       FALSE  3.73e-47
@@ -125,41 +126,41 @@ Running coverage-standardised estimates (root-sample units) ...
       FALSE  6.57e-24
       FALSE  1.43e-21
       FALSE  5.66e-87
-      FALSE  6.82e-97
+      FALSE 5.51e-107
        TRUE  2.46e-01
-      FALSE  1.96e-11
+      FALSE  4.84e-04
       FALSE  1.52e-51
-      FALSE  1.76e-33
+      FALSE  2.74e-57
       FALSE 5.58e-134
-      FALSE 5.62e-181
+      FALSE 6.07e-188
        TRUE  4.50e-02
-      FALSE  1.14e-13
+      FALSE  4.17e-12
       FALSE  9.46e-73
-      FALSE  9.11e-67
+      FALSE  2.79e-82
       FALSE 1.01e-222
-      FALSE 1.06e-265
+      FALSE 1.14e-271
       FALSE  1.18e-30
-      FALSE  1.95e-54
+      FALSE  1.15e-52
       FALSE  2.20e-71
-      FALSE  1.77e-58
+      FALSE  2.32e-65
       FALSE  1.59e-64
-      FALSE  3.46e-94
+      FALSE  8.42e-97
        TRUE  1.51e-01
-      FALSE  1.07e-17
+      FALSE  2.46e-07
       FALSE  2.71e-29
-      FALSE  4.15e-22
+      FALSE  5.66e-39
       FALSE  1.00e-68
-      FALSE 4.46e-111
+      FALSE 2.64e-106
        TRUE  9.92e-01
-      FALSE  1.33e-10
+      FALSE  8.69e-07
       FALSE  3.98e-35
-      FALSE  3.49e-36
+      FALSE  4.38e-46
       FALSE  5.57e-71
-      FALSE  1.11e-86
+      FALSE  1.55e-95
        TRUE  3.90e-01
-      FALSE  7.74e-08
+      FALSE  4.14e-07
       FALSE  4.74e-33
-      FALSE  5.51e-28
+      FALSE  1.06e-34
 
 ==== CI width: plant units relative to root-sample units ====
                  basis diversity q   habitat      plant root_sample
@@ -181,24 +182,24 @@ Running coverage-standardised estimates (root-sample units) ...
             asymptotic        PD 0 subparamo  39.214783   27.859342
             asymptotic        PD 1 subparamo  10.476689    7.309942
             asymptotic        PD 2 subparamo   3.818637    2.893418
- coverage_standardised        TD 0    forest 270.861163  235.384590
- coverage_standardised        TD 1    forest 194.448120  141.317070
- coverage_standardised        TD 2    forest 133.725924  102.307491
- coverage_standardised        TD 0 subparamo 402.019943  281.254175
- coverage_standardised        TD 1 subparamo 314.175230  184.160637
- coverage_standardised        TD 2 subparamo 208.463679  133.621612
- coverage_standardised        TD 0    paramo 207.011474  216.070294
- coverage_standardised        TD 1    paramo 151.883117  133.189928
- coverage_standardised        TD 2    paramo 101.868812   87.772213
- coverage_standardised        PD 0    forest  13.797134   14.124580
- coverage_standardised        PD 1    forest   5.832796    4.610057
- coverage_standardised        PD 2    forest   2.801927    2.160448
- coverage_standardised        PD 0 subparamo  18.717571   16.736162
- coverage_standardised        PD 1 subparamo   8.211528    5.955917
- coverage_standardised        PD 2 subparamo   3.213171    2.491916
- coverage_standardised        PD 0    paramo  12.278357   13.247230
- coverage_standardised        PD 1    paramo   5.648144    4.501243
- coverage_standardised        PD 2    paramo   2.710466    2.020421
+ coverage_standardised        TD 0    forest 270.861163  129.029935
+ coverage_standardised        TD 1    forest 194.448120   99.162388
+ coverage_standardised        TD 2    forest 133.725924   76.455468
+ coverage_standardised        TD 0 subparamo 402.019943  161.712144
+ coverage_standardised        TD 1 subparamo 314.175230  122.606361
+ coverage_standardised        TD 2 subparamo 208.463679  100.250292
+ coverage_standardised        TD 0    paramo 207.011474  123.056182
+ coverage_standardised        TD 1    paramo 151.883117   91.789168
+ coverage_standardised        TD 2    paramo 101.868812   68.886206
+ coverage_standardised        PD 0    forest  13.797134    8.260420
+ coverage_standardised        PD 1    forest   5.832796    3.828103
+ coverage_standardised        PD 2    forest   2.801927    2.007808
+ coverage_standardised        PD 0 subparamo  18.717571   10.334585
+ coverage_standardised        PD 1 subparamo   8.211528    4.635474
+ coverage_standardised        PD 2 subparamo   3.213171    2.282189
+ coverage_standardised        PD 0    paramo  12.278357    8.358385
+ coverage_standardised        PD 1    paramo   5.648144    3.697050
+ coverage_standardised        PD 2    paramo   2.710466    1.886087
  width_ratio_plant_over_root
                         1.71
                         1.79
@@ -218,31 +219,31 @@ Running coverage-standardised estimates (root-sample units) ...
                         1.41
                         1.43
                         1.32
-                        1.15
-                        1.38
-                        1.31
-                        1.43
-                        1.71
-                        1.56
-                        0.96
-                        1.14
-                        1.16
-                        0.98
-                        1.27
-                        1.30
-                        1.12
-                        1.38
-                        1.29
-                        0.93
-                        1.25
-                        1.34
+                        2.10
+                        1.96
+                        1.75
+                        2.49
+                        2.56
+                        2.08
+                        1.68
+                        1.65
+                        1.48
+                        1.67
+                        1.52
+                        1.40
+                        1.81
+                        1.77
+                        1.41
+                        1.47
+                        1.53
+                        1.44
 
 Coverage level used for coverage-standardised estimates:
-       level diversity  coverage
-       plant        TD 0.6000150
-       plant        PD 0.6000150
- root_sample        TD 0.7852508
- root_sample        PD 0.7852508
+       level diversity coverage
+       plant        TD 0.600015
+       plant        PD 0.600015
+ root_sample        TD 0.600015
+ root_sample        PD 0.600015
 
 Done. Outputs written to tables/ and objects/
 Figure 3A (plant units) written to figures/Figure_3A_iNEXT_plant_units.png
